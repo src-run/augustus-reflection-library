@@ -1,0 +1,3 @@
+[submodule ".config"]
+	path = .config
+	url = https://github.com/src-run/build-knowledge-shared.git
