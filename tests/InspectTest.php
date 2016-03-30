@@ -10,12 +10,12 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Tests\Manager;
+namespace SR\Reflection\Tests\Introspection;
 
 use SR\Reflection\Definition\ReflectionConstant;
 use SR\Reflection\Inspect;
-use SR\Reflection\Manager\ClassInstanceTypeManager;
-use SR\Reflection\Manager\ClassGeneralTypeManager;
+use SR\Reflection\Introspection\ObjectIntrospection;
+use SR\Reflection\Introspection\ClassIntrospection;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
@@ -31,7 +31,7 @@ class InspectTest extends AbstractTestHelper
     /**
      * @var string
      */
-    const TEST_FIXTURE_CLASS = 'SR\Reflection\Manager\Resolver\ResultSetResolver';
+    const TEST_FIXTURE_CLASS = 'SR\Reflection\Introspection\Resolver\ResultResolver';
 
     /**
      * @var Inspect
@@ -49,12 +49,12 @@ class InspectTest extends AbstractTestHelper
     {
         $r = Inspect::thisClass(self::TEST_FIXTURE_CLASS);
 
-        $this->assertTrue($r instanceof ClassGeneralTypeManager);
+        $this->assertTrue($r instanceof ClassIntrospection);
         $this->assertSame(self::TEST_FIXTURE_CLASS, $r->classNameAbsolute());
 
         $r = Inspect::this(self::TEST_FIXTURE_CLASS);
 
-        $this->assertTrue($r instanceof ClassGeneralTypeManager);
+        $this->assertTrue($r instanceof ClassIntrospection);
         $this->assertSame(self::TEST_FIXTURE_CLASS, $r->classNameAbsolute());
     }
 
@@ -64,12 +64,12 @@ class InspectTest extends AbstractTestHelper
         $f = new $c;
         $r = Inspect::thisInstance($f);
 
-        $this->assertTrue($r instanceof ClassInstanceTypeManager);
+        $this->assertTrue($r instanceof ObjectIntrospection);
         $this->assertSame(self::TEST_FIXTURE_CLASS, $r->classNameAbsolute());
 
         $r = Inspect::this($f);
 
-        $this->assertTrue($r instanceof ClassInstanceTypeManager);
+        $this->assertTrue($r instanceof ObjectIntrospection);
         $this->assertSame(self::TEST_FIXTURE_CLASS, $r->classNameAbsolute());
     }
 
@@ -86,7 +86,8 @@ class InspectTest extends AbstractTestHelper
         $this->assertGreaterThan(3, $results);
 
         foreach ($results as $r) {
-            $this->assertNotFalse(strpos($r, 'propProtectedOne0---'));
+            $this->assertNotFalse(strpos($r, 'propProtectedOne0---') !== false);
+            $this->assertNotFalse(strpos($r, 'ONE_') !== false || strpos($r, 'NULL_') !== false);
         }
     }
 }

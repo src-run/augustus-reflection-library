@@ -12,6 +12,8 @@
 
 namespace SR\Reflection\Definition;
 
+use SR\Exception\RuntimeException;
+
 /**
  * Class ReflectionConstant.
  */
@@ -72,12 +74,12 @@ class ReflectionConstant implements \Reflector
     /**
      * @todo Real implementation should be written
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public static function export()
     {
-        throw new \RuntimeException(
-            sprintf('TODO: Implement %s functionality.', get_class()));
+        throw RuntimeException::create('TODO: Implement %s functionality.')
+            ->with(get_class());
     }
 }
 

@@ -10,14 +10,14 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager\Accessor;
+namespace SR\Reflection\Introspection\Type\ClassAware;
 
 use SR\Reflection\Inspect;
 
 /**
- * Class ClassAccessorsTrait.
+ * Class IdentityAwareAccessorsTrait.
  */
-trait ClassAccessorsTrait
+trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
 {
     /**
      * @return \ReflectionClass

@@ -10,14 +10,15 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager\Accessor;
+namespace SR\Reflection\Introspection\Type\ClassAware;
 
-use SR\Reflection\Manager\Resolver\ResolverInterface;
+use SR\Exception\InvalidArgumentException;
+use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
- * Class MethodAccessorsTrait.
+ * Class MethodAwareAccessorsTrait.
  */
-trait MethodAccessorsTrait
+trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
 {
     /**
      * @return \ReflectionClass
@@ -42,14 +43,14 @@ trait MethodAccessorsTrait
     /**
      * @param string $name
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      *
      * @return \ReflectionMethod
      */
     public function getMethod($name)
     {
         if (! $this->hasMethod($name)) {
-            throw new \InvalidArgumentException(sprintf('Method %s not found.', $name));
+            throw InvalidArgumentException::create('Method %s not found.')->with($name);
         }
 
         return $this->reflection()->getMethod($name);

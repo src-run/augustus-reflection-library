@@ -10,24 +10,26 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager;
+namespace SR\Reflection\Introspection;
 
-use SR\Reflection\Manager\Accessor\ConstantAccessorsTrait;
-use SR\Reflection\Manager\Accessor\MethodAccessorsTrait;
-use SR\Reflection\Manager\Accessor\PropertyAccessorsTrait;
-use SR\Reflection\Manager\Accessor\ClassAccessorsTrait;
-use SR\Reflection\Manager\Resolver\ResolverInterface;
-use SR\Reflection\Utility\ClassChecker;
+use SR\Exception\RuntimeException;
+use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
+use SR\Reflection\Introspection\Resolver\ResolverInterface;
+use SR\Reflection\Helpers\ClassUtils;
+use SR\Utility\ClassUtil;
 
 /**
  * Class ClassInstanceTypeManager.
  */
-class ClassInstanceTypeManager extends AbstractTypeManager
+class ObjectIntrospection extends AbstractIntrospection
 {
-    use ConstantAccessorsTrait;
-    use ClassAccessorsTrait;
-    use MethodAccessorsTrait;
-    use PropertyAccessorsTrait;
+    use ConstantAwareAccessorsTrait;
+    use IdentityAwareAccessorsTrait;
+    use MethodAwareAccessorsTrait;
+    use PropertyAwareAccessorsTrait;
 
     /**
      * @var \ReflectionObject
@@ -42,10 +44,10 @@ class ClassInstanceTypeManager extends AbstractTypeManager
     public function __construct($instance, $bindScope = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassChecker::assertInstance($instance);
+            ClassUtil::assertInstance($instance);
             parent::__construct(new \ReflectionObject($instance), $bindScope, $resolver);
         } catch (\Exception $exception) {
-            throw new \RuntimeException('Parameter must be an instantiated object instance');
+            throw RuntimeException::create('Parameter must be an instantiated object instance');
         }
     }
     

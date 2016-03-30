@@ -10,14 +10,15 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager\Accessor;
+namespace SR\Reflection\Introspection\Type\ClassAware;
 
-use SR\Reflection\Manager\Resolver\ResolverInterface;
+use SR\Exception\InvalidArgumentException;
+use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
- * Class PropertyAccessorsTrait.
+ * Class PropertyAwareAccessorsTrait.
  */
-trait PropertyAccessorsTrait
+trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
 {
     /**
      * @return \ReflectionClass
@@ -42,14 +43,14 @@ trait PropertyAccessorsTrait
     /**
      * @param string $name
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      *
      * @return \ReflectionProperty
      */
     public function getProperty($name)
     {
         if (! $this->hasProperty($name)) {
-            throw new \InvalidArgumentException(sprintf('Property %s not found.', $name));
+            throw InvalidArgumentException::create('Property %s not found.')->with($name);
         }
 
         return $this->reflection()->getProperty($name);

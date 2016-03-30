@@ -10,25 +10,25 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Tests\Manager;
+namespace SR\Reflection\Tests\Introspection;
 
 use SR\Reflection\Definition\ReflectionConstant;
-use SR\Reflection\Manager\ClassGeneralTypeManager;
-use SR\Reflection\Manager\TypeManagerInterface;
+use SR\Reflection\Introspection\AbstractIntrospection;
+use SR\Reflection\Introspection\ClassIntrospection;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
- * Class ClassGeneralTypeManagerTest.
+ * Class ClassIntrospectionTest.
  */
-class ClassGeneralTypeManagerTest extends AbstractTestHelper
+class ClassIntrospectionTest extends AbstractTestHelper
 {
     /**
      * @var string
      */
-    const TEST_CLASS = '\Manager\ClassGeneralTypeManager';
+    const TEST_CLASS = '\Introspection\ClassIntrospection';
 
     /**
-     * @var ClassGeneralTypeManager
+     * @var ClassIntrospection
      */
     protected static $instance = null;
 
@@ -40,7 +40,7 @@ class ClassGeneralTypeManagerTest extends AbstractTestHelper
         });
     }
 
-    public function getMethodsAndCheckCount(TypeManagerInterface $m, $filter = '', $countAssert = null, $levels = null)
+    public function getMethodsAndCheckCount(AbstractIntrospection $m, $filter = '', $countAssert = null, $levels = null)
     {
         $call = ucfirst($filter).'Methods';
         $methods = $m->{$call}($levels);

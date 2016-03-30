@@ -12,8 +12,8 @@
 
 namespace SR\Reflection\Tests\Helper;
 
-use SR\Reflection\Manager\ClassGeneralTypeManager;
-use SR\Reflection\Manager\ClassInstanceTypeManager;
+use SR\Reflection\Introspection\ClassIntrospection;
+use SR\Reflection\Introspection\ObjectIntrospection;
 
 /**
  * Class AbstractTestHelper.
@@ -73,7 +73,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \SR\Reflection\Manager\ClassGeneralTypeManager[]|ClassInstanceTypeManager[]
+     * @return ClassIntrospection[]|ObjectIntrospection[]
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {

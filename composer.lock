@@ -4,9 +4,139 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c17301eb59d9b283b04df0d63ac6851",
-    "content-hash": "ecb65a5048c964a5e929bbbd9f87dd09",
-    "packages": [],
+    "hash": "21b6493df6166ee3efc02dfd2b0e620f",
+    "content-hash": "71aa456bb5ff19c4e79487f51174193a",
+    "packages": [
+        {
+            "name": "src-run/augustus-exception-library",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "/home/rmf/code/composer/augustus-exception-library/",
+                "reference": "e546ad67caebc2ca5ff6cd587d64807d4795f0cc",
+                "shasum": null
+            },
+            "require": {
+                "php": "~5.6|~7.0",
+                "src-run/augustus-utility-library": "~0.5"
+            },
+            "require-dev": {
+                "codacy/coverage": "~1.0",
+                "phpunit/phpunit": "~5.0",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SR\\Exception\\": "lib/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "SR\\Exception\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Frawley 2nd",
+                    "email": "rmf@src.run",
+                    "homepage": "https://get.src.run/rmf",
+                    "role": "Project Lead"
+                }
+            ],
+            "description": "This library contains enhanced base exception implementations.",
+            "homepage": "https://get.src.run/augustus-exception-library",
+            "keywords": [
+                "augustus-exception-library",
+                "exception",
+                "library",
+                "rmf",
+                "src-run"
+            ],
+            "support": {
+                "email": "rmf@src.run",
+                "issues": "https://get.src.run/augustus-exception-library/issues",
+                "source": "https://get.src.run/augustus-exception-library/git",
+                "irc": "irc://irc.efnet.org/scribe"
+            },
+            "transport-options": {
+                "symlink": true
+            }
+        },
+        {
+            "name": "src-run/augustus-utility-library",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "/home/rmf/code/composer/augustus-utility-library/",
+                "reference": "55fcc5a8d173555e6bacb437fcf59562ca73c691",
+                "shasum": null
+            },
+            "require": {
+                "php": "~5.6|~7.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "~1.0",
+                "phpunit/phpunit": "~5.0",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SR\\Utility\\": "lib/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "SR\\Utility\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Frawley 2nd",
+                    "email": "rmf@src.run",
+                    "homepage": "https://src.run/rmf",
+                    "role": "Project Lead"
+                }
+            ],
+            "description": "This library contains a core collection of generic type utilities (strings, classes, etc).",
+            "homepage": "https://src.run/augustus-utility-library",
+            "keywords": [
+                "augustus-utility-library",
+                "library",
+                "reflection",
+                "rmf",
+                "scribe",
+                "src-run",
+                "utilities"
+            ],
+            "support": {
+                "email": "rmf@src.run",
+                "issues": "https://augustus-utility-library.oss.src.run/issues",
+                "source": "https://augustus-utility-library.oss.src.run/git",
+                "irc": "irc://irc.efnet.org/scribe"
+            },
+            "transport-options": {
+                "symlink": true
+            }
+        }
+    ],
     "packages-dev": [
         {
             "name": "codacy/coverage",

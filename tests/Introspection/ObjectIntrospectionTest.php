@@ -10,28 +10,28 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Tests\Manager;
+namespace SR\Reflection\Tests\Introspection;
 
-use SR\Reflection\Manager\ClassInstanceTypeManager;
+use SR\Reflection\Introspection\ObjectIntrospection;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
- * Class ClassInstanceTypeManagerTest.
+ * Class ObjectIntrospectionTest.
  */
-class ClassInstanceTypeManagerTest extends AbstractTestHelper
+class ObjectIntrospectionTest extends AbstractTestHelper
 {
     /**
      * @var string
      */
-    const TEST_CLASS = '\Manager\ClassInstanceTypeManager';
+    const TEST_CLASS = '\Introspection\ObjectIntrospection';
 
     /**
-     * @var ClassInstanceTypeManager
+     * @var ObjectIntrospection
      */
     protected static $instance = null;
 
     /**
-     * @return \SR\Reflection\Manager\ClassGeneralTypeManager[]|ClassInstanceTypeManager[]
+     * @return ObjectIntrospection[]
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {

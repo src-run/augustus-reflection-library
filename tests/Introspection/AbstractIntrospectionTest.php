@@ -10,27 +10,27 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Tests\Manager;
+namespace SR\Reflection\Tests\Introspection;
 
 use SR\Reflection\Tests\Helper\ReflectionFixture;
 
 /**
- * Class AbstractClassTypeManagerTest.
+ * Class AbstractIntrospectionTest.
  */
-class AbstractClassTypeManagerTest extends \PHPUnit_Framework_TestCase
+class AbstractIntrospectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testInvalidReflectorInConstruct()
     {
         $this->expectException('\InvalidArgumentException');
 
-        $mock = $this->getMockBuilder('SR\Reflection\Manager\AbstractTypeManager')
+        $mock = $this->getMockBuilder('SR\Reflection\Introspection\AbstractIntrospection')
             ->disableOriginalConstructor()
             ->setMethods(['reflectionRequiredIsInstanceOfSet'])
             ->getMockForAbstractClass();
         $mock->method('reflectionRequiredIsInstanceOfSet')
             ->willReturn(['\InvalidReflectorClassReferenceChecked']);
 
-        $r = new \ReflectionClass('SR\Reflection\Manager\AbstractTypeManager');
+        $r = new \ReflectionClass('SR\Reflection\Introspection\AbstractIntrospection');
         $m = $r->getMethod('initializeReflection');
         $m->setAccessible(true);
         $m->invoke($mock, new ReflectionFixture());

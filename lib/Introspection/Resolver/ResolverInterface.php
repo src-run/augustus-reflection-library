@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager\Resolver;
+namespace SR\Reflection\Introspection\Resolver;
 
 /**
  * Class ResolverInterface.
@@ -72,26 +72,11 @@ interface ResolverInterface
     public function matchOne(array $items, $match, $method = '__toString');
 
     /**
-     * @param mixed $scope
-     *
-     * @return string
-     */
-    public function validateBind($scope);
-
-    /**
      * @param object|null $scope
      *
      * @return $this
      */
     public function bind($scope = null);
-
-    /**
-     * @param \Closure $invokable
-     * @param mixed    $parameters
-     *
-     * @return mixed
-     */
-    public function doBindScopeAndInvoke(\Closure $invokable, &...$parameters);
 }
 
 /* EOF */

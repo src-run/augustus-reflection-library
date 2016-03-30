@@ -12,8 +12,9 @@
 
 namespace SR\Reflection;
 
-use SR\Reflection\Manager\ClassGeneralTypeManager;
-use SR\Reflection\Manager\ClassInstanceTypeManager;
+use SR\Exception\RuntimeException;
+use SR\Reflection\Introspection\ClassIntrospection;
+use SR\Reflection\Introspection\ObjectIntrospection;
 
 /**
  * Class InspectInterface.
@@ -24,9 +25,9 @@ interface InspectInterface
      * @param string|object $nameOrInstance
      * @param object|null   $closureScope
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
-     * @return ClassGeneralTypeManager|ClassInstanceTypeManager
+     * @return ClassIntrospection|ObjectIntrospection
      */
     public static function this($nameOrInstance, $closureScope = null);
 
@@ -34,7 +35,7 @@ interface InspectInterface
      * @param string      $name
      * @param object|null $closureScope
      *
-     * @return ClassGeneralTypeManager
+     * @return ClassIntrospection
      */
     public static function thisClass($name, $closureScope = null);
 
@@ -42,7 +43,7 @@ interface InspectInterface
      * @param object      $instance
      * @param object|null $closureScope
      *
-     * @return ClassInstanceTypeManager
+     * @return ObjectIntrospection
      */
     public static function thisInstance($instance, $closureScope = null);
 }

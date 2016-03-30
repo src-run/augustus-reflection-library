@@ -10,15 +10,21 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager;
+namespace SR\Reflection\Introspection;
 
-use SR\Reflection\Manager\Resolver\ResultSetResolver;
-use SR\Reflection\Manager\Resolver\ResolverInterface;
+use SR\Exception\InvalidArgumentException;
+use SR\Reflection\Introspection\Resolver\ResultResolver;
+use SR\Reflection\Introspection\Resolver\ResolverInterface;
+use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsInterface;
 
 /**
- * Class AbstractTypeManager.
+ * Class AbstractIntrospection.
  */
-abstract class AbstractTypeManager implements TypeManagerInterface
+abstract class AbstractIntrospection implements ConstantAwareAccessorsInterface, IdentityAwareAccessorsInterface,
+                                                MethodAwareAccessorsInterface, PropertyAwareAccessorsInterface
 {
     /**
      * @var \ReflectionClass|\ReflectionObject|\Reflector|null
@@ -33,9 +39,9 @@ abstract class AbstractTypeManager implements TypeManagerInterface
     /**
      * @param \Reflector        $reflection
      * @param object|null       $bindScope
-     * @param ResultSetResolver $resolver
+     * @param ResultResolver $resolver
      */
-    public function __construct(\Reflector $reflection, $bindScope = null, ResultSetResolver $resolver = null)
+    public function __construct(\Reflector $reflection, $bindScope = null, ResultResolver $resolver = null)
     {
         $this->initializeReflection($reflection);
         $this->initializeResolver($resolver, $bindScope);
@@ -63,7 +69,7 @@ abstract class AbstractTypeManager implements TypeManagerInterface
      */
     protected function initializeResolver(ResolverInterface $resolver = null, $bind = null)
     {
-        $this->resolver = $resolver ?: new ResultSetResolver();
+        $this->resolver = $resolver ?: new ResultResolver();
         $this->resolver->bind($bind);
     }
 
@@ -77,7 +83,8 @@ abstract class AbstractTypeManager implements TypeManagerInterface
         });
 
         if (count($failedSet) !== 0) {
-            throw new \InvalidArgumentException(sprintf('Failed instanceof checks: %s', implode(', ', (array)$failedSet)));
+            throw InvalidArgumentException::create('Failed instanceof checks: %s')
+                ->with(implode(', ', (array)$failedSet));
         }
 
         $this->reflection = $reflection;

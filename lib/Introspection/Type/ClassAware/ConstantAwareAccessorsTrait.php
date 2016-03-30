@@ -10,15 +10,16 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager\Accessor;
+namespace SR\Reflection\Introspection\Type\ClassAware;
 
+use SR\Exception\InvalidArgumentException;
 use SR\Reflection\Definition\ReflectionConstant;
-use SR\Reflection\Manager\Resolver\ResolverInterface;
+use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
- * Class ConstantsAccessorsTrait.
+ * Class ConstantAwareAccessorsTrait.
  */
-trait ConstantAccessorsTrait
+trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
 {
     /**
      * @return \ReflectionClass
@@ -43,14 +44,14 @@ trait ConstantAccessorsTrait
     /**
      * @param string $name
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      *
      * @return ReflectionConstant
      */
     public function getConstant($name)
     {
         if (! $this->hasConstant($name)) {
-            throw new \InvalidArgumentException(sprintf('Constant %s not found.', $name));
+            throw InvalidArgumentException::create('Constant %s not found.')->with($name);
         }
 
         $value = $this->reflection()->getConstant($name);

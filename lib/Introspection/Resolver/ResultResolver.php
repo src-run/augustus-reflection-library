@@ -10,12 +10,12 @@
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Manager\Resolver;
+namespace SR\Reflection\Introspection\Resolver;
 
 /**
- * Class ResultSetResolver.
+ * Class ResultResolver.
  */
-class ResultSetResolver implements ResolverInterface
+class ResultResolver implements ResolverInterface
 {
     /**
      * @var null|object
