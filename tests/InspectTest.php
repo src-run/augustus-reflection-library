@@ -16,6 +16,7 @@ use SR\Reflection\Definition\ReflectionConstant;
 use SR\Reflection\Inspect;
 use SR\Reflection\Introspection\ObjectIntrospection;
 use SR\Reflection\Introspection\ClassIntrospection;
+use SR\Reflection\Introspection\TraitIntrospection;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
@@ -89,6 +90,18 @@ class InspectTest extends AbstractTestHelper
             $this->assertNotFalse(strpos($r, 'propProtectedOne0---') !== false);
             $this->assertNotFalse(strpos($r, 'ONE_') !== false || strpos($r, 'NULL_') !== false);
         }
+    }
+
+    public function testReflectionOnTraitName()
+    {
+        $trait = 'SR\Reflection\Tests\Helper\FixtureTraitTwo';
+        $r = Inspect::thisTrait($trait);
+
+        $this->assertTrue($r instanceof TraitIntrospection);
+        $this->assertSame($trait, $r->classNameAbsolute());
+
+        $this->expectException('SR\Exception\RuntimeException');
+        $r = Inspect::thisTrait($trait.'\InvalidTraitName');
     }
 }
 

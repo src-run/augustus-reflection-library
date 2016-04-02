@@ -15,6 +15,7 @@ namespace SR\Reflection;
 use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\ClassIntrospection;
 use SR\Reflection\Introspection\ObjectIntrospection;
+use SR\Reflection\Introspection\TraitIntrospection;
 use SR\Utility\ClassUtil;
 
 /**
@@ -63,6 +64,17 @@ class Inspect implements InspectInterface
     public static function thisInstance($instance, $closureScope = null)
     {
         return new ObjectIntrospection($instance, $closureScope);
+    }
+
+    /**
+     * @param string      $name
+     * @param object|null $closureScope
+     *
+     * @return ObjectIntrospection
+     */
+    public static function thisTrait($name, $closureScope = null)
+    {
+        return new TraitIntrospection($name, $closureScope);
     }
 }
 
