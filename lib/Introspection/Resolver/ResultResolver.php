@@ -31,7 +31,7 @@ class ResultResolver implements ResolverInterface
      */
     public function sort(array $items, \Closure $sort, &...$extra)
     {
-        $_ = function (\Reflector $first, \Reflector $second) use ($sort, $extra){
+        $_ = function (\Reflector $first, \Reflector $second) use ($sort, $extra) {
             return (int) $this->doBindScopeAndInvoke($sort, $first, $second, ...$extra);
         };
 

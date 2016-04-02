@@ -49,7 +49,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      */
     public function getMethod($name)
     {
-        if (! $this->hasMethod($name)) {
+        if (!$this->hasMethod($name)) {
             throw InvalidArgumentException::create('Method %s not found.')->with($name);
         }
 
@@ -169,7 +169,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      */
     private function maskMethodDefaults()
     {
-        return \ReflectionMethod::IS_PUBLIC|\ReflectionMethod::IS_PROTECTED|\ReflectionMethod::IS_PRIVATE;
+        return \ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PROTECTED | \ReflectionMethod::IS_PRIVATE;
     }
 }
 

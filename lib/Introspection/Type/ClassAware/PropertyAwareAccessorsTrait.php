@@ -49,7 +49,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      */
     public function getProperty($name)
     {
-        if (! $this->hasProperty($name)) {
+        if (!$this->hasProperty($name)) {
             throw InvalidArgumentException::create('Property %s not found.')->with($name);
         }
 
@@ -169,7 +169,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      */
     private function maskPropertyDefaults()
     {
-        return \ReflectionProperty::IS_PUBLIC|\ReflectionProperty::IS_PROTECTED|\ReflectionProperty::IS_PRIVATE;
+        return \ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE;
     }
 }
 

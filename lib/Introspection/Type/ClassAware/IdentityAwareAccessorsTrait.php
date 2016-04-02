@@ -65,7 +65,6 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      */
     public function implementsInterface($interface)
     {
-
         return (bool) $this->reflection()->implementsInterface($interface);
     }
 

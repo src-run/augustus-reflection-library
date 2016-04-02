@@ -18,7 +18,6 @@ use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
-use SR\Reflection\Helpers\ClassUtils;
 use SR\Utility\ClassUtil;
 
 /**

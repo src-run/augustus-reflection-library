@@ -50,7 +50,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      */
     public function getConstant($name)
     {
-        if (! $this->hasConstant($name)) {
+        if (!$this->hasConstant($name)) {
             throw InvalidArgumentException::create('Constant %s not found.')->with($name);
         }
 

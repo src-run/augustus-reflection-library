@@ -53,7 +53,7 @@ interface ConstantAwareAccessorsInterface
     public function constants();
 
     /**
-     * @param \Closure $sort
+     * @param \Closure   $sort
      * @param mixed ,... $extra
      *
      * @return ReflectionConstant[]
@@ -61,7 +61,7 @@ interface ConstantAwareAccessorsInterface
     public function sortConstants(\Closure $sort, &...$extra);
 
     /**
-     * @param \Closure $visit
+     * @param \Closure   $visit
      * @param mixed ,... $extra
      *
      * @return ReflectionConstant[]|mixed[]
@@ -69,7 +69,7 @@ interface ConstantAwareAccessorsInterface
     public function visitConstants(\Closure $visit, &...$extra);
 
     /**
-     * @param \Closure $predicate
+     * @param \Closure   $predicate
      * @param mixed ,... $extra
      *
      * @return ReflectionConstant[]
@@ -77,7 +77,7 @@ interface ConstantAwareAccessorsInterface
     public function filterConstants(\Closure $predicate, &...$extra);
 
     /**
-     * @param \Closure $predicate
+     * @param \Closure   $predicate
      * @param mixed ,... $extra
      *
      * @return ReflectionConstant|null
@@ -85,7 +85,7 @@ interface ConstantAwareAccessorsInterface
     public function filterOneConstant(\Closure $predicate, &...$extra);
 
     /**
-     * @param mixed $match
+     * @param mixed  $match
      * @param string $func
      *
      * @return ReflectionConstant[]
@@ -93,7 +93,7 @@ interface ConstantAwareAccessorsInterface
     public function matchConstants($match, $func = '__toString');
 
     /**
-     * @param mixed $match
+     * @param mixed  $match
      * @param string $func
      *
      * @return ReflectionConstant|null
@@ -101,7 +101,7 @@ interface ConstantAwareAccessorsInterface
     public function matchOneConstant($match, $func = '__toString');
 
     /**
-     * @param string $name
+     * @param string     $name
      * @param null|mixed $value
      *
      * @return ReflectionConstant

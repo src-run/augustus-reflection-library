@@ -69,8 +69,8 @@ interface PropertyAwareAccessorsInterface
     public function privateProperties();
 
     /**
-     * @param \Closure $sort
-     * @param null|int $mask
+     * @param \Closure   $sort
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionProperty[]
@@ -78,8 +78,8 @@ interface PropertyAwareAccessorsInterface
     public function sortProperties(\Closure $sort, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $visit
-     * @param null|int $mask
+     * @param \Closure   $visit
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionProperty[]|mixed[]
@@ -87,8 +87,8 @@ interface PropertyAwareAccessorsInterface
     public function visitProperties(\Closure $visit, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param \Closure   $predicate
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionProperty[]
@@ -96,8 +96,8 @@ interface PropertyAwareAccessorsInterface
     public function filterProperties(\Closure $predicate, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param \Closure   $predicate
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionProperty|null
@@ -105,8 +105,8 @@ interface PropertyAwareAccessorsInterface
     public function filterOneProperty(\Closure $predicate, $mask = null, &...$extra);
 
     /**
-     * @param mixed $match
-     * @param string $func
+     * @param mixed    $match
+     * @param string   $func
      * @param null|int $mask
      *
      * @return \ReflectionProperty[]
@@ -114,8 +114,8 @@ interface PropertyAwareAccessorsInterface
     public function matchProperties($match, $func = '__toString', $mask = null);
 
     /**
-     * @param mixed $match
-     * @param string $func
+     * @param mixed    $match
+     * @param string   $func
      * @param null|int $mask
      *
      * @return \ReflectionProperty|null

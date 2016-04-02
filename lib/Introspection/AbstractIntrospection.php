@@ -37,8 +37,8 @@ abstract class AbstractIntrospection implements ConstantAwareAccessorsInterface,
     protected $resolver;
 
     /**
-     * @param \Reflector        $reflection
-     * @param object|null       $bindScope
+     * @param \Reflector     $reflection
+     * @param object|null    $bindScope
      * @param ResultResolver $resolver
      */
     public function __construct(\Reflector $reflection, $bindScope = null, ResultResolver $resolver = null)
@@ -79,12 +79,12 @@ abstract class AbstractIntrospection implements ConstantAwareAccessorsInterface,
     protected function initializeReflection(\Reflector $reflection)
     {
         $failedSet = array_filter($this->reflectionRequiredIsInstanceOfSet(), function ($type) use ($reflection) {
-            return ! $reflection instanceof $type;
+            return !$reflection instanceof $type;
         });
 
         if (count($failedSet) !== 0) {
             throw InvalidArgumentException::create('Failed instanceof checks: %s')
-                ->with(implode(', ', (array)$failedSet));
+                ->with(implode(', ', (array) $failedSet));
         }
 
         $this->reflection = $reflection;

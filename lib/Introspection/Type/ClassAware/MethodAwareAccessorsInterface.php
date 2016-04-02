@@ -69,8 +69,8 @@ interface MethodAwareAccessorsInterface
     public function privateMethods();
 
     /**
-     * @param \Closure $sort
-     * @param null|int $mask
+     * @param \Closure   $sort
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionMethod[]
@@ -78,8 +78,8 @@ interface MethodAwareAccessorsInterface
     public function sortMethods(\Closure $sort, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $visit
-     * @param null|int $mask
+     * @param \Closure   $visit
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionMethod[]|mixed
@@ -87,8 +87,8 @@ interface MethodAwareAccessorsInterface
     public function visitMethods(\Closure $visit, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param \Closure   $predicate
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionMethod[]
@@ -96,8 +96,8 @@ interface MethodAwareAccessorsInterface
     public function filterMethods(\Closure $predicate, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param \Closure   $predicate
+     * @param null|int   $mask
      * @param mixed ,... $extra
      *
      * @return \ReflectionMethod|null
@@ -105,8 +105,8 @@ interface MethodAwareAccessorsInterface
     public function filterOneMethod(\Closure $predicate, $mask = null, &...$extra);
 
     /**
-     * @param mixed $match
-     * @param string $func
+     * @param mixed    $match
+     * @param string   $func
      * @param null|int $mask
      *
      * @return \ReflectionMethod[]
@@ -114,8 +114,8 @@ interface MethodAwareAccessorsInterface
     public function matchMethods($match, $func = '__toString', $mask = null);
 
     /**
-     * @param mixed $match
-     * @param string $func
+     * @param mixed    $match
+     * @param string   $func
      * @param null|int $mask
      *
      * @return \ReflectionMethod|null
