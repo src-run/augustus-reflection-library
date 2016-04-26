@@ -59,6 +59,14 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function namespaceSections()
+    {
+        return (array) explode('\\', $this->namespace());
+    }
+
+    /**
      * @param object|string $class
      *
      * @return bool

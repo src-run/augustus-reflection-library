@@ -33,6 +33,11 @@ interface IdentityAwareAccessorsInterface
     public function namespace();
 
     /**
+     * @return string[]
+     */
+    public function namespaceSections();
+
+    /**
      * @return string
      */
     public function nameQualified();
