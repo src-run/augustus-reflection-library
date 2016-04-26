@@ -30,16 +30,6 @@ interface IdentityAwareAccessorsInterface
     /**
      * @return string
      */
-    public function namespace();
-
-    /**
-     * @return string[]
-     */
-    public function namespaceSections();
-
-    /**
-     * @return string
-     */
     public function nameQualified();
 
     /**
@@ -48,25 +38,35 @@ interface IdentityAwareAccessorsInterface
     public function nameUnQualified();
 
     /**
+     * @return string
+     */
+    public function namespaceName();
+
+    /**
+     * @return string[]
+     */
+    public function namespaceSections();
+
+    /**
      * @param object|string $class
      *
      * @return bool
      */
-    public function extends($class);
+    public function extendsClass($class);
 
     /**
      * @param string $interface
      *
      * @return bool
      */
-    public function implements($interface);
+    public function implementsInterface($interface);
 
     /**
      * @param string $trait
      *
      * @return bool
      */
-    public function uses($trait);
+    public function usesTrait($trait);
 }
 
 /* EOF */

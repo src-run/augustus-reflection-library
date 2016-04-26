@@ -53,7 +53,7 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
     /**
      * @return string
      */
-    public function namespace()
+    public function namespaceName()
     {
         return $this->reflection()->getNamespaceName();
     }
@@ -63,7 +63,7 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      */
     public function namespaceSections()
     {
-        return (array) explode('\\', $this->namespace());
+        return (array) explode('\\', $this->namespaceName());
     }
 
     /**
@@ -71,7 +71,7 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      *
      * @return bool
      */
-    public function extends($class)
+    public function extendsClass($class)
     {
         $namespace = static::normalizeNamespace(Inspect::this($class)->nameQualified());
 
@@ -83,7 +83,7 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      *
      * @return bool
      */
-    public function implements($interface)
+    public function implementsInterface($interface)
     {
         $interface = static::normalizeNamespace($interface);
 
@@ -95,7 +95,7 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      *
      * @return bool
      */
-    public function uses($trait)
+    public function usesTrait($trait)
     {
         $trait = static::normalizeNamespace(Inspect::this($trait)->nameQualified());
 

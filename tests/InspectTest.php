@@ -68,7 +68,7 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($name, $r->name());
         $this->assertSame($name, $r->name(false));
         $this->assertSame($qualified, $r->name(true));
-        $this->assertSame($namespace, $r->namespace());
+        $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
         $r = Inspect::this($qualified);
@@ -79,7 +79,7 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($name, $r->name());
         $this->assertSame($name, $r->name(false));
         $this->assertSame($qualified, $r->name(true));
-        $this->assertSame($namespace, $r->namespace());
+        $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
     }
 
@@ -114,7 +114,7 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($name, $r->name());
         $this->assertSame($name, $r->name(false));
         $this->assertSame($qualified, $r->name(true));
-        $this->assertSame($namespace, $r->namespace());
+        $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
         $r = Inspect::this($qualified);
@@ -125,7 +125,7 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($name, $r->name());
         $this->assertSame($name, $r->name(false));
         $this->assertSame($qualified, $r->name(true));
-        $this->assertSame($namespace, $r->namespace());
+        $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
         $trait = 'SR\Reflection\Tests\Helper\FixtureTraitTwo';
