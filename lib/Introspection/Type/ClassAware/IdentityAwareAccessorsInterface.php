@@ -25,38 +25,43 @@ interface IdentityAwareAccessorsInterface
     /**
      * @return string
      */
-    public function className();
+    public function name();
 
     /**
      * @return string
      */
-    public function classNamespace();
+    public function namespace();
 
     /**
      * @return string
      */
-    public function classNameAbsolute();
+    public function nameQualified();
+
+    /**
+     * @return string
+     */
+    public function nameUnQualified();
 
     /**
      * @param object|string $class
      *
      * @return bool
      */
-    public function extendsClass($class);
+    public function extends($class);
 
     /**
      * @param string $interface
      *
      * @return bool
      */
-    public function implementsInterface($interface);
+    public function implements($interface);
 
     /**
      * @param string $trait
      *
      * @return bool
      */
-    public function usesTrait($trait);
+    public function uses($trait);
 }
 
 /* EOF */

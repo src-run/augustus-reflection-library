@@ -14,21 +14,16 @@ namespace SR\Reflection\Introspection;
 
 use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsInterface;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
-use SR\Utility\ClassUtil;
+use SR\Utility\ClassInspect;
 
 /**
  * Class ClassIntrospection.
  */
-class ClassIntrospection extends AbstractIntrospection
+class ClassIntrospection extends AbstractIntrospection implements ConstantAwareAccessorsInterface
 {
     use ConstantAwareAccessorsTrait;
-    use IdentityAwareAccessorsTrait;
-    use MethodAwareAccessorsTrait;
-    use PropertyAwareAccessorsTrait;
 
     /**
      * @var \ReflectionClass
@@ -43,7 +38,7 @@ class ClassIntrospection extends AbstractIntrospection
     public function __construct($name, $bindScope = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassUtil::assertClass($name);
+            ClassInspect::assertClass($name);
             parent::__construct(new \ReflectionClass($name), $bindScope, $resolver);
         } catch (\Exception $exception) {
             throw RuntimeException::create('Parameter must be a string containing a valid class name');

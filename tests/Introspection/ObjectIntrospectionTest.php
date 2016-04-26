@@ -35,7 +35,7 @@ class ObjectIntrospectionTest extends AbstractTestHelper
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {
-        $testClass = $this->getClassNameAbsolute();
+        $testClass = $this->getClassnameQualified();
         $_ = $this->getFixtureClassNamesAbsolute();
 
         array_walk($_, function (&$className) {

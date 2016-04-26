@@ -69,7 +69,7 @@ class ClassIntrospectionTest extends AbstractTestHelper
     
     public function testStaticFactoryConstruction()
     {
-        $_r = $this->getClassNameAbsolute();
+        $_r = $this->getClassnameQualified();
 
         foreach ($this->getFixtureClassNamesAbsolute() as $_n) {
             $_nn = new $_r($_n);
@@ -306,29 +306,29 @@ class ClassIntrospectionTest extends AbstractTestHelper
         $n = $this->getFixtureClassNamesAbsolute();
         $f = $this->getFixtureInstances();
 
-        $this->assertFalse($f[0]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassOne'));
-        $this->assertTrue($f[1]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassOne'));
-        $this->assertTrue($f[2]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassOne'));
-        $this->assertFalse($f[0]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassTwo'));
-        $this->assertFalse($f[1]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassTwo'));
-        $this->assertTrue($f[2]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassTwo'));
-        $this->assertFalse($f[0]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassThree'));
-        $this->assertFalse($f[1]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassThree'));
-        $this->assertFalse($f[2]->extendsClass('\SR\Reflection\Tests\Helper\FixtureClassThree'));
+        $this->assertFalse($f[0]->extends('\SR\Reflection\Tests\Helper\FixtureClassOne'));
+        $this->assertTrue($f[1]->extends('\SR\Reflection\Tests\Helper\FixtureClassOne'));
+        $this->assertTrue($f[2]->extends('\SR\Reflection\Tests\Helper\FixtureClassOne'));
+        $this->assertFalse($f[0]->extends('\SR\Reflection\Tests\Helper\FixtureClassTwo'));
+        $this->assertFalse($f[1]->extends('\SR\Reflection\Tests\Helper\FixtureClassTwo'));
+        $this->assertTrue($f[2]->extends('\SR\Reflection\Tests\Helper\FixtureClassTwo'));
+        $this->assertFalse($f[0]->extends('\SR\Reflection\Tests\Helper\FixtureClassThree'));
+        $this->assertFalse($f[1]->extends('\SR\Reflection\Tests\Helper\FixtureClassThree'));
+        $this->assertFalse($f[2]->extends('\SR\Reflection\Tests\Helper\FixtureClassThree'));
 
-        $this->assertFalse($f[0]->usesTrait('SR\Reflection\Tests\Helper\FixtureTrait'));
-        $this->assertFalse($f[0]->usesTrait('\SR\Reflection\Tests\Helper\FixtureTrait'));
-        $this->assertTrue($f[1]->usesTrait('SR\Reflection\Tests\Helper\FixtureTrait'));
-        $this->assertTrue($f[1]->usesTrait('\SR\Reflection\Tests\Helper\FixtureTrait'));
-        $this->assertFalse($f[2]->usesTrait('SR\Reflection\Tests\Helper\FixtureTrait'));
-        $this->assertFalse($f[2]->usesTrait('\SR\Reflection\Tests\Helper\FixtureTrait'));
+        $this->assertFalse($f[0]->uses('SR\Reflection\Tests\Helper\FixtureTrait'));
+        $this->assertFalse($f[0]->uses('\SR\Reflection\Tests\Helper\FixtureTrait'));
+        $this->assertTrue($f[1]->uses('SR\Reflection\Tests\Helper\FixtureTrait'));
+        $this->assertTrue($f[1]->uses('\SR\Reflection\Tests\Helper\FixtureTrait'));
+        $this->assertFalse($f[2]->uses('SR\Reflection\Tests\Helper\FixtureTrait'));
+        $this->assertFalse($f[2]->uses('\SR\Reflection\Tests\Helper\FixtureTrait'));
 
-        $this->assertFalse($f[0]->implementsInterface('SR\Reflection\Tests\Helper\FixtureInterface'));
-        $this->assertFalse($f[0]->implementsInterface('\SR\Reflection\Tests\Helper\FixtureInterface'));
-        $this->assertTrue($f[1]->implementsInterface('SR\Reflection\Tests\Helper\FixtureInterface'));
-        $this->assertTrue($f[1]->implementsInterface('\SR\Reflection\Tests\Helper\FixtureInterface'));
-        $this->assertTrue($f[2]->implementsInterface('SR\Reflection\Tests\Helper\FixtureInterface'));
-        $this->assertTrue($f[2]->implementsInterface('\SR\Reflection\Tests\Helper\FixtureInterface'));
+        $this->assertFalse($f[0]->implements('SR\Reflection\Tests\Helper\FixtureInterface'));
+        $this->assertFalse($f[0]->implements('\SR\Reflection\Tests\Helper\FixtureInterface'));
+        $this->assertTrue($f[1]->implements('SR\Reflection\Tests\Helper\FixtureInterface'));
+        $this->assertTrue($f[1]->implements('\SR\Reflection\Tests\Helper\FixtureInterface'));
+        $this->assertTrue($f[2]->implements('SR\Reflection\Tests\Helper\FixtureInterface'));
+        $this->assertTrue($f[2]->implements('\SR\Reflection\Tests\Helper\FixtureInterface'));
     }
 
     public function testMethodAccessors()

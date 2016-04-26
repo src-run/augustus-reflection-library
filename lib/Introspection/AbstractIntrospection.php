@@ -15,7 +15,9 @@ namespace SR\Reflection\Introspection;
 use SR\Exception\InvalidArgumentException;
 use SR\Reflection\Introspection\Resolver\ResultResolver;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
-use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsInterface;
 use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsInterface;
 use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsInterface;
@@ -23,9 +25,13 @@ use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsInterface;
 /**
  * Class AbstractIntrospection.
  */
-abstract class AbstractIntrospection implements ConstantAwareAccessorsInterface, IdentityAwareAccessorsInterface,
-                                                MethodAwareAccessorsInterface, PropertyAwareAccessorsInterface
+abstract class AbstractIntrospection implements IdentityAwareAccessorsInterface, MethodAwareAccessorsInterface,
+                                                PropertyAwareAccessorsInterface
 {
+    use IdentityAwareAccessorsTrait;
+    use MethodAwareAccessorsTrait;
+    use PropertyAwareAccessorsTrait;
+
     /**
      * @var \ReflectionClass|\ReflectionObject|\Reflector|null
      */

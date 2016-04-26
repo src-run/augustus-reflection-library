@@ -13,23 +13,14 @@
 namespace SR\Reflection\Introspection;
 
 use SR\Exception\RuntimeException;
-use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
-use SR\Utility\ClassUtil;
+use SR\Utility\ClassInspect;
 
 /**
  * Class TraitIntrospection.
  */
 class TraitIntrospection extends AbstractIntrospection
 {
-    use ConstantAwareAccessorsTrait;
-    use IdentityAwareAccessorsTrait;
-    use MethodAwareAccessorsTrait;
-    use PropertyAwareAccessorsTrait;
-
     /**
      * @var \ReflectionClass
      */
@@ -43,7 +34,7 @@ class TraitIntrospection extends AbstractIntrospection
     public function __construct($name, $bindScope = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassUtil::assertTrait($name);
+            ClassInspect::assertTrait($name);
             parent::__construct(new \ReflectionClass($name), $bindScope, $resolver);
         } catch (\Exception $exception) {
             throw RuntimeException::create('Parameter must be a string containing a valid trait name');

@@ -16,7 +16,7 @@ use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\ClassIntrospection;
 use SR\Reflection\Introspection\ObjectIntrospection;
 use SR\Reflection\Introspection\TraitIntrospection;
-use SR\Utility\ClassUtil;
+use SR\Utility\ClassInspect;
 
 /**
  * Class Inspect.
@@ -33,12 +33,16 @@ class Inspect implements InspectInterface
      */
     public static function this($nameOrInstance, $closureScope = null)
     {
-        if (ClassUtil::isInstance($nameOrInstance)) {
+        if (ClassInspect::isInstance($nameOrInstance)) {
             return self::thisInstance($nameOrInstance, $closureScope);
         }
 
-        if (ClassUtil::isClass($nameOrInstance)) {
+        if (ClassInspect::isClass($nameOrInstance)) {
             return self::thisClass($nameOrInstance, $closureScope);
+        }
+
+        if (ClassInspect::isTrait($nameOrInstance)) {
+            return self::thisTrait($nameOrInstance);
         }
 
         throw RuntimeException::create('Invalid class name or instance provided to inspector.');

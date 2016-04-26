@@ -40,7 +40,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    protected function getClassNameAbsolute($className = null)
+    protected function getClassnameQualified($className = null)
     {
         if (static::TEST_CLASS === null) {
             $this->fail(sprintf('%s::TEST_CLASS must be set to the testing class name.', static::TEST_NAMESPACE));
@@ -56,7 +56,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
      */
     protected function setUpInstance(array $parameters = [])
     {
-        $_fqcn = $this->getClassNameAbsolute();
+        $_fqcn = $this->getClassnameQualified();
 
         self::$instance = $_fqcn(...$parameters);
 
@@ -66,9 +66,9 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
     protected function getFixtureClassNamesAbsolute()
     {
         return [
-            $this->getClassNameAbsolute('\Tests\Helper\FixtureClassOne'),
-            $this->getClassNameAbsolute('\Tests\Helper\FixtureClassTwo'),
-            $this->getClassNameAbsolute('\Tests\Helper\FixtureClassThree'),
+            $this->getClassnameQualified('\Tests\Helper\FixtureClassOne'),
+            $this->getClassnameQualified('\Tests\Helper\FixtureClassTwo'),
+            $this->getClassnameQualified('\Tests\Helper\FixtureClassThree'),
         ];
     }
 
@@ -77,7 +77,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {
-        $_ = $this->getClassNameAbsolute();
+        $_ = $this->getClassnameQualified();
         list($_1, $_2, $_3) = $this->getFixtureClassNamesAbsolute();
 
         return [

@@ -25,9 +25,27 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
     abstract public function reflection();
 
     /**
+     * @param bool $qualified
+     *
      * @return string
      */
-    public function className()
+    public function name($qualified = false)
+    {
+        return $qualified ? $this->nameQualified() : $this->nameUnQualified();
+    }
+
+    /**
+     * @return string
+     */
+    public function nameQualified()
+    {
+        return $this->reflection()->getName();
+    }
+
+    /**
+     * @return string
+     */
+    public function nameUnQualified()
     {
         return $this->reflection()->getShortName();
     }
@@ -35,17 +53,9 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
     /**
      * @return string
      */
-    public function classNamespace()
+    public function namespace()
     {
         return $this->reflection()->getNamespaceName();
-    }
-
-    /**
-     * @return string
-     */
-    public function classNameAbsolute()
-    {
-        return sprintf('%s\%s', $this->classNamespace(), $this->className());
     }
 
     /**
@@ -53,9 +63,11 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      *
      * @return bool
      */
-    public function extendsClass($class)
+    public function extends($class)
     {
-        return (bool) $this->reflection()->isSubclassOf(Inspect::this($class)->classNameAbsolute());
+        $namespace = static::normalizeNamespace(Inspect::this($class)->nameQualified());
+
+        return (bool) $this->reflection()->isSubclassOf($namespace);
     }
 
     /**
@@ -63,8 +75,10 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      *
      * @return bool
      */
-    public function implementsInterface($interface)
+    public function implements($interface)
     {
+        $interface = static::normalizeNamespace($interface);
+
         return (bool) $this->reflection()->implementsInterface($interface);
     }
 
@@ -73,11 +87,27 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
      *
      * @return bool
      */
-    public function usesTrait($trait)
+    public function uses($trait)
     {
-        $trait = substr($trait, 0, 1) === '\\' ? substr($trait, 1) : $trait;
+        $trait = static::normalizeNamespace(Inspect::this($trait)->nameQualified());
 
         return (bool) in_array($trait, $this->reflection()->getTraitNames());
+    }
+
+    /**
+     * @param string $namespace
+     *
+     * @return string
+     */
+    public static function normalizeNamespace($namespace)
+    {
+        $namespace = str_replace('\\\\', '\\', $namespace);
+
+        if (substr($namespace, 0, 1) === '\\') {
+            return substr($namespace, 1);
+        }
+
+        return $namespace;
     }
 }
 

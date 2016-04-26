@@ -14,21 +14,16 @@ namespace SR\Reflection\Introspection;
 
 use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
-use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsInterface;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
-use SR\Utility\ClassUtil;
+use SR\Utility\ClassInspect;
 
 /**
  * Class ClassInstanceTypeManager.
  */
-class ObjectIntrospection extends AbstractIntrospection
+class ObjectIntrospection extends AbstractIntrospection implements ConstantAwareAccessorsInterface
 {
     use ConstantAwareAccessorsTrait;
-    use IdentityAwareAccessorsTrait;
-    use MethodAwareAccessorsTrait;
-    use PropertyAwareAccessorsTrait;
 
     /**
      * @var \ReflectionObject
@@ -43,7 +38,7 @@ class ObjectIntrospection extends AbstractIntrospection
     public function __construct($instance, $bindScope = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassUtil::assertInstance($instance);
+            ClassInspect::assertInstance($instance);
             parent::__construct(new \ReflectionObject($instance), $bindScope, $resolver);
         } catch (\Exception $exception) {
             throw RuntimeException::create('Parameter must be an instantiated object instance');
