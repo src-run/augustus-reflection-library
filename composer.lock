@@ -4,31 +4,122 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "21b6493df6166ee3efc02dfd2b0e620f",
-    "content-hash": "71aa456bb5ff19c4e79487f51174193a",
+    "hash": "9690f6ebd1e2301afa090f644d9528da",
+    "content-hash": "da412de0e0ec71f95270522fbfa28471",
     "packages": [
+        {
+            "name": "ircmaxell/password-compat",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ircmaxell/password_compat.git",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/password.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Ferrara",
+                    "email": "ircmaxell@php.net",
+                    "homepage": "http://blog.ircmaxell.com"
+                }
+            ],
+            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+            "homepage": "https://github.com/ircmaxell/password_compat",
+            "keywords": [
+                "hashing",
+                "password"
+            ],
+            "time": "2014-11-20 16:49:30"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2016-04-03 06:00:07"
+        },
         {
             "name": "src-run/augustus-exception-library",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "/home/rmf/code/composer/augustus-exception-library/",
-                "reference": "7290d436af3c7ae0d9795733f28ec67d8f75a583",
+                "reference": "9ce18dca0369df744bb32b28edacecf3d455b88a",
                 "shasum": null
             },
             "require": {
-                "php": "~5.6|~7.0",
-                "src-run/augustus-utility-library": "~0.5"
+                "php": "^5.6|^7.0",
+                "src-run/augustus-polyfill-library": "^0.6",
+                "src-run/augustus-utility-library": "^0.6"
             },
             "require-dev": {
-                "codacy/coverage": "~1.0",
-                "phpunit/phpunit": "~5.0",
-                "satooshi/php-coveralls": "~1.0"
+                "codacy/coverage": "^1.0",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.5-dev"
+                    "dev-master": "0.6-dev"
                 }
             },
             "autoload": {
@@ -48,13 +139,14 @@
                 {
                     "name": "Rob Frawley 2nd",
                     "email": "rmf@src.run",
-                    "homepage": "https://get.src.run/rmf",
+                    "homepage": "https://src.run/rmf",
                     "role": "Project Lead"
                 }
             ],
-            "description": "This library contains enhanced base exception implementations.",
-            "homepage": "https://get.src.run/augustus-exception-library",
+            "description": "core exception base class with fluent API, as well as a set of exceptions built to utilize this and replace core-engine exceptions",
+            "homepage": "https://src.run/augustus-exception-library",
             "keywords": [
+                "augustus",
                 "augustus-exception-library",
                 "exception",
                 "library",
@@ -63,9 +155,77 @@
             ],
             "support": {
                 "email": "rmf@src.run",
-                "issues": "https://get.src.run/augustus-exception-library/issues",
-                "source": "https://get.src.run/augustus-exception-library/git",
-                "irc": "irc://irc.efnet.org/scribe"
+                "issues": "https://src.run/augustus-exception-library/issues",
+                "source": "https://src.run/augustus-exception-library/git"
+            },
+            "transport-options": {
+                "symlink": true
+            }
+        },
+        {
+            "name": "src-run/augustus-polyfill-library",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "/home/rmf/code/composer/augustus-polyfill-library/",
+                "reference": "31912771d98d935ffabdbc6fd13da4a287a61294",
+                "shasum": null
+            },
+            "require": {
+                "ircmaxell/password-compat": "^1.0",
+                "paragonie/random_compat": "^2.0",
+                "php": "^5.6||^7.0",
+                "symfony/polyfill": "~1.1"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.0",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SR\\Polyfill\\": "lib/"
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "SR\\Polyfill\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Frawley 2nd",
+                    "email": "rmf@src.run",
+                    "homepage": "https://src.run/rmf",
+                    "role": "Project Lead"
+                }
+            ],
+            "description": "library that includes symfony/polyfill-* and provides an Error/Throwable implementation for pre-7.0 PHP release",
+            "homepage": "https://src.run/augustus-polyfill-library",
+            "keywords": [
+                "augustus",
+                "augustus-polyfill-library",
+                "library",
+                "polyfill",
+                "rmf",
+                "src-run"
+            ],
+            "support": {
+                "email": "rmf@src.run",
+                "issues": "https://src.run/augustus-polyfill-library/issues",
+                "source": "https://src.run/augustus-polyfill-library/git"
             },
             "transport-options": {
                 "symlink": true
@@ -77,21 +237,21 @@
             "dist": {
                 "type": "path",
                 "url": "/home/rmf/code/composer/augustus-utility-library/",
-                "reference": "c3d29d4301f279665f19459746b8dd9ad676d2fa",
+                "reference": "9922a30159e86a3873dde0f61a7b53b24b8be5e2",
                 "shasum": null
             },
             "require": {
-                "php": "~5.6|~7.0"
+                "php": "^5.6|^7.0"
             },
             "require-dev": {
-                "codacy/coverage": "~1.0",
-                "phpunit/phpunit": "~5.0",
-                "satooshi/php-coveralls": "~1.0"
+                "codacy/coverage": "^1.0",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.5-dev"
+                    "dev-master": "0.6-dev"
                 }
             },
             "autoload": {
@@ -115,26 +275,186 @@
                     "role": "Project Lead"
                 }
             ],
-            "description": "This library contains a core collection of generic type utilities (strings, classes, etc).",
+            "description": "collection of utility objects for strings, arrays, classes, etc",
             "homepage": "https://src.run/augustus-utility-library",
             "keywords": [
+                "augustus",
                 "augustus-utility-library",
                 "library",
-                "reflection",
                 "rmf",
-                "scribe",
                 "src-run",
-                "utilities"
+                "utility"
             ],
             "support": {
                 "email": "rmf@src.run",
-                "issues": "https://augustus-utility-library.oss.src.run/issues",
-                "source": "https://augustus-utility-library.oss.src.run/git",
-                "irc": "irc://irc.efnet.org/scribe"
+                "source": "https://src.run/augustus-utility-library/git",
+                "issues": "https://src.run/augustus-utility-library/issues"
             },
             "transport-options": {
                 "symlink": true
             }
+        },
+        {
+            "name": "symfony/intl",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/intl.git",
+                "reference": "020a5dcd764e426013dacc2814e7ce4ac09ac2b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/020a5dcd764e426013dacc2814e7ce4ac09ac2b3",
+                "reference": "020a5dcd764e426013dacc2814e7ce4ac09ac2b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-intl-icu": "~1.0"
+            },
+            "require-dev": {
+                "symfony/filesystem": "~2.8|~3.0"
+            },
+            "suggest": {
+                "ext-intl": "to use the component with locales other than \"en\""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Intl\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                },
+                {
+                    "name": "Eriksen Costa",
+                    "email": "eriksen.costa@infranology.com.br"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A PHP replacement layer for the C intl extension that includes additional data from the ICU library.",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "i18n",
+                "icu",
+                "internationalization",
+                "intl",
+                "l10n",
+                "localization"
+            ],
+            "time": "2016-03-23 13:23:25"
+        },
+        {
+            "name": "symfony/polyfill",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill.git",
+                "reference": "4f81055caed158ef999dc2f48c5a87395e631123"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill/zipball/4f81055caed158ef999dc2f48c5a87395e631123",
+                "reference": "4f81055caed158ef999dc2f48c5a87395e631123",
+                "shasum": ""
+            },
+            "require": {
+                "ircmaxell/password-compat": "~1.0",
+                "paragonie/random_compat": "~1.0|~2.0",
+                "php": ">=5.3.3",
+                "symfony/intl": "~2.3|~3.0"
+            },
+            "replace": {
+                "symfony/polyfill-apcu": "self.version",
+                "symfony/polyfill-iconv": "self.version",
+                "symfony/polyfill-intl-grapheme": "self.version",
+                "symfony/polyfill-intl-icu": "self.version",
+                "symfony/polyfill-intl-normalizer": "self.version",
+                "symfony/polyfill-mbstring": "self.version",
+                "symfony/polyfill-php54": "self.version",
+                "symfony/polyfill-php55": "self.version",
+                "symfony/polyfill-php56": "self.version",
+                "symfony/polyfill-php70": "self.version",
+                "symfony/polyfill-util": "self.version",
+                "symfony/polyfill-xml": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\": "src/"
+                },
+                "files": [
+                    "src/Apcu/bootstrap.php",
+                    "src/Php54/bootstrap.php",
+                    "src/Php55/bootstrap.php",
+                    "src/Php56/bootstrap.php",
+                    "src/Php70/bootstrap.php",
+                    "src/Iconv/bootstrap.php",
+                    "src/Intl/Grapheme/bootstrap.php",
+                    "src/Intl/Icu/bootstrap.php",
+                    "src/Intl/Normalizer/bootstrap.php",
+                    "src/Mbstring/bootstrap.php",
+                    "src/Xml/bootstrap.php"
+                ],
+                "classmap": [
+                    "src/Intl/Normalizer/Resources/stubs",
+                    "src/Php70/Resources/stubs",
+                    "src/Php54/Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfills backporting features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compat",
+                "compatibility",
+                "polyfill",
+                "shim"
+            ],
+            "time": "2016-04-29 08:01:37"
         }
     ],
     "packages-dev": [
@@ -1742,65 +2062,6 @@
             "time": "2016-03-27 10:24:39"
         },
         {
-            "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "1289d16209491b584839022f29257ad859b8532d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
-                "reference": "1289d16209491b584839022f29257ad859b8532d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-mbstring": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for the Mbstring extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "mbstring",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2016-01-20 09:13:37"
-        },
-        {
             "name": "symfony/process",
             "version": "v3.0.4",
             "source": {
@@ -1954,7 +2215,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "~5.6|~7.0"
+        "php": "^5.6|^7.0"
     },
     "platform-dev": []
 }
