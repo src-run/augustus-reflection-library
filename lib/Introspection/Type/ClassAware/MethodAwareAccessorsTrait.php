@@ -93,9 +93,9 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $sort
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $sort
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionMethod[]
      */
@@ -105,9 +105,9 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $visit
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $visit
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionMethod[]|mixed
      */
@@ -117,9 +117,9 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $predicate
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $predicate
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionMethod[]
      */
@@ -129,9 +129,9 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $predicate
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $predicate
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionMethod|null
      */
@@ -157,7 +157,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return \ReflectionMethod|null
+     * @return null|\ReflectionMethod
      */
     public function matchOneMethod($match, $func = '__toString', $mask = null)
     {

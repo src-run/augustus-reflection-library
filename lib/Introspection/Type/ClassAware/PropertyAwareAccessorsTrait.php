@@ -93,9 +93,9 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $sort
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $sort
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]
      */
@@ -105,9 +105,9 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $visit
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $visit
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]|mixed[]
      */
@@ -117,9 +117,9 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $predicate
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $predicate
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]
      */
@@ -129,9 +129,9 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $predicate
-     * @param null|int  $mask
-     * @param mixed,... $extra
+     * @param \Closure $predicate
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty|null
      */
@@ -157,7 +157,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return \ReflectionProperty|null
+     * @return null|\ReflectionProperty
      */
     public function matchOneProperty($match, $func = '__toString', $mask = null)
     {

@@ -69,36 +69,36 @@ interface PropertyAwareAccessorsInterface
     public function privateProperties();
 
     /**
-     * @param \Closure   $sort
-     * @param null|int   $mask
-     * @param mixed ,... $extra
+     * @param \Closure $sort
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]
      */
     public function sortProperties(\Closure $sort, $mask = null, &...$extra);
 
     /**
-     * @param \Closure   $visit
-     * @param null|int   $mask
-     * @param mixed ,... $extra
+     * @param \Closure $visit
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]|mixed[]
      */
     public function visitProperties(\Closure $visit, $mask = null, &...$extra);
 
     /**
-     * @param \Closure   $predicate
-     * @param null|int   $mask
-     * @param mixed ,... $extra
+     * @param \Closure $predicate
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]
      */
     public function filterProperties(\Closure $predicate, $mask = null, &...$extra);
 
     /**
-     * @param \Closure   $predicate
-     * @param null|int   $mask
-     * @param mixed ,... $extra
+     * @param \Closure $predicate
+     * @param null|int $mask
+     * @param mixed    ...$extra
      *
      * @return \ReflectionProperty|null
      */
@@ -118,7 +118,7 @@ interface PropertyAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return \ReflectionProperty|null
+     * @return null|\ReflectionProperty
      */
     public function matchOneProperty($match, $func = '__toString', $mask = null);
 }

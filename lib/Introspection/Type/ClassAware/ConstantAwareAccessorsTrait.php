@@ -75,8 +75,8 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $sort
-     * @param mixed,... $extra
+     * @param \Closure $sort
+     * @param mixed    ...$extra
      *
      * @return ReflectionConstant[]
      */
@@ -86,8 +86,8 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $visit
-     * @param mixed,... $extra
+     * @param \Closure $visit
+     * @param mixed    ...$extra
      *
      * @return ReflectionConstant[]|mixed[]
      */
@@ -97,8 +97,8 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $predicate
-     * @param mixed,... $extra
+     * @param \Closure $predicate
+     * @param mixed    ...$extra
      *
      * @return ReflectionConstant[]
      */
@@ -108,10 +108,10 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
     }
 
     /**
-     * @param \Closure  $predicate
-     * @param mixed,... $extra
+     * @param \Closure $predicate
+     * @param mixed    ...$extra
      *
-     * @return ReflectionConstant|null
+     * @return null|ReflectionConstant
      */
     public function filterOneConstant(\Closure $predicate, &...$extra)
     {
@@ -133,7 +133,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return ReflectionConstant|null
+     * @return null|ReflectionConstant
      */
     public function matchOneConstant($match, $func = '__toString')
     {

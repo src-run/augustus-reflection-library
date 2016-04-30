@@ -33,7 +33,7 @@ abstract class AbstractIntrospection implements IdentityAwareAccessorsInterface,
     use PropertyAwareAccessorsTrait;
 
     /**
-     * @var \ReflectionClass|\ReflectionObject|\Reflector|null
+     * @var null|\ReflectionClass|\ReflectionObject|\Reflector
      */
     protected $reflection;
 
@@ -44,7 +44,7 @@ abstract class AbstractIntrospection implements IdentityAwareAccessorsInterface,
 
     /**
      * @param \Reflector     $reflection
-     * @param object|null    $bindScope
+     * @param null|object    $bindScope
      * @param ResultResolver $resolver
      */
     public function __construct(\Reflector $reflection, $bindScope = null, ResultResolver $resolver = null)
@@ -54,7 +54,7 @@ abstract class AbstractIntrospection implements IdentityAwareAccessorsInterface,
     }
 
     /**
-     * @return \ReflectionClass|\ReflectionObject|\Reflector|null
+     * @return null|\ReflectionClass|\ReflectionObject|\Reflector
      */
     public function reflection()
     {
@@ -70,7 +70,7 @@ abstract class AbstractIntrospection implements IdentityAwareAccessorsInterface,
     }
 
     /**
-     * @param ResolverInterface|null $resolver
+     * @param null|ResolverInterface $resolver
      * @param null|object            $bind
      */
     protected function initializeResolver(ResolverInterface $resolver = null, $bind = null)

@@ -35,17 +35,44 @@ class FixtureClassTwo extends FixtureClassOne implements FixtureInterface
     private $propPrivateTwo1 = 'propPrivateTwo1';
     private $propPrivateTwo2 = 'propPrivateTwo2';
 
-    public function publicTwo0() { return 'prop'.ucfirst(__FUNCTION__); }
-    public function publicTwo1() { return 'prop'.ucfirst(__FUNCTION__); }
-    public function publicTwo2() { return 'prop'.ucfirst(__FUNCTION__); }
+    public function publicTwo0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    public function publicTwo1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    public function publicTwo2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 
-    protected function protectedTwo0() { return 'prop'.ucfirst(__FUNCTION__); }
-    protected function protectedTwo1() { return 'prop'.ucfirst(__FUNCTION__); }
-    protected function protectedTwo2() { return 'prop'.ucfirst(__FUNCTION__); }
+    protected function protectedTwo0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    protected function protectedTwo1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    protected function protectedTwo2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 
-    private function privateTwo0() { return 'prop'.ucfirst(__FUNCTION__); }
-    private function privateTwo1() { return 'prop'.ucfirst(__FUNCTION__); }
-    private function privateTwo2() { return 'prop'.ucfirst(__FUNCTION__); }
+    private function privateTwo0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    private function privateTwo1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    private function privateTwo2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 }
 
 /* EOF */

@@ -33,17 +33,44 @@ class FixtureClassThree extends FixtureClassTwo
     private $propPrivateThree1 = 'propPrivateThree1';
     private $propPrivateThree2 = 'propPrivateThree2';
 
-    public function publicThree0() { return 'prop'.ucfirst(__FUNCTION__); }
-    public function publicThree1() { return 'prop'.ucfirst(__FUNCTION__); }
-    public function publicThree2() { return 'prop'.ucfirst(__FUNCTION__); }
+    public function publicThree0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    public function publicThree1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    public function publicThree2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 
-    protected function protectedThree0() { return 'prop'.ucfirst(__FUNCTION__); }
-    protected function protectedThree1() { return 'prop'.ucfirst(__FUNCTION__); }
-    protected function protectedThree2() { return 'prop'.ucfirst(__FUNCTION__); }
+    protected function protectedThree0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    protected function protectedThree1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    protected function protectedThree2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 
-    private function privateThree0() { return 'prop'.ucfirst(__FUNCTION__); }
-    private function privateThree1() { return 'prop'.ucfirst(__FUNCTION__); }
-    private function privateThree2() { return 'prop'.ucfirst(__FUNCTION__); }
+    private function privateThree0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    private function privateThree1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    private function privateThree2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 }
 
 /* EOF */

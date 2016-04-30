@@ -25,7 +25,7 @@ class ResultResolver implements ResolverInterface
     /**
      * @param \Reflector[] $items
      * @param \Closure     $sort
-     * @param mixed,...    $extra
+     * @param mixed        ...$extra
      *
      * @return \Reflector[]
      */
@@ -43,7 +43,7 @@ class ResultResolver implements ResolverInterface
     /**
      * @param \Reflector[] $items
      * @param \Closure     $visit
-     * @param mixed,...    $extra
+     * @param mixed        ...$extra
      *
      * @return mixed[]
      */
@@ -61,7 +61,7 @@ class ResultResolver implements ResolverInterface
     /**
      * @param \Reflector[] $items
      * @param \Closure     $predicate
-     * @param mixed,...    $extra
+     * @param mixed        ...$extra
      *
      * @return \Reflector[]
      */
@@ -79,7 +79,7 @@ class ResultResolver implements ResolverInterface
     /**
      * @param \Reflector[] $items
      * @param \Closure     $predicate
-     * @param mixed,...    $extra
+     * @param mixed        ...$extra
      *
      * @return \Reflector
      */
@@ -134,7 +134,7 @@ class ResultResolver implements ResolverInterface
     }
 
     /**
-     * @param object|null $scope
+     * @param null|object $scope
      *
      * @return $this
      */

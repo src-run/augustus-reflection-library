@@ -39,7 +39,7 @@ class ObjectIntrospectionTest extends AbstractTestHelper
         $_ = $this->getFixtureClassNamesAbsolute();
 
         array_walk($_, function (&$className) {
-            $className = new $className;
+            $className = new $className();
         });
 
         return [

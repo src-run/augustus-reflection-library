@@ -32,8 +32,8 @@ class ObjectIntrospection extends AbstractIntrospection implements ConstantAware
 
     /**
      * @param object                 $instance
-     * @param object|null            $bindScope
-     * @param ResolverInterface|null $resolver
+     * @param null|object            $bindScope
+     * @param null|ResolverInterface $resolver
      */
     public function __construct($instance, $bindScope = null, ResolverInterface $resolver = null)
     {

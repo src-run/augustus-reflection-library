@@ -34,17 +34,44 @@ class FixtureClassOne
     private $propPrivateOne1 = 'propPrivateOne1';
     private $propPrivateOne2 = 'propPrivateOne2';
 
-    public function publicOne0() { return 'prop'.ucfirst(__FUNCTION__); }
-    public function publicOne1() { return 'prop'.ucfirst(__FUNCTION__); }
-    public function publicOne2() { return 'prop'.ucfirst(__FUNCTION__); }
+    public function publicOne0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    public function publicOne1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    public function publicOne2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 
-    protected function protectedOne0() { return 'prop'.ucfirst(__FUNCTION__); }
-    protected function protectedOne1() { return 'prop'.ucfirst(__FUNCTION__); }
-    protected function protectedOne2() { return 'prop'.ucfirst(__FUNCTION__); }
+    protected function protectedOne0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    protected function protectedOne1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    protected function protectedOne2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 
-    private function privateOne0() { return 'prop'.ucfirst(__FUNCTION__); }
-    private function privateOne1() { return 'prop'.ucfirst(__FUNCTION__); }
-    private function privateOne2() { return 'prop'.ucfirst(__FUNCTION__); }
+    private function privateOne0()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    private function privateOne1()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
+    private function privateOne2()
+    {
+        return 'prop'.ucfirst(__FUNCTION__);
+    }
 }
 
 /* EOF */

@@ -1,7 +1,7 @@
 ---
 
 ##
-# This file is part of the `src-run/augustus-utility-library` project.
+# This file is part of the `src-run/augustus-reflection-library` project.
 #
 # (c) Rob Frawley 2nd <rmf@src.run>
 # (c) Scribe Inc      <scr@src.run>
@@ -10,24 +10,12 @@
 # file distributed with this source code.
 ##
 
-language: php
-
-sudo: false
-
-php:
-  - 5.6
-  - 7.0
+sudo     : false
+language : php
+php      : [ 5.6, 7.0 ]
 
 git:
-  depth: 3
-
-services:
-  - mysql
-  - memcached
-
-addons:
-  hosts:
-    - travis.src.run
+  depth : 3
 
 env:
   global:

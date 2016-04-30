@@ -25,7 +25,7 @@ class Inspect implements InspectInterface
 {
     /**
      * @param string|object $nameOrInstance
-     * @param object|null   $closureScope
+     * @param null|object   $closureScope
      *
      * @throws RuntimeException
      *
@@ -50,7 +50,7 @@ class Inspect implements InspectInterface
 
     /**
      * @param string      $name
-     * @param object|null $closureScope
+     * @param null|object $closureScope
      *
      * @return ClassIntrospection
      */
@@ -61,7 +61,7 @@ class Inspect implements InspectInterface
 
     /**
      * @param object      $instance
-     * @param object|null $closureScope
+     * @param null|object $closureScope
      *
      * @return ObjectIntrospection
      */
@@ -72,7 +72,7 @@ class Inspect implements InspectInterface
 
     /**
      * @param string      $name
-     * @param object|null $closureScope
+     * @param null|object $closureScope
      *
      * @return ObjectIntrospection
      */

@@ -83,7 +83,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
         return [
             new $_($one ?: $_1),
             new $_($two ?: $_2),
-            new $_($three ?: $_3)
+            new $_($three ?: $_3),
         ];
     }
 }

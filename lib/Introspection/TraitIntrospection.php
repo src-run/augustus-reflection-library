@@ -28,8 +28,8 @@ class TraitIntrospection extends AbstractIntrospection
 
     /**
      * @param string                 $name
-     * @param object|null            $bindScope
-     * @param ResolverInterface|null $resolver
+     * @param null|object            $bindScope
+     * @param null|ResolverInterface $resolver
      */
     public function __construct($name, $bindScope = null, ResolverInterface $resolver = null)
     {

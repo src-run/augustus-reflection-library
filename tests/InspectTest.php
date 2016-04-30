@@ -48,7 +48,7 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnInvalidInput()
     {
         $this->expectException('\RuntimeException');
-        
+
         $r = Inspect::this(__NAMESPACE__.'abcdef0123\ThisShouldNot\Ever\Exist');
     }
 
@@ -86,7 +86,7 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnClassInstance()
     {
         $c = self::TEST_FIXTURE_CLASS;
-        $f = new $c;
+        $f = new $c();
         $r = Inspect::thisInstance($f);
 
         $this->assertTrue($r instanceof ObjectIntrospection);
@@ -144,7 +144,7 @@ class InspectTest extends AbstractTestHelper
         $s = new \SR\Reflection\Tests\Helper\FixtureClassOne();
         $m = Inspect::thisClass($c, $s);
 
-        $results = $m->visitConstants(function(ReflectionConstant &$c) {
+        $results = $m->visitConstants(function (ReflectionConstant &$c) {
             return $this->protectedOne0($c->getValue()).'---'.$c->getName();
         });
 

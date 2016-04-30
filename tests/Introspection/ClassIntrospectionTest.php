@@ -66,7 +66,7 @@ class ClassIntrospectionTest extends AbstractTestHelper
         $this->expectException('\RuntimeException');
         $this->getFixtureInstances('/AN/INVALID/NAME/SPACE/I/REALLY/HOPE');
     }
-    
+
     public function testStaticFactoryConstruction()
     {
         $_r = $this->getClassnameQualified();
@@ -80,17 +80,17 @@ class ClassIntrospectionTest extends AbstractTestHelper
         $this->expectException('\RuntimeException');
         $this->getFixtureInstances('/AN/INVALID/NAME/SPACE/I/REALLY/HOPE');
     }
-    
+
     public function testConstruction()
     {
         list($_1n, $_2n, $_3n) = $this->getFixtureClassNamesAbsolute();
 
         foreach ($this->getFixtureInstances() as $i => $_) {
-            $_z = '_'.($i+1).'n';
+            $_z = '_'.($i + 1).'n';
             $_a = $_->reflection();
 
             $this->assertTrue($$_z === $_a->getName());
-            $methods = $this->getMethodsAndCheckCount($_, '', 9 * ($i+1));
+            $methods = $this->getMethodsAndCheckCount($_, '', 9 * ($i + 1));
             $this->checkMethods($methods);
         }
     }
@@ -100,11 +100,11 @@ class ClassIntrospectionTest extends AbstractTestHelper
         list($_1n, $_2n, $_3n) = $this->getFixtureClassNamesAbsolute();
 
         foreach ($this->getFixtureInstances() as $i => $_) {
-            $_z = '_'.($i+1).'n';
+            $_z = '_'.($i + 1).'n';
             $_a = $_->reflection();
 
             $this->assertTrue($$_z === $_a->getName());
-            $methods = $this->getMethodsAndCheckCount($_, 'Public', 3 * ($i+1));
+            $methods = $this->getMethodsAndCheckCount($_, 'Public', 3 * ($i + 1));
             $this->checkMethods($methods);
         }
     }
@@ -114,11 +114,11 @@ class ClassIntrospectionTest extends AbstractTestHelper
         list($_1n, $_2n, $_3n) = $this->getFixtureClassNamesAbsolute();
 
         foreach ($this->getFixtureInstances() as $i => $_) {
-            $_z = '_'.($i+1).'n';
+            $_z = '_'.($i + 1).'n';
             $_a = $_->reflection();
 
             $this->assertTrue($$_z === $_a->getName());
-            $methods = $this->getMethodsAndCheckCount($_, 'Protected', 3 * ($i+1));
+            $methods = $this->getMethodsAndCheckCount($_, 'Protected', 3 * ($i + 1));
             $this->checkMethods($methods);
         }
     }
@@ -128,11 +128,11 @@ class ClassIntrospectionTest extends AbstractTestHelper
         list($_1n, $_2n, $_3n) = $this->getFixtureClassNamesAbsolute();
 
         foreach ($this->getFixtureInstances() as $i => $_) {
-            $_z = '_'.($i+1).'n';
+            $_z = '_'.($i + 1).'n';
             $_a = $_->reflection();
 
             $this->assertTrue($$_z === $_a->getName());
-            $methods = $this->getMethodsAndCheckCount($_, 'Private', 3 * ($i+1));
+            $methods = $this->getMethodsAndCheckCount($_, 'Private', 3 * ($i + 1));
             $this->checkMethods($methods);
         }
     }
@@ -142,11 +142,11 @@ class ClassIntrospectionTest extends AbstractTestHelper
         list($_1n, $_2n, $_3n) = $this->getFixtureClassNamesAbsolute();
 
         foreach ($this->getFixtureInstances() as $i => $_) {
-            $_z = '_'.($i+1).'n';
+            $_z = '_'.($i + 1).'n';
             $_a = $_->reflection();
 
             $this->assertTrue($$_z === $_a->getName());
-            $methods = $this->getMethodsAndCheckCount($_, '', 6 * ($i+1), \ReflectionMethod::IS_PUBLIC|\ReflectionMethod::IS_PRIVATE);
+            $methods = $this->getMethodsAndCheckCount($_, '', 6 * ($i + 1), \ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PRIVATE);
             $this->checkMethods($methods);
         }
     }
@@ -160,7 +160,7 @@ class ClassIntrospectionTest extends AbstractTestHelper
 
             $this->assertTrue($_n[$i] === $_r->getName());
 
-            $methods = $this->getMethodsAndCheckCount($_, '', 9 * ($i+1));
+            $methods = $this->getMethodsAndCheckCount($_, '', 9 * ($i + 1));
             $this->checkMethods($methods);
 
             $filtered = $_->filterMethods(function (\ReflectionMethod $m) {
@@ -178,8 +178,8 @@ class ClassIntrospectionTest extends AbstractTestHelper
             $constantDefinitions = $constantStrings = [];
 
             $constStrings = $constIntToString;
-            array_walk($constStrings, function(&$name, $j) use ($constIntToString, $i) {
-                $name = $constIntToString[$i] . '_' . $j;
+            array_walk($constStrings, function (&$name, $j) use ($constIntToString, $i) {
+                $name = $constIntToString[$i].'_'.$j;
             });
 
             foreach ($constStrings as $cs) {
@@ -209,11 +209,11 @@ class ClassIntrospectionTest extends AbstractTestHelper
         foreach ($this->getFixtureInstances() as $i => $m) {
             $expectedConstants = $constants = $m->constants();
 
-            array_walk($expectedConstants, function(ReflectionConstant &$c) {
+            array_walk($expectedConstants, function (ReflectionConstant &$c) {
                 $c = $c->getName().$c->getValue();
             });
 
-            $visitedConstants = $m->visitConstants(function(ReflectionConstant $c) {
+            $visitedConstants = $m->visitConstants(function (ReflectionConstant $c) {
                 return $c->getName().$c->getValue();
             });
 
@@ -224,7 +224,7 @@ class ClassIntrospectionTest extends AbstractTestHelper
     public function testConstantFilter()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $result = $m->filterOneConstant(function(ReflectionConstant $c) {
+            $result = $m->filterOneConstant(function (ReflectionConstant $c) {
                 return $c->getName() === 'ONE_0';
             });
 
@@ -256,7 +256,7 @@ class ClassIntrospectionTest extends AbstractTestHelper
             $results = $m->matchConstants('_');
             $this->assertTrue(is_array($results));
             $this->assertGreaterThan(3, $results);
-            array_walk($results, function($r) {
+            array_walk($results, function ($r) {
                 $this->assertTrue($r instanceof ReflectionConstant);
             });
         }
@@ -265,12 +265,12 @@ class ClassIntrospectionTest extends AbstractTestHelper
     public function testConstantsFilter()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $results = $m->filterConstants(function(ReflectionConstant $c) {
+            $results = $m->filterConstants(function (ReflectionConstant $c) {
                 return false !== strpos($c->getName(), 'ONE');
             });
             $this->assertTrue(is_array($results));
             $this->assertCount(3, $results);
-            array_walk($results, function($r) {
+            array_walk($results, function ($r) {
                 $this->assertTrue($r instanceof ReflectionConstant);
             });
         }
@@ -279,20 +279,20 @@ class ClassIntrospectionTest extends AbstractTestHelper
     public function testSortConstants()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $results = $m->sortConstants(function(ReflectionConstant $a, ReflectionConstant $b) {
+            $results = $m->sortConstants(function (ReflectionConstant $a, ReflectionConstant $b) {
                 return substr($a->getName(), -1, 1) > substr($b->getName(), -1, 1);
             });
 
             $this->assertGreaterThan(3, $results);
             $this->assertStringEndsWith('0', $results[0]->getName());
-            $this->assertStringEndsWith('2', $results[count($results)-2]->getName());
+            $this->assertStringEndsWith('2', $results[count($results) - 2]->getName());
         }
     }
 
     public function testConstantExport()
     {
         $this->expectException('\RuntimeException');
-        
+
         foreach ($this->getFixtureInstances() as $i => $m) {
             $results = $m->constants();
             foreach ($results as $c) {
@@ -334,20 +334,20 @@ class ClassIntrospectionTest extends AbstractTestHelper
     public function testMethodAccessors()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $result = $m->filterMethods(function(\ReflectionMethod $m) {
+            $result = $m->filterMethods(function (\ReflectionMethod $m) {
                 return false !== strpos($m->getName(), 'publicOne');
             });
             $this->assertCount(3, $result);
-            $result = $m->filterMethods(function(\ReflectionMethod $m) {
+            $result = $m->filterMethods(function (\ReflectionMethod $m) {
                 return $m->getName() === 'abcdef';
             });
             $this->assertCount(0, $result);
 
-            $result = $m->filterOneMethod(function(\ReflectionMethod $m) {
+            $result = $m->filterOneMethod(function (\ReflectionMethod $m) {
                 return $m->getName() === 'publicOne0';
             });
             $this->assertTrue($result instanceof \ReflectionMethod);
-            $result = $m->filterOneMethod(function(\ReflectionMethod $m) {
+            $result = $m->filterOneMethod(function (\ReflectionMethod $m) {
                 return $m->getName() === 'abcdef';
             });
             $this->assertNull($result);
@@ -395,20 +395,20 @@ class ClassIntrospectionTest extends AbstractTestHelper
     public function testPropertyAccessors()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $result = $m->filterProperties(function(\ReflectionProperty $m) {
+            $result = $m->filterProperties(function (\ReflectionProperty $m) {
                 return false !== strpos($m->getName(), 'propPublicOne');
             });
             $this->assertCount(3, $result);
-            $result = $m->filterProperties(function(\ReflectionProperty $m) {
+            $result = $m->filterProperties(function (\ReflectionProperty $m) {
                 return $m->getName() === 'abcdef';
             });
             $this->assertCount(0, $result);
 
-            $result = $m->filterOneProperty(function(\ReflectionProperty $m) {
+            $result = $m->filterOneProperty(function (\ReflectionProperty $m) {
                 return $m->getName() === 'propPublicOne0';
             });
             $this->assertTrue($result instanceof \ReflectionProperty);
-            $result = $m->filterOneProperty(function(\ReflectionProperty $m) {
+            $result = $m->filterOneProperty(function (\ReflectionProperty $m) {
                 return $m->getName() === 'abcdef';
             });
             $this->assertNull($result);

@@ -23,7 +23,7 @@ interface InspectInterface
 {
     /**
      * @param string|object $nameOrInstance
-     * @param object|null   $closureScope
+     * @param null|object   $closureScope
      *
      * @throws RuntimeException
      *
@@ -33,7 +33,7 @@ interface InspectInterface
 
     /**
      * @param string      $name
-     * @param object|null $closureScope
+     * @param null|object $closureScope
      *
      * @return ClassIntrospection
      */
@@ -41,11 +41,19 @@ interface InspectInterface
 
     /**
      * @param object      $instance
-     * @param object|null $closureScope
+     * @param null|object $closureScope
      *
      * @return ObjectIntrospection
      */
     public static function thisInstance($instance, $closureScope = null);
+
+    /**
+     * @param string      $name
+     * @param null|object $closureScope
+     *
+     * @return ObjectIntrospection
+     */
+    public static function thisTrait($name, $closureScope = null);
 }
 
 /* EOF */
