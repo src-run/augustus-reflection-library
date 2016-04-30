@@ -12,5 +12,5 @@ app_prep   : dep-composer
 app_post   : ~
 app_path   : ~
 pkg_name   : augustus-reflection-library
-pkg_desc   : "a collections of common utilities and helpers for PHP object reflection tasks."
+pkg_desc   : "collection of reflection wrapper objects and helprs to simplify common tasks"
 pkg_bndl   : false
