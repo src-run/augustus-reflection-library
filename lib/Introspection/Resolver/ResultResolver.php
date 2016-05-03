@@ -12,6 +12,13 @@
 
 namespace SR\Reflection\Introspection\Resolver;
 
+use SR\Reflection\Definition\ReflectionConstant;
+use SR\Reflection\Introspection\ClassIntrospection;
+use SR\Reflection\Introspection\ConstantIntrospection;
+use SR\Reflection\Introspection\MethodIntrospection;
+use SR\Reflection\Introspection\ObjectIntrospection;
+use SR\Reflection\Introspection\PropertyIntrospection;
+
 /**
  * Class ResultResolver.
  */
@@ -32,12 +39,12 @@ class ResultResolver implements ResolverInterface
     public function sort(array $items, \Closure $sort, &...$extra)
     {
         $_ = function (\Reflector $first, \Reflector $second) use ($sort, $extra) {
-            return (int) $this->doBindScopeAndInvoke($sort, $first, $second, ...$extra);
+            return (int) $this->bindScopeAndInvoke($sort, $first, $second, ...$extra);
         };
 
         usort($items, $_);
 
-        return $this->doResultReturnSet($items);
+        return $this->normalizeResultSet($items);
     }
 
     /**
@@ -50,12 +57,12 @@ class ResultResolver implements ResolverInterface
     public function visit(array $items, \Closure $visit, &...$extra)
     {
         $_ = function (\Reflector &$r, $i) use ($visit, $extra) {
-            $r = $this->doBindScopeAndInvoke($visit, $r, $i, ...$extra);
+            $r = $this->bindScopeAndInvoke($visit, $r, $i, ...$extra);
         };
 
         array_walk($items, $_);
 
-        return $this->doResultReturnSet($items, false);
+        return $this->normalizeResultSet($items, false);
     }
 
     /**
@@ -68,12 +75,12 @@ class ResultResolver implements ResolverInterface
     public function filter(array $items, \Closure $predicate, &...$extra)
     {
         $_ = function (\Reflector $r, $i) use ($predicate, $extra) {
-            return (bool) $this->doBindScopeAndInvoke($predicate, $r, $i, ...$extra);
+            return (bool) $this->bindScopeAndInvoke($predicate, $r, $i, ...$extra);
         };
 
         $items = array_filter($items, $_, ARRAY_FILTER_USE_BOTH);
 
-        return $this->doResultReturnSet($items);
+        return $this->normalizeResultSet($items);
     }
 
     /**
@@ -87,7 +94,7 @@ class ResultResolver implements ResolverInterface
     {
         $items = $this->filter($items, $predicate, ...$extra);
 
-        return $this->doResultReturnOne($items);
+        return $this->normalizeResultSingle($items);
     }
 
     /**
@@ -106,7 +113,7 @@ class ResultResolver implements ResolverInterface
 
         $items = $this->filter($items, $_);
 
-        return $this->doResultReturnSet($items);
+        return $this->normalizeResultSet($items);
     }
 
     /**
@@ -120,7 +127,7 @@ class ResultResolver implements ResolverInterface
     {
         $items = $this->match($items, $match, $method);
 
-        return $this->doResultReturnOne($items);
+        return $this->normalizeResultSingle($items);
     }
 
     /**
@@ -153,7 +160,7 @@ class ResultResolver implements ResolverInterface
      *
      * @return mixed
      */
-    public function doBindScopeAndInvoke(\Closure $invokable, &...$parameters)
+    public function bindScopeAndInvoke(\Closure $invokable, &...$parameters)
     {
         if ($this->validateBind($this->scope)) {
             $invokable = $invokable->bindTo($this->scope, $this->scope);
@@ -164,26 +171,16 @@ class ResultResolver implements ResolverInterface
 
     /**
      * @param \Reflector[]|mixed[] $items
-     *
-     * @return \Reflector[]
-     */
-    protected function doResultSetNormalization($items)
-    {
-        return (array) array_filter((array) $items, function ($v) {
-            return $v instanceof \Reflector;
-        });
-    }
-
-    /**
-     * @param \Reflector[]|mixed[] $items
      * @param bool                 $normalize
      *
      * @return \Reflector[]|mixed[]
      */
-    protected function doResultReturnSet($items, $normalize = true)
+    protected function normalizeResultSet($items, $normalize = true)
     {
         if ($normalize === true) {
-            $items = $this->doResultSetNormalization($items);
+            $items = array_filter($items, function ($item) {
+                return $item instanceof \Reflector;
+            });
         }
 
         return (array) array_values((array) $items);
@@ -195,13 +192,13 @@ class ResultResolver implements ResolverInterface
      *
      * @return \Reflector|mixed|null
      */
-    protected function doResultReturnOne($items, $normalize = true)
+    protected function normalizeResultSingle($items, $normalize = true)
     {
-        if (count($items = $this->doResultReturnSet($items, $normalize)) !== 1) {
-            return null;
+        if (count($items = $this->normalizeResultSet($items, $normalize)) === 1) {
+            return array_shift($items);
         }
 
-        return array_shift($items);
+        return null;
     }
 }
 

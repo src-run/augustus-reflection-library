@@ -12,6 +12,8 @@
 
 namespace SR\Reflection\Definition;
 
+use SR\Exception\InvalidArgumentException;
+use SR\Exception\LogicException;
 use SR\Exception\RuntimeException;
 
 /**
@@ -25,18 +27,26 @@ class ReflectionConstant implements \Reflector
     private $name;
 
     /**
-     * @var null|mixed
+     * @var string
      */
-    private $value;
+    private $declaringContext;
 
     /**
-     * @param string     $name
-     * @param null|mixed $value
+     * @param string $declaringContext
+     * @param string $constantName
      */
-    public function __construct($name, $value = null)
+    public function __construct($declaringContext, $constantName)
     {
-        $this->name = (string) $name;
-        $this->value = $value;
+        $constant = $declaringContext.'::'.$constantName;
+
+        if (!defined($constant)) {
+            throw InvalidArgumentException::create()
+                ->setMessage('Constant "%s" does not exist')
+                ->with($constant);
+        }
+
+        $this->name = $constantName;
+        $this->declaringContext = $declaringContext;
     }
 
     /**
@@ -48,7 +58,7 @@ class ReflectionConstant implements \Reflector
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -56,19 +66,19 @@ class ReflectionConstant implements \Reflector
     }
 
     /**
-     * @return mixed|null
+     * @return mixed
      */
     public function getValue()
     {
-        return $this->value;
+        return constant($this->declaringContext.'::'.$this->name);
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isNull()
+    public function getDeclaringContext()
     {
-        return $this->value === null;
+        return $this->declaringContext;
     }
 
     /**
@@ -76,10 +86,29 @@ class ReflectionConstant implements \Reflector
      *
      * @throws RuntimeException
      */
-    public static function export()
+    public static function export($class, $name)
     {
-        throw RuntimeException::create('TODO: Implement %s functionality.')
-            ->with(get_class());
+        $constant = $class.'::'.$name;
+
+        if (!defined($constant)) {
+            throw InvalidArgumentException::create()->setMessage('Constant "%s" does not exist')->with($constant);
+        }
+
+        $reflect = new \ReflectionClass($class);
+        $valOriginal = constant($constant);
+        $valFormatted = $valOriginal;
+
+        if (is_array($valOriginal)) {
+            $valFormatted = '';
+            foreach ($valOriginal as $key => $value) {
+                $valFormatted .= '['.$key.'] => '.($value ?: 'NULL').", ";
+            }
+            $valFormatted = substr($valFormatted, 0, strlen($valFormatted) - 2);
+        } elseif (is_null($valOriginal)) {
+            $valFormatted = 'NULL';
+        }
+
+        printf("Constant [ %s %s::%s ] {\n  %s\n}", gettype($valOriginal), $reflect->getName(), $name, $valFormatted);
     }
 }
 

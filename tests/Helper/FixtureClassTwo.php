@@ -15,7 +15,7 @@ namespace SR\Reflection\Tests\Helper;
 /**
  * Class FixtureClassTwo.
  */
-class FixtureClassTwo extends FixtureClassOne implements FixtureInterface
+class FixtureClassTwo extends FixtureClassOne implements FixtureInterfaceTwo
 {
     use FixtureTrait;
 

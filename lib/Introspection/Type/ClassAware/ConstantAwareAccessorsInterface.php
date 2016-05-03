@@ -13,7 +13,7 @@
 namespace SR\Reflection\Introspection\Type\ClassAware;
 
 use SR\Exception\InvalidArgumentException;
-use SR\Reflection\Definition\ReflectionConstant;
+use SR\Reflection\Introspection\ConstantIntrospection;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
@@ -43,12 +43,12 @@ interface ConstantAwareAccessorsInterface
      *
      * @throws InvalidArgumentException
      *
-     * @return ReflectionConstant
+     * @return ConstantIntrospection
      */
     public function getConstant($name);
 
     /**
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function constants();
 
@@ -56,7 +56,7 @@ interface ConstantAwareAccessorsInterface
      * @param \Closure $sort
      * @param mixed    ...$extra
      *
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function sortConstants(\Closure $sort, &...$extra);
 
@@ -64,7 +64,7 @@ interface ConstantAwareAccessorsInterface
      * @param \Closure $visit
      * @param mixed    ...$extra
      *
-     * @return ReflectionConstant[]|mixed[]
+     * @return ConstantIntrospection[]|mixed[]
      */
     public function visitConstants(\Closure $visit, &...$extra);
 
@@ -72,7 +72,7 @@ interface ConstantAwareAccessorsInterface
      * @param \Closure $predicate
      * @param mixed    ...$extra
      *
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function filterConstants(\Closure $predicate, &...$extra);
 
@@ -80,7 +80,7 @@ interface ConstantAwareAccessorsInterface
      * @param \Closure $predicate
      * @param mixed      ...$extra
      *
-     * @return ReflectionConstant|null
+     * @return null|ConstantIntrospection
      */
     public function filterOneConstant(\Closure $predicate, &...$extra);
 
@@ -88,7 +88,7 @@ interface ConstantAwareAccessorsInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function matchConstants($match, $func = '__toString');
 
@@ -96,17 +96,9 @@ interface ConstantAwareAccessorsInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return null|ReflectionConstant
+     * @return null|ConstantIntrospection
      */
     public function matchOneConstant($match, $func = '__toString');
-
-    /**
-     * @param string     $name
-     * @param null|mixed $value
-     *
-     * @return ReflectionConstant
-     */
-    public function createConstantDefinition($name, $value = null);
 }
 
 /* EOF */

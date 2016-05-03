@@ -13,15 +13,16 @@
 namespace SR\Reflection\Introspection\Type\ClassAware;
 
 use SR\Exception\InvalidArgumentException;
+use SR\Reflection\Introspection\MethodIntrospection;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
  * Class MethodAwareAccessorsTrait.
  */
-trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
+trait MethodAwareAccessorsTrait // implements MethodAwareAccessorsInterface
 {
     /**
-     * @return \ReflectionClass
+     * @return \ReflectionClass|\ReflectionObject
      */
     abstract public function reflection();
 
@@ -45,7 +46,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      *
      * @throws InvalidArgumentException
      *
-     * @return \ReflectionMethod
+     * @return MethodIntrospection
      */
     public function getMethod($name)
     {
@@ -53,23 +54,28 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
             throw InvalidArgumentException::create('Method %s not found.')->with($name);
         }
 
-        return $this->reflection()->getMethod($name);
+        return $this->createMethodDefinition($this->reflection()->getName(), $name);
     }
 
     /**
      * @param null|int $mask
      *
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function methods($mask = null)
     {
-        $mask = $mask ?: $this->maskMethodDefaults();
+        $ms = $this->reflection()->getMethods($mask ?: $this->maskMethodDefaults());
+        $_ = function (\ReflectionMethod &$m) {
+            $m = $this->createMethodDefinition($this->reflection()->getName(), $m->getName());
+        };
 
-        return (array) $this->reflection()->getMethods($mask);
+        array_walk($ms, $_);
+
+        return array_values($ms);
     }
 
     /**
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function publicMethods()
     {
@@ -77,7 +83,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     }
 
     /**
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function protectedMethods()
     {
@@ -85,7 +91,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     }
 
     /**
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function privateMethods()
     {
@@ -97,7 +103,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function sortMethods(\Closure $sort, $mask = null, &...$extra)
     {
@@ -109,7 +115,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionMethod[]|mixed
+     * @return MethodIntrospection[]|mixed[]
      */
     public function visitMethods(\Closure $visit, $mask = null, &...$extra)
     {
@@ -121,7 +127,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function filterMethods(\Closure $predicate, $mask = null, &...$extra)
     {
@@ -133,7 +139,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionMethod|null
+     * @return MethodIntrospection|null
      */
     public function filterOneMethod(\Closure $predicate, $mask = null, &...$extra)
     {
@@ -145,7 +151,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return \ReflectionMethod[]
+     * @return MethodIntrospection[]
      */
     public function matchMethods($match, $func = '__toString', $mask = null)
     {
@@ -157,7 +163,7 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return null|\ReflectionMethod
+     * @return null|MethodIntrospection
      */
     public function matchOneMethod($match, $func = '__toString', $mask = null)
     {
@@ -170,6 +176,17 @@ trait MethodAwareAccessorsTrait //extends MethodAwareAccessorsInterface
     private function maskMethodDefaults()
     {
         return \ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PROTECTED | \ReflectionMethod::IS_PRIVATE;
+    }
+
+    /**
+     * @param string $class
+     * @param string $method
+     *
+     * @return MethodIntrospection
+     */
+    private function createMethodDefinition($class, $method)
+    {
+        return new MethodIntrospection($class, $method);
     }
 }
 

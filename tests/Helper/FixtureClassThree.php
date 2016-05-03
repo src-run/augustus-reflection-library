@@ -15,7 +15,7 @@ namespace SR\Reflection\Tests\Helper;
 /**
  * Class FixtureClassThree.
  */
-class FixtureClassThree extends FixtureClassTwo
+class FixtureClassThree extends FixtureClassTwo implements FixtureInterfaceThree
 {
     const THREE_0 = 'three-0';
     const THREE_1 = 'three-1';

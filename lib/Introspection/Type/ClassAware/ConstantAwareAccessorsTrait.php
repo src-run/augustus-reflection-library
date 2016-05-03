@@ -13,13 +13,13 @@
 namespace SR\Reflection\Introspection\Type\ClassAware;
 
 use SR\Exception\InvalidArgumentException;
-use SR\Reflection\Definition\ReflectionConstant;
+use SR\Reflection\Introspection\ConstantIntrospection;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
  * Class ConstantAwareAccessorsTrait.
  */
-trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
+trait ConstantAwareAccessorsTrait // implements ConstantAwareAccessorsInterface
 {
     /**
      * @return \ReflectionClass
@@ -46,7 +46,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      *
      * @throws InvalidArgumentException
      *
-     * @return ReflectionConstant
+     * @return ConstantIntrospection
      */
     public function getConstant($name)
     {
@@ -54,19 +54,17 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
             throw InvalidArgumentException::create('Constant %s not found.')->with($name);
         }
 
-        $value = $this->reflection()->getConstant($name);
-
-        return $this->createConstantDefinition($name, $value);
+        return $this->createConstantDefinition($this->reflection()->getName(), $name);
     }
 
     /**
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function constants()
     {
         $cs = $this->reflection()->getConstants();
         $_ = function (&$value, $name) {
-            $value = $this->createConstantDefinition($name, $value);
+            $value = $this->createConstantDefinition($this->reflection()->getName(), $name);
         };
 
         array_walk($cs, $_);
@@ -78,7 +76,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param \Closure $sort
      * @param mixed    ...$extra
      *
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function sortConstants(\Closure $sort, &...$extra)
     {
@@ -89,7 +87,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param \Closure $visit
      * @param mixed    ...$extra
      *
-     * @return ReflectionConstant[]|mixed[]
+     * @return ConstantIntrospection[]|mixed[]
      */
     public function visitConstants(\Closure $visit, &...$extra)
     {
@@ -100,7 +98,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param \Closure $predicate
      * @param mixed    ...$extra
      *
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function filterConstants(\Closure $predicate, &...$extra)
     {
@@ -111,7 +109,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param \Closure $predicate
      * @param mixed    ...$extra
      *
-     * @return null|ReflectionConstant
+     * @return null|ConstantIntrospection
      */
     public function filterOneConstant(\Closure $predicate, &...$extra)
     {
@@ -122,7 +120,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return ReflectionConstant[]
+     * @return ConstantIntrospection[]
      */
     public function matchConstants($match, $func = '__toString')
     {
@@ -133,7 +131,7 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return null|ReflectionConstant
+     * @return null|ConstantIntrospection
      */
     public function matchOneConstant($match, $func = '__toString')
     {
@@ -141,14 +139,14 @@ trait ConstantAwareAccessorsTrait //extends ConstantAwareAccessorsInterface
     }
 
     /**
-     * @param string     $name
-     * @param null|mixed $value
+     * @param string $class
+     * @param string $constant
      *
-     * @return ReflectionConstant
+     * @return ConstantIntrospection
      */
-    public function createConstantDefinition($name, $value = null)
+    protected function createConstantDefinition($class, $constant)
     {
-        return new ReflectionConstant($name, $value);
+        return new ConstantIntrospection($class, $constant);
     }
 }
 

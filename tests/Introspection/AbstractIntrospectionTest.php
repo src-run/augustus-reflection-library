@@ -25,13 +25,13 @@ class AbstractIntrospectionTest extends \PHPUnit_Framework_TestCase
 
         $mock = $this->getMockBuilder('SR\Reflection\Introspection\AbstractIntrospection')
             ->disableOriginalConstructor()
-            ->setMethods(['reflectionRequiredIsInstanceOfSet'])
+            ->setMethods(['getReflectionRequirements'])
             ->getMockForAbstractClass();
-        $mock->method('reflectionRequiredIsInstanceOfSet')
-            ->willReturn(['\InvalidReflectorClassReferenceChecked']);
+        $mock->method('getReflectionRequirements')
+            ->willReturn(['\InvalidReflectorClassName']);
 
         $r = new \ReflectionClass('SR\Reflection\Introspection\AbstractIntrospection');
-        $m = $r->getMethod('initializeReflection');
+        $m = $r->getMethod('setReflection');
         $m->setAccessible(true);
         $m->invoke($mock, new ReflectionFixture());
     }

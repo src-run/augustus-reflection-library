@@ -12,61 +12,16 @@
 
 namespace SR\Reflection\Introspection\Type\ClassAware;
 
+use SR\Reflection\Introspection\Type\Aware\IdentityInheritanceAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\Aware\IdentityNameAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\Aware\IdentityNamespaceAwareAccessorsInterface;
+
 /**
  * Class IdentityAwareAccessorsInterface.
  */
-interface IdentityAwareAccessorsInterface
+interface IdentityAwareAccessorsInterface extends IdentityNameAwareAccessorsInterface, IdentityNamespaceAwareAccessorsInterface,
+                                                  IdentityInheritanceAwareAccessorsInterface
 {
-    /**
-     * @return \ReflectionClass
-     */
-    public function reflection();
-
-    /**
-     * @return string
-     */
-    public function name();
-
-    /**
-     * @return string
-     */
-    public function nameQualified();
-
-    /**
-     * @return string
-     */
-    public function nameUnQualified();
-
-    /**
-     * @return string
-     */
-    public function namespaceName();
-
-    /**
-     * @return string[]
-     */
-    public function namespaceSections();
-
-    /**
-     * @param object|string $class
-     *
-     * @return bool
-     */
-    public function extendsClass($class);
-
-    /**
-     * @param string $interface
-     *
-     * @return bool
-     */
-    public function implementsInterface($interface);
-
-    /**
-     * @param string $trait
-     *
-     * @return bool
-     */
-    public function usesTrait($trait);
 }
 
 /* EOF */

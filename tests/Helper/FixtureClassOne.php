@@ -22,55 +22,79 @@ class FixtureClassOne
     const ONE_2 = 'one-2';
     const NULL_CONST = null;
 
+    /**
+     * @var string
+     */
     public $propPublicOne0 = 'propPublicOne0';
     public $propPublicOne1 = 'propPublicOne1';
     public $propPublicOne2 = 'propPublicOne2';
 
+    /**
+     * @var string
+     */
     protected $propProtectedOne0 = 'propProtectedOne0';
     protected $propProtectedOne1 = 'propProtectedOne1';
     protected $propProtectedOne2 = 'propProtectedOne2';
 
+    /**
+     * @var string
+     */
     private $propPrivateOne0 = 'propPrivateOne0';
     private $propPrivateOne1 = 'propPrivateOne1';
     private $propPrivateOne2 = 'propPrivateOne2';
 
-    public function publicOne0()
+    /**
+     * @param string $param
+     *
+     * @return string
+     */
+    public function publicOne0($param = '')
     {
-        return 'prop'.ucfirst(__FUNCTION__);
+        return 'prop'.ucfirst(__FUNCTION__).$param;
     }
-    public function publicOne1()
+    public function publicOne1($param = '')
     {
-        return 'prop'.ucfirst(__FUNCTION__);
+        return 'prop'.ucfirst(__FUNCTION__).$param;
     }
-    public function publicOne2()
+    public function publicOne2($param = '')
     {
-        return 'prop'.ucfirst(__FUNCTION__);
-    }
-
-    protected function protectedOne0()
-    {
-        return 'prop'.ucfirst(__FUNCTION__);
-    }
-    protected function protectedOne1()
-    {
-        return 'prop'.ucfirst(__FUNCTION__);
-    }
-    protected function protectedOne2()
-    {
-        return 'prop'.ucfirst(__FUNCTION__);
+        return 'prop'.ucfirst(__FUNCTION__).$param;
     }
 
-    private function privateOne0()
+    /**
+     * @param string $param
+     *
+     * @return string
+     */
+    protected function protectedOne0($param = '')
     {
-        return 'prop'.ucfirst(__FUNCTION__);
+        return 'prop'.ucfirst(__FUNCTION__).$param;
     }
-    private function privateOne1()
+    protected function protectedOne1($param = '')
     {
-        return 'prop'.ucfirst(__FUNCTION__);
+        return 'prop'.ucfirst(__FUNCTION__).$param;
     }
-    private function privateOne2()
+    protected function protectedOne2($param = '')
     {
-        return 'prop'.ucfirst(__FUNCTION__);
+        return 'prop'.ucfirst(__FUNCTION__).$param;
+    }
+    
+    /**
+     * @param string $param
+     *
+     * @return string
+     */
+    private function privateOne0($param = '')
+    {
+        return 'prop'.ucfirst(__FUNCTION__).$param;
+    }
+    private function privateOne1($param = '')
+    {
+        return 'prop'.ucfirst(__FUNCTION__).$param;
+    }
+    private function privateOne2($param = '')
+    {
+        return 'prop'.ucfirst(__FUNCTION__).$param;
     }
 }
 

@@ -13,12 +13,13 @@
 namespace SR\Reflection\Introspection\Type\ClassAware;
 
 use SR\Exception\InvalidArgumentException;
+use SR\Reflection\Introspection\PropertyIntrospection;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
  * Class PropertyAwareAccessorsTrait.
  */
-trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
+trait PropertyAwareAccessorsTrait // implements PropertyAwareAccessorsInterface
 {
     /**
      * @return \ReflectionClass
@@ -45,7 +46,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      *
      * @throws InvalidArgumentException
      *
-     * @return \ReflectionProperty
+     * @return PropertyIntrospection
      */
     public function getProperty($name)
     {
@@ -53,23 +54,28 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
             throw InvalidArgumentException::create('Property %s not found.')->with($name);
         }
 
-        return $this->reflection()->getProperty($name);
+        return $this->createPropertyDefinition($this->reflection()->getName(), $name);
     }
 
     /**
      * @param null|int $mask
      *
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function properties($mask = null)
     {
-        $mask = $mask ?: $this->maskPropertyDefaults();
+        $ps = $this->reflection()->getProperties($mask ?: $this->maskPropertyDefaults());
+        $_ = function (\ReflectionProperty &$m) {
+            $m = $this->createPropertyDefinition($this->reflection()->getName(), $m->getName());
+        };
 
-        return (array) $this->reflection()->getProperties($mask);
+        array_walk($ps, $_);
+
+        return array_values($ps);
     }
 
     /**
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function publicProperties()
     {
@@ -77,7 +83,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     }
 
     /**
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function protectedProperties()
     {
@@ -85,7 +91,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     }
 
     /**
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function privateProperties()
     {
@@ -97,7 +103,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function sortProperties(\Closure $sort, $mask = null, &...$extra)
     {
@@ -109,7 +115,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionProperty[]|mixed[]
+     * @return PropertyIntrospection[]|mixed[]
      */
     public function visitProperties(\Closure $visit, $mask = null, &...$extra)
     {
@@ -121,7 +127,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function filterProperties(\Closure $predicate, $mask = null, &...$extra)
     {
@@ -133,7 +139,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param null|int $mask
      * @param mixed    ...$extra
      *
-     * @return \ReflectionProperty|null
+     * @return PropertyIntrospection|null
      */
     public function filterOneProperty(\Closure $predicate, $mask = null, &...$extra)
     {
@@ -145,7 +151,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return \ReflectionProperty[]
+     * @return PropertyIntrospection[]
      */
     public function matchProperties($match, $func = '__toString', $mask = null)
     {
@@ -157,7 +163,7 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
      * @param string   $func
      * @param null|int $mask
      *
-     * @return null|\ReflectionProperty
+     * @return null|PropertyIntrospection
      */
     public function matchOneProperty($match, $func = '__toString', $mask = null)
     {
@@ -170,6 +176,17 @@ trait PropertyAwareAccessorsTrait //extends PropertyAwareAccessorsInterface
     private function maskPropertyDefaults()
     {
         return \ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE;
+    }
+
+    /**
+     * @param string $class
+     * @param string $method
+     *
+     * @return PropertyIntrospection
+     */
+    private function createPropertyDefinition($class, $property)
+    {
+        return new PropertyIntrospection($class, $property);
     }
 }
 

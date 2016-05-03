@@ -12,48 +12,71 @@
 
 namespace SR\Reflection\Introspection;
 
-use SR\Exception\RuntimeException;
+use SR\Reflection\Introspection\Resolver\ResolverInterface;
+use SR\Reflection\Introspection\Type\Aware\LocationAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\Aware\LocationAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\ClassAware\ConstantAwareAccessorsInterface;
-use SR\Reflection\Introspection\Resolver\ResolverInterface;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\InterfaceAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\InterfaceAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\ModifiersAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\ModifiersAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
 use SR\Utility\ClassInspect;
 
 /**
  * Class ClassIntrospection.
  */
-class ClassIntrospection extends AbstractIntrospection implements ConstantAwareAccessorsInterface
+class ClassIntrospection extends AbstractIntrospection implements ConstantAwareAccessorsInterface, IdentityAwareAccessorsInterface,
+                                                                  InterfaceAwareAccessorsInterface, LocationAwareAccessorsInterface,
+                                                                  MethodAwareAccessorsInterface, ModifiersAwareAccessorsInterface,
+                                                                  PropertyAwareAccessorsInterface
 {
     use ConstantAwareAccessorsTrait;
+    use IdentityAwareAccessorsTrait;
+    use InterfaceAwareAccessorsTrait;
+    use LocationAwareAccessorsTrait;
+    use ModifiersAwareAccessorsTrait;
+    use MethodAwareAccessorsTrait;
+    use PropertyAwareAccessorsTrait;
 
     /**
-     * @var \ReflectionClass
-     */
-    protected $reflection;
-
-    /**
-     * @param string                 $name
-     * @param null|object            $bindScope
+     * @param string                 $class
+     * @param null|object            $bindTo
      * @param null|ResolverInterface $resolver
      */
-    public function __construct($name, $bindScope = null, ResolverInterface $resolver = null)
+    public function __construct($class, $bindTo = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassInspect::assertClass($name);
-            parent::__construct(new \ReflectionClass($name), $bindScope, $resolver);
-        } catch (\Exception $exception) {
-            throw RuntimeException::create('Parameter must be a string containing a valid class name');
+            ClassInspect::assertClass($class);
+            parent::__construct(new \ReflectionClass($class), $bindTo, $resolver);
         }
+        catch (\Exception $exception) {
+            throw $this->getConstructorException(['class name string', $class]);
+        }
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return string
+     */
+    public static function export($class)
+    {
+        return self::exportFor('\ReflectionClass', $class);
     }
 
     /**
      * @return string[]
      */
-    protected function reflectionRequiredIsInstanceOfSet()
+    protected function getReflectionRequirements()
     {
-        return array_merge(
-            (array) parent::reflectionRequiredIsInstanceOfSet(),
-            (array) ['\ReflectionClass']
-        );
+        return ['\ReflectionClass'];
     }
 }
 

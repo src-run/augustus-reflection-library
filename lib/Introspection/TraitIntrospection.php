@@ -12,44 +12,64 @@
 
 namespace SR\Reflection\Introspection;
 
-use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
+use SR\Reflection\Introspection\Type\Aware\LocationAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\Aware\LocationAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\IdentityAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\MethodAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\ModifiersAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\ModifiersAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsInterface;
+use SR\Reflection\Introspection\Type\ClassAware\PropertyAwareAccessorsTrait;
 use SR\Utility\ClassInspect;
 
 /**
  * Class TraitIntrospection.
  */
-class TraitIntrospection extends AbstractIntrospection
+class TraitIntrospection extends AbstractIntrospection implements IdentityAwareAccessorsInterface, LocationAwareAccessorsInterface,
+                                                                  MethodAwareAccessorsInterface, ModifiersAwareAccessorsInterface,
+                                                                  PropertyAwareAccessorsInterface
 {
-    /**
-     * @var \ReflectionClass
-     */
-    protected $reflection;
+    use IdentityAwareAccessorsTrait;
+    use LocationAwareAccessorsTrait;
+    use MethodAwareAccessorsTrait;
+    use ModifiersAwareAccessorsTrait;
+    use PropertyAwareAccessorsTrait;
 
     /**
      * @param string                 $name
-     * @param null|object            $bindScope
+     * @param null|object            $bindTo
      * @param null|ResolverInterface $resolver
      */
-    public function __construct($name, $bindScope = null, ResolverInterface $resolver = null)
+    public function __construct($name, $bindTo = null, ResolverInterface $resolver = null)
     {
         try {
             ClassInspect::assertTrait($name);
-            parent::__construct(new \ReflectionClass($name), $bindScope, $resolver);
-        } catch (\Exception $exception) {
-            throw RuntimeException::create('Parameter must be a string containing a valid trait name');
+            parent::__construct(new \ReflectionClass($name), $bindTo, $resolver);
         }
+        catch (\Exception $exception) {
+            throw $this->getConstructorException(['trait name string', $name]);
+        }
+    }
+
+    /**
+     * @param string $trait
+     *
+     * @return string
+     */
+    public static function export($trait)
+    {
+        return self::exportFor('\ReflectionClass', $trait);
     }
 
     /**
      * @return string[]
      */
-    protected function reflectionRequiredIsInstanceOfSet()
+    protected function getReflectionRequirements()
     {
-        return array_merge(
-            (array) parent::reflectionRequiredIsInstanceOfSet(),
-            (array) ['\ReflectionClass']
-        );
+        return ['\ReflectionClass'];
     }
 }
 

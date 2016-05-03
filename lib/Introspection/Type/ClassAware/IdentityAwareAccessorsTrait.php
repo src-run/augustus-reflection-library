@@ -12,27 +12,18 @@
 
 namespace SR\Reflection\Introspection\Type\ClassAware;
 
-use SR\Reflection\Inspect;
+use SR\Reflection\Introspection\Type\Aware\IdentityInheritanceAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\Aware\IdentityNameAwareAccessorsTrait;
+use SR\Reflection\Introspection\Type\Aware\IdentityNamespaceAwareAccessorsTrait;
 
 /**
  * Class IdentityAwareAccessorsTrait.
  */
-trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
+trait IdentityAwareAccessorsTrait // implements IdentityAwareAccessorsInterface
 {
-    /**
-     * @return \ReflectionClass
-     */
-    abstract public function reflection();
-
-    /**
-     * @param bool $qualified
-     *
-     * @return string
-     */
-    public function name($qualified = false)
-    {
-        return $qualified ? $this->nameQualified() : $this->nameUnQualified();
-    }
+    use IdentityNameAwareAccessorsTrait;
+    use IdentityNamespaceAwareAccessorsTrait;
+    use IdentityInheritanceAwareAccessorsTrait;
 
     /**
      * @return string
@@ -48,74 +39,6 @@ trait IdentityAwareAccessorsTrait //extends IdentityAwareAccessorsInterface
     public function nameUnQualified()
     {
         return $this->reflection()->getShortName();
-    }
-
-    /**
-     * @return string
-     */
-    public function namespaceName()
-    {
-        return $this->reflection()->getNamespaceName();
-    }
-
-    /**
-     * @return string[]
-     */
-    public function namespaceSections()
-    {
-        return (array) explode('\\', $this->namespaceName());
-    }
-
-    /**
-     * @param object|string $class
-     *
-     * @return bool
-     */
-    public function extendsClass($class)
-    {
-        $namespace = static::normalizeNamespace(Inspect::this($class)->nameQualified());
-
-        return (bool) $this->reflection()->isSubclassOf($namespace);
-    }
-
-    /**
-     * @param string $interface
-     *
-     * @return bool
-     */
-    public function implementsInterface($interface)
-    {
-        $interface = static::normalizeNamespace($interface);
-
-        return (bool) $this->reflection()->implementsInterface($interface);
-    }
-
-    /**
-     * @param string $trait
-     *
-     * @return bool
-     */
-    public function usesTrait($trait)
-    {
-        $trait = static::normalizeNamespace(Inspect::this($trait)->nameQualified());
-
-        return (bool) in_array($trait, $this->reflection()->getTraitNames());
-    }
-
-    /**
-     * @param string $namespace
-     *
-     * @return string
-     */
-    public static function normalizeNamespace($namespace)
-    {
-        $namespace = str_replace('\\\\', '\\', $namespace);
-
-        if (substr($namespace, 0, 1) === '\\') {
-            return substr($namespace, 1);
-        }
-
-        return $namespace;
     }
 }
 

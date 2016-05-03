@@ -14,6 +14,7 @@ namespace SR\Reflection\Tests\Introspection;
 
 use SR\Reflection\Definition\ReflectionConstant;
 use SR\Reflection\Inspect;
+use SR\Reflection\Introspection\ConstantIntrospection;
 use SR\Reflection\Introspection\ObjectIntrospection;
 use SR\Reflection\Introspection\ClassIntrospection;
 use SR\Reflection\Introspection\TraitIntrospection;
@@ -134,24 +135,24 @@ class InspectTest extends AbstractTestHelper
         $this->assertTrue($r instanceof TraitIntrospection);
         $this->assertSame($trait, $r->nameQualified());
 
-        $this->expectException('SR\Exception\RuntimeException');
+        $this->expectException('SR\Exception\InvalidArgumentException');
         $r = Inspect::thisTrait($trait.'\InvalidTraitName');
     }
 
     public function testBoundScope()
     {
-        $c = '\SR\Reflection\Tests\Helper\FixtureClassOne';
+        $class = '\SR\Reflection\Tests\Helper\FixtureClassOne';
         $s = new \SR\Reflection\Tests\Helper\FixtureClassOne();
-        $m = Inspect::thisClass($c, $s);
+        $m = Inspect::thisClass($class, $s);
 
-        $results = $m->visitConstants(function (ReflectionConstant &$c) {
-            return $this->protectedOne0($c->getValue()).'---'.$c->getName();
+        $results = $m->visitConstants(function (ConstantIntrospection $const) use ($class) {
+            return $this->protectedOne0($const->value()).'---'.$const->name();
         });
 
         $this->assertGreaterThan(3, $results);
 
         foreach ($results as $r) {
-            $this->assertNotFalse(strpos($r, 'propProtectedOne0---') !== false);
+            $this->assertNotFalse(strpos($r, 'propProtectedOne0') !== false);
             $this->assertNotFalse(strpos($r, 'ONE_') !== false || strpos($r, 'NULL_') !== false);
         }
     }
