@@ -86,7 +86,7 @@ class ReflectionConstantTest extends \PHPUnit_Framework_TestCase
     {
         foreach (self::TEST_NAMES as $constant) {
             $reflectionConstant = new ReflectionConstant(self::TEST_CLASS, $constant);
-            $this->assertSame($constant, (string)$reflectionConstant);
+            $this->assertSame($constant, (string) $reflectionConstant);
         }
     }
 

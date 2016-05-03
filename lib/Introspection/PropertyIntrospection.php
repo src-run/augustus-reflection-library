@@ -21,7 +21,6 @@ use SR\Reflection\Introspection\Type\PropertyAware\ModifiersAwareAccessorsInterf
 use SR\Reflection\Introspection\Type\PropertyAware\ModifiersAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\PropertyAware\ValueAwareAccessorsInterface;
 use SR\Reflection\Introspection\Type\PropertyAware\ValueAwareAccessorsTrait;
-use SR\Utility\ClassInspect;
 
 /**
  * Class PropertyIntrospection.
@@ -45,8 +44,7 @@ class PropertyIntrospection extends AbstractIntrospection implements IdentityAwa
         try {
             parent::__construct(new \ReflectionProperty($class, $property), $bindTo, $resolver);
             $this->declaringClass = new ClassIntrospection($class);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class], ['property name string', $property]);
         }
     }

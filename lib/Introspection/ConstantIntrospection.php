@@ -41,8 +41,7 @@ class ConstantIntrospection extends AbstractIntrospection implements IdentityAwa
             } elseif (ClassInspect::isClass($class)) {
                 $this->declaringClass = new ClassIntrospection($class);
             }
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class], ['constant name string', $constant]);
         }
     }

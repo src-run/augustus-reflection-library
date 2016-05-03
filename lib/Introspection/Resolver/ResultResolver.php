@@ -12,13 +12,6 @@
 
 namespace SR\Reflection\Introspection\Resolver;
 
-use SR\Reflection\Definition\ReflectionConstant;
-use SR\Reflection\Introspection\ClassIntrospection;
-use SR\Reflection\Introspection\ConstantIntrospection;
-use SR\Reflection\Introspection\MethodIntrospection;
-use SR\Reflection\Introspection\ObjectIntrospection;
-use SR\Reflection\Introspection\PropertyIntrospection;
-
 /**
  * Class ResultResolver.
  */

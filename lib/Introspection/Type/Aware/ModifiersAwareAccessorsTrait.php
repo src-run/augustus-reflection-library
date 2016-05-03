@@ -29,8 +29,6 @@ trait ModifiersAwareAccessorsTrait // implements ModifiersAwareAccessorsInterfac
     {
         return $this->reflection()->getModifiers();
     }
-
-    
 }
 
 /* EOF */

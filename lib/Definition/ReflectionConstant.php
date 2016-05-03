@@ -13,7 +13,6 @@
 namespace SR\Reflection\Definition;
 
 use SR\Exception\InvalidArgumentException;
-use SR\Exception\LogicException;
 use SR\Exception\RuntimeException;
 
 /**
@@ -101,7 +100,7 @@ class ReflectionConstant implements \Reflector
         if (is_array($valOriginal)) {
             $valFormatted = '';
             foreach ($valOriginal as $key => $value) {
-                $valFormatted .= '['.$key.'] => '.($value ?: 'NULL').", ";
+                $valFormatted .= '['.$key.'] => '.($value ?: 'NULL').', ';
             }
             $valFormatted = substr($valFormatted, 0, strlen($valFormatted) - 2);
         } elseif (is_null($valOriginal)) {

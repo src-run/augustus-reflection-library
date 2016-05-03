@@ -37,7 +37,7 @@ trait IdentityNamespaceAwareAccessorsTrait // implements IdentityNamespaceAwareA
      */
     public function namespaceSections()
     {
-        return (array)explode('\\', $this->namespaceName());
+        return (array) explode('\\', $this->namespaceName());
     }
 }
 

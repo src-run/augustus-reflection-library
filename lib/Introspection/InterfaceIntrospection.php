@@ -48,8 +48,7 @@ class InterfaceIntrospection extends AbstractIntrospection implements ConstantAw
         try {
             ClassInspect::assertInterface($interface);
             parent::__construct(new \ReflectionClass($interface), $bindTo, $resolver);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['interface name string', $interface]);
         }
     }

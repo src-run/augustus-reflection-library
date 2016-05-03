@@ -55,8 +55,7 @@ class ObjectIntrospection extends AbstractIntrospection implements ConstantAware
         try {
             ClassInspect::assertInstance($instance);
             parent::__construct(new \ReflectionObject($instance), $bindTo, $resolver);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['object instance', $instance]);
         }
     }

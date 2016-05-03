@@ -83,8 +83,8 @@ class ObjectIntrospectionTest extends AbstractTestHelper
         foreach ($this->getFixtureInstances() as $i => $_) {
             $result = $_->file();
             $this->assertSame($files[$i], $result->getFilename());
-            $this->assertRegExp('{[0-9]+}', (string)$_->lineStart());
-            $this->assertRegExp('{[0-9]+}', (string)$_->lineEnd());
+            $this->assertRegExp('{[0-9]+}', (string) $_->lineStart());
+            $this->assertRegExp('{[0-9]+}', (string) $_->lineEnd());
             $this->assertTrue(gettype($_->lineStart()) === 'integer');
             $this->assertTrue(gettype($_->lineEnd()) === 'integer');
         }

@@ -55,8 +55,7 @@ class ClassIntrospection extends AbstractIntrospection implements ConstantAwareA
         try {
             ClassInspect::assertClass($class);
             parent::__construct(new \ReflectionClass($class), $bindTo, $resolver);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class]);
         }
     }

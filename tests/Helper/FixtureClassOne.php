@@ -78,7 +78,7 @@ class FixtureClassOne
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
-    
+
     /**
      * @param string $param
      *

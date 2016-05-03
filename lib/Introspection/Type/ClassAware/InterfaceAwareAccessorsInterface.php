@@ -65,7 +65,7 @@ interface InterfaceAwareAccessorsInterface
     public function filterOneInterface(\Closure $predicate, &...$extra);
 
     /**
-     * @param mixed $match
+     * @param mixed  $match
      * @param string $func
      *
      * @return InterfaceIntrospection[]
@@ -73,7 +73,7 @@ interface InterfaceAwareAccessorsInterface
     public function matchInterfaces($match, $func = '__toString');
 
     /**
-     * @param mixed $match
+     * @param mixed  $match
      * @param string $func
      *
      * @return null|InterfaceIntrospection

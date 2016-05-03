@@ -48,8 +48,7 @@ class TraitIntrospection extends AbstractIntrospection implements IdentityAwareA
         try {
             ClassInspect::assertTrait($name);
             parent::__construct(new \ReflectionClass($name), $bindTo, $resolver);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['trait name string', $name]);
         }
     }

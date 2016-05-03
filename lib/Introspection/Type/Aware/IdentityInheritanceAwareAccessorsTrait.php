@@ -12,8 +12,6 @@
 
 namespace SR\Reflection\Introspection\Type\Aware;
 
-use SR\Reflection\Inspect;
-
 /**
  * Class IdentityInheritanceAwareAccessorsTrait.
  */

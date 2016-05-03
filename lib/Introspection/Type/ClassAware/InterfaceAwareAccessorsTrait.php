@@ -14,7 +14,6 @@ namespace SR\Reflection\Introspection\Type\ClassAware;
 
 use SR\Exception\InvalidArgumentException;
 use SR\Reflection\Introspection\InterfaceIntrospection;
-use SR\Reflection\IntrospectionInterfaceIntrospection;
 use SR\Reflection\Introspection\Resolver\ResolverInterface;
 
 /**
@@ -47,8 +46,7 @@ trait InterfaceAwareAccessorsTrait // implements InterfaceAwareAccessorsInterfac
 
         try {
             return $this->createInterfaceDefinition($name);
-        }
-        catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return $this->createInterfaceDefinition($this->namespaceName().'\\'.$name);
         }
     }
@@ -113,8 +111,8 @@ trait InterfaceAwareAccessorsTrait // implements InterfaceAwareAccessorsInterfac
     }
 
     /**
-     * @param mixed    $match
-     * @param string   $func
+     * @param mixed  $match
+     * @param string $func
      *
      * @return InterfaceIntrospection[]
      */
@@ -124,8 +122,8 @@ trait InterfaceAwareAccessorsTrait // implements InterfaceAwareAccessorsInterfac
     }
 
     /**
-     * @param mixed    $match
-     * @param string   $func
+     * @param mixed  $match
+     * @param string $func
      *
      * @return null|InterfaceIntrospection
      */

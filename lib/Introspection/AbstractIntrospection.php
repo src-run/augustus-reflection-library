@@ -24,7 +24,7 @@ use SR\Reflection\Introspection\Type\Aware\DocBlockAwareAccessorsTrait;
 abstract class AbstractIntrospection implements \Reflector, DocBlockAwareAccessorsInterface
 {
     use DocBlockAwareAccessorsTrait;
-    
+
     /**
      * @var null|\ReflectionClass|\ReflectionObject|\Reflector
      */
@@ -107,14 +107,12 @@ abstract class AbstractIntrospection implements \Reflector, DocBlockAwareAccesso
 
         try {
             $class::export(...$parameters);
-        }
-        catch (\ReflectionException $e) {
+        } catch (\ReflectionException $e) {
             $parameters = array_map(function ($p) {
                 return var_export($p, true);
             }, $parameters);
             throw InvalidArgumentException::create()->setMessage('Could not export %s: ')->with(implode('::', $parameters), $e->getMessage());
-        }
-        finally {
+        } finally {
             $export = ob_get_contents();
             ob_end_clean();
         }
@@ -154,7 +152,7 @@ abstract class AbstractIntrospection implements \Reflector, DocBlockAwareAccesso
         $message = [];
 
         foreach ($for as $i => $f) {
-            $message[] = sprintf('parameter "%d" must be valid %s, got type "%s" containing "%s"', $i+1, $f[0], gettype($f[1]), $f[1]);
+            $message[] = sprintf('parameter "%d" must be valid %s, got type "%s" containing "%s"', $i + 1, $f[0], gettype($f[1]), $f[1]);
         }
 
         return InvalidArgumentException::create()

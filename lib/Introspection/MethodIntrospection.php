@@ -23,7 +23,6 @@ use SR\Reflection\Introspection\Type\MethodAware\IdentityAwareAccessorsInterface
 use SR\Reflection\Introspection\Type\MethodAware\IdentityAwareAccessorsTrait;
 use SR\Reflection\Introspection\Type\MethodAware\ModifiersAwareAccessorsInterface;
 use SR\Reflection\Introspection\Type\MethodAware\ModifiersAwareAccessorsTrait;
-use SR\Utility\ClassInspect;
 
 /**
  * Class MethodIntrospection.
@@ -49,8 +48,7 @@ class MethodIntrospection extends AbstractIntrospection implements CallableAware
         try {
             parent::__construct(new \ReflectionMethod($class, $method), $bindTo, $resolver);
             $this->declaringClass = new ClassIntrospection($class);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class], ['method name string', $method]);
         }
     }

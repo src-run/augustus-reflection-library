@@ -26,7 +26,7 @@ interface CallableAwareAccessorsInterface
     public function invoke($instance, ...$parameters);
 
     /**
-     * @param object $instance
+     * @param object  $instance
      * @param mixed[] $parameters
      *
      * @return mixed

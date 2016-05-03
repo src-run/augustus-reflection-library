@@ -26,7 +26,7 @@ interface ValueAwareAccessorsInterface
 
     /**
      * @param object $instance
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setValue($instance, $value);
 }

@@ -12,7 +12,6 @@
 
 namespace SR\Reflection\Tests\Introspection;
 
-use SR\Reflection\Definition\ReflectionConstant;
 use SR\Reflection\Inspect;
 use SR\Reflection\Introspection\ConstantIntrospection;
 use SR\Reflection\Introspection\ObjectIntrospection;
