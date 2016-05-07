@@ -45,7 +45,7 @@ class Inspect implements InspectInterface
             return self::thisTrait($nameOrInstance);
         }
 
-        throw RuntimeException::create('Invalid class name or instance provided to inspector.');
+        throw RuntimeException::create('Invalid class name or instance (%s) provided to inspector.')->with(var_export($nameOrInstance, true));
     }
 
     /**
