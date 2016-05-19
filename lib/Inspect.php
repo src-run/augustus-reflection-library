@@ -14,6 +14,7 @@ namespace SR\Reflection;
 
 use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\ClassIntrospection;
+use SR\Reflection\Introspection\InterfaceIntrospection;
 use SR\Reflection\Introspection\ObjectIntrospection;
 use SR\Reflection\Introspection\TraitIntrospection;
 use SR\Utility\ClassInspect;
@@ -24,61 +25,76 @@ use SR\Utility\ClassInspect;
 class Inspect implements InspectInterface
 {
     /**
-     * @param string|object $nameOrInstance
-     * @param null|object   $closureScope
+     * @param string|object $what
+     * @param null|object   $bindTo
      *
      * @throws RuntimeException
      *
-     * @return ClassIntrospection|ObjectIntrospection
+     * @return ClassIntrospection|ObjectIntrospection|InterfaceIntrospection|TraitIntrospection
      */
-    public static function this($nameOrInstance, $closureScope = null)
+    public static function this($what, $bindTo = null)
     {
-        if (ClassInspect::isInstance($nameOrInstance)) {
-            return self::thisInstance($nameOrInstance, $closureScope);
+        if (ClassInspect::isInstance($what)) {
+            return self::thisInstance($what, $bindTo);
         }
 
-        if (ClassInspect::isClass($nameOrInstance)) {
-            return self::thisClass($nameOrInstance, $closureScope);
+        if (ClassInspect::isClass($what)) {
+            return self::thisClass($what, $bindTo);
         }
 
-        if (ClassInspect::isTrait($nameOrInstance)) {
-            return self::thisTrait($nameOrInstance);
+        if (ClassInspect::isInterface($what)) {
+            return self::thisInterface($what, $bindTo);
         }
 
-        throw RuntimeException::create('Invalid class name or instance (%s) provided to inspector.')->with(var_export($nameOrInstance, true));
+        if (ClassInspect::isTrait($what)) {
+            return self::thisTrait($what);
+        }
+
+        throw RuntimeException::create('Invalid inspector argument provided (got %s)')->with(var_export($what, true));
     }
 
     /**
-     * @param string      $name
-     * @param null|object $closureScope
+     * @param string $what
+     * @param null|object $bindTo
      *
      * @return ClassIntrospection
      */
-    public static function thisClass($name, $closureScope = null)
+    public static function thisClass($what, $bindTo = null)
     {
-        return new ClassIntrospection($name, $closureScope);
+        return new ClassIntrospection($what, $bindTo);
     }
 
     /**
-     * @param object      $instance
-     * @param null|object $closureScope
+     * @param object      $what
+     * @param null|object $bindTo
      *
      * @return ObjectIntrospection
      */
-    public static function thisInstance($instance, $closureScope = null)
+    public static function thisInstance($what, $bindTo = null)
     {
-        return new ObjectIntrospection($instance, $closureScope);
+        return new ObjectIntrospection($what, $bindTo);
     }
 
     /**
-     * @param string      $name
-     * @param null|object $closureScope
+     * @param string      $what
+     * @param null|object $bindTo
      *
-     * @return ObjectIntrospection
+     * @return InterfaceIntrospection
      */
-    public static function thisTrait($name, $closureScope = null)
+    public static function thisInterface($what, $bindTo = null)
     {
-        return new TraitIntrospection($name, $closureScope);
+        return new InterfaceIntrospection($what, $bindTo);
+    }
+
+    /**
+     * @param string      $what
+     * @param null|object $bindTo
+     *
+     * @return TraitIntrospection
+     */
+    public static function thisTrait($what, $bindTo = null)
+    {
+        return new TraitIntrospection($what, $bindTo);
     }
 }
 

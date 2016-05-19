@@ -14,7 +14,9 @@ namespace SR\Reflection;
 
 use SR\Exception\RuntimeException;
 use SR\Reflection\Introspection\ClassIntrospection;
+use SR\Reflection\Introspection\InterfaceIntrospection;
 use SR\Reflection\Introspection\ObjectIntrospection;
+use SR\Reflection\Introspection\TraitIntrospection;
 
 /**
  * Class InspectInterface.
@@ -22,38 +24,46 @@ use SR\Reflection\Introspection\ObjectIntrospection;
 interface InspectInterface
 {
     /**
-     * @param string|object $nameOrInstance
-     * @param null|object   $closureScope
+     * @param string|object $what
+     * @param null|object   $bindTo
      *
      * @throws RuntimeException
      *
-     * @return ClassIntrospection|ObjectIntrospection
+     * @return ClassIntrospection|ObjectIntrospection|InterfaceIntrospection|TraitIntrospection
      */
-    public static function this($nameOrInstance, $closureScope = null);
+    public static function this($what, $bindTo = null);
 
     /**
-     * @param string      $name
-     * @param null|object $closureScope
+     * @param string      $what
+     * @param null|object $bindTo
      *
      * @return ClassIntrospection
      */
-    public static function thisClass($name, $closureScope = null);
+    public static function thisClass($what, $bindTo = null);
 
     /**
-     * @param object      $instance
-     * @param null|object $closureScope
+     * @param object      $what
+     * @param null|object $bindTo
      *
      * @return ObjectIntrospection
      */
-    public static function thisInstance($instance, $closureScope = null);
+    public static function thisInstance($what, $bindTo = null);
 
     /**
-     * @param string      $name
-     * @param null|object $closureScope
+     * @param string      $what
+     * @param null|object $bindTo
      *
-     * @return ObjectIntrospection
+     * @return InterfaceIntrospection
      */
-    public static function thisTrait($name, $closureScope = null);
+    public static function thisInterface($what, $bindTo = null);
+
+    /**
+     * @param string      $what
+     * @param null|object $bindTo
+     *
+     * @return TraitIntrospection
+     */
+    public static function thisTrait($what, $bindTo = null);
 }
 
 /* EOF */
