@@ -1,53 +1,54 @@
 {
-  "name"        : "src-run/augustus-reflection-library",
-  "license"     : "MIT",
-  "type"        : "library",
-  "homepage"    : "https://src.run/augustus-reflection-library",
-  "description" : "collection of reflection wrapper objects and helprs to simplify common tasks",
-  "support" : {
-    "email"  : "rmf@src.run",
-    "source" : "https://src.run/augustus-reflection-library/git",
-    "issues" : "https://src.run/augustus-reflection-library/issues"
+  "name": "src-run/augustus-reflection-library",
+  "license": "MIT",
+  "type": "library",
+  "homepage": "https://src.run/augustus-reflection-library",
+  "description": "A simple library providing a partial reflection high-level api.",
+  "support": {
+    "email": "rmf@src.run",
+    "source": "https://src.run/augustus-reflection-library/git",
+    "issues": "https://src.run/augustus-reflection-library/issues"
   },
-  "keywords" : [
-    "augustus-reflection-library", "augustus", "reflection", "library", "rmf", "src-run"
-  ],
-  "authors" : [
+  "keywords": [ "augustus-reflection-library", "augustus", "reflection", "library", "rmf", "src-run" ],
+  "authors": [
     {
-      "name"     : "Rob Frawley 2nd",
-      "email"    : "rmf@src.run",
-      "homepage" : "https://src.run/rmf",
-      "role"     : "Project Lead"
+      "name": "Rob Frawley 2nd",
+      "email": "rmf@src.run",
+      "homepage": "https://src.run/rmf",
+      "role": "Project Lead"
     }
   ],
-  "require" : {
-    "php"                                : "^5.6||^7.0",
-    "src-run/augustus-utility-library"   : "^0.6",
-    "src-run/augustus-exception-library" : "^0.6"
+  "require": {
+    "php": "^5.6||^7.0",
+    "src-run/augustus-utility-library": "^0.6",
+    "src-run/augustus-exception-library": "^0.6"
   },
-  "require-dev" : {
-    "phpunit/phpunit"        : "^5.0",
-    "codacy/coverage"        : "^1.0",
-    "satooshi/php-coveralls" : "^1.0"
+  "require-dev": {
+    "codacy/coverage": "~1.0",
+    "friendsofphp/php-cs-fixer": "~2.0",
+    "phpunit/phpunit": "~5.4",
+    "satooshi/php-coveralls": "~1.0",
+    "sllh/php-cs-fixer-styleci-bridge": "~2.1"
   },
-  "autoload" : {
-    "psr-4" : {
-      "SR\\Reflection\\" : "lib/"
+  "autoload": {
+    "psr-4": {
+      "SR\\Reflection\\": "lib/"
     }
   },
-  "autoload-dev" : {
-    "psr-4" : {
-      "SR\\Reflection\\Tests\\" : "tests/"
+  "autoload-dev": {
+    "psr-4": {
+      "SR\\Reflection\\Tests\\": "tests/"
     }
   },
-  "minimum-stability" : "dev",
-  "prefer-stable"     : true,
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "config": {
-    "bin-dir" : "bin"
+    "bin-dir": "bin",
+    "sort-packages": true
   },
   "extra": {
     "branch-alias": {
-      "dev-master" : "0.6-dev"
+      "dev-master": "0.7-dev"
     }
   }
 }

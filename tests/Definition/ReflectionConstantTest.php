@@ -55,7 +55,7 @@ class ReflectionConstantTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConstructorArguments()
     {
-        $this->expectException('SR\Exception\InvalidArgumentException');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
         new ReflectionConstant(self::TEST_CLASS, 'CONSTANT_DOES_NOT_EXIST');
     }
 
@@ -69,7 +69,7 @@ class ReflectionConstantTest extends \PHPUnit_Framework_TestCase
             $this->assertRegExp('{Constant \[ (string|NULL|integer|array) [A-Za-z0-9_:\\\\]+ \] \{'."\n".'  [^'."\n".']+'."\n".'\}}', $export);
         }
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
         ReflectionConstant::export(self::TEST_CLASS, 'CONSTANT_DOES_NOT_EXIST');
     }
 

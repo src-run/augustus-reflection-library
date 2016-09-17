@@ -11,8 +11,8 @@
 
 namespace SR\Reflection\Definition;
 
-use SR\Exception\InvalidArgumentException;
-use SR\Exception\RuntimeException;
+use SR\Reflection\Exception\InvalidArgumentException;
+use SR\Reflection\Exception\RuntimeException;
 
 /**
  * Class ReflectionConstant.

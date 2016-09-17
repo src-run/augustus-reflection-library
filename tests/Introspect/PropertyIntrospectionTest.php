@@ -11,7 +11,7 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Reflection\Introspect\PropertyIntrospect;
+use SR\Reflection\Inspector\PropertyInspector;
 
 /**
  * Class PropertyIntrospectionTest.
@@ -49,30 +49,30 @@ class PropertyIntrospectionTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConstructorArguments()
     {
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        new PropertyIntrospect(self::TEST_CLASS, 'thisPropertyDoesNotExist');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        new PropertyInspector(self::TEST_CLASS, 'thisPropertyDoesNotExist');
     }
 
     public function testExport()
     {
         foreach (self::TEST_NAMES as $property) {
-            $export = PropertyIntrospect::export(self::TEST_CLASS, $property);
+            $export = PropertyInspector::export(self::TEST_CLASS, $property);
             $this->assertRegExp('{Property \[ <default> (public|protected|private) \$[a-zA-Z0-9]+ \]}', $export);
         }
 
         $class = self::TEST_CLASS;
         $class = new $class();
         $class->dynamic_property = 'dynamic_property';
-        $export = PropertyIntrospect::export($class, 'dynamic_property');
+        $export = PropertyInspector::export($class, 'dynamic_property');
         $this->assertSame('Property [ <implicit> $dynamic_property ]', $export);
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        PropertyIntrospect::export(self::TEST_CLASS, 'thisPropertyDoesNotExist');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        PropertyInspector::export(self::TEST_CLASS, 'thisPropertyDoesNotExist');
     }
 
     public function testDeclaringClass()
     {
-        $inspect = new PropertyIntrospect(self::TEST_CLASS, self::TEST_NAME);
+        $inspect = new PropertyInspector(self::TEST_CLASS, self::TEST_NAME);
         $this->assertSame(self::TEST_CLASS, $inspect->declaringClass()->nameQualified());
         $this->assertInstanceOf('\ReflectionClass', $inspect->reflectionDeclaringClass());
     }
@@ -80,7 +80,7 @@ class PropertyIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testName()
     {
         foreach (self::TEST_NAMES as $property) {
-            $inspect = new PropertyIntrospect(self::TEST_CLASS, $property);
+            $inspect = new PropertyInspector(self::TEST_CLASS, $property);
             $this->assertSame(self::TEST_CLASS.'::$'.$property, $inspect->nameQualified());
             $this->assertSame(self::TEST_CLASS.'::$'.$property, $inspect->name(true));
             $this->assertSame($property, $inspect->nameUnQualified());
@@ -93,7 +93,7 @@ class PropertyIntrospectionTest extends \PHPUnit_Framework_TestCase
         foreach (self::TEST_NAMES as $property) {
             $class = self::TEST_CLASS;
             $class = new $class();
-            $inspect = new PropertyIntrospect(self::TEST_CLASS, $property);
+            $inspect = new PropertyInspector(self::TEST_CLASS, $property);
             $result = $inspect->value($class);
             $this->assertRegExp('{prop(Public|Protected|Private)(One|Two|Three)[0-2]}', $result);
             $inspect->setValue($class, self::TEST_CLASS);
@@ -106,7 +106,7 @@ class PropertyIntrospectionTest extends \PHPUnit_Framework_TestCase
         foreach (self::TEST_NAMES as $property) {
             $class = self::TEST_CLASS;
             $class = new $class();
-            $inspect = new PropertyIntrospect(self::TEST_CLASS, $property);
+            $inspect = new PropertyInspector(self::TEST_CLASS, $property);
             $result = $inspect->docBlock();
             $this->assertRegExp('{@var string}', $result);
         }
@@ -115,7 +115,7 @@ class PropertyIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testModifiers()
     {
         foreach (self::TEST_NAMES as $property) {
-            $_ = new PropertyIntrospect(self::TEST_CLASS, $property);
+            $_ = new PropertyInspector(self::TEST_CLASS, $property);
             $this->assertTrue(gettype($_->modifiers()) === 'integer');
             $this->assertFalse($_->isStatic());
             $this->assertTrue($_->isDefault());

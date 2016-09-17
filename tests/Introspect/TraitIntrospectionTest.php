@@ -11,9 +11,9 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Exception\InvalidArgumentException;
-use SR\Reflection\Introspect\MethodIntrospect;
-use SR\Reflection\Introspect\TraitIntrospect;
+use SR\Reflection\Exception\InvalidArgumentException;
+use SR\Reflection\Inspector\MethodInspector;
+use SR\Reflection\Inspector\TraitInspector;
 use SR\Reflection\Tests\Helper\FixtureTrait;
 use SR\Reflection\Tests\Helper\FixtureTraitThree;
 
@@ -30,25 +30,25 @@ class TraitIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidConstructorArguments()
     {
         $this->expectException(InvalidArgumentException::class);
-        new TraitIntrospect('\SR\Reflection\Tests\Does\Not\Exist\Trait');
+        new TraitInspector('\SR\Reflection\Tests\Does\Not\Exist\Trait');
     }
 
     public function testExport()
     {
-        $export = TraitIntrospect::export(self::TEST_TRAIT);
+        $export = TraitInspector::export(self::TEST_TRAIT);
         $this->assertRegExp('{Trait \[ <[a-z]+> trait [a-zA-Z\\\]+ \]}', $export);
     }
 
     public function testDocBlock()
     {
-        $inspect = new TraitIntrospect(self::TEST_TRAIT);
+        $inspect = new TraitInspector(self::TEST_TRAIT);
         $docBlock = $inspect->docBlock();
         $this->assertRegExp('{\* Class FixtureTrait\.}', $docBlock);
     }
 
     public function testModifiers()
     {
-        $_ = new TraitIntrospect(self::TEST_TRAIT);
+        $_ = new TraitInspector(self::TEST_TRAIT);
         $this->assertTrue(gettype($_->modifiers()) === 'integer');
         if (PHP_VERSION_ID < 70000) {
             $this->assertTrue($_->isAbstract());
@@ -68,8 +68,8 @@ class TraitIntrospectionTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodAccessors()
     {
-        $inspector = new TraitIntrospect(FixtureTraitThree::class);
-        $methodNames = $inspector->visitMethods(function (MethodIntrospect $method) {
+        $inspector = new TraitInspector(FixtureTraitThree::class);
+        $methodNames = $inspector->visitMethods(function (MethodInspector $method) {
             return $method->nameUnQualified();
         });
 

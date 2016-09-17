@@ -11,7 +11,7 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Reflection\Introspect\InterfaceIntrospect;
+use SR\Reflection\Inspector\InterfaceInspector;
 
 /**
  * Class InterfaceIntrospectionTest.
@@ -25,22 +25,22 @@ class InterfaceIntrospectionTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConstructorArguments()
     {
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        new InterfaceIntrospect('SR\Reflection\Tests\Helper\Interface\That\Does\Not\Exist');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        new InterfaceInspector('SR\Reflection\Tests\Helper\Interface\That\Does\Not\Exist');
     }
 
     public function testExport()
     {
-        $export = InterfaceIntrospect::export(self::TEST_INTERFACE);
+        $export = InterfaceInspector::export(self::TEST_INTERFACE);
         $this->assertRegExp('{Interface \[ <user> interface [^\s]+ \] \{}', $export);
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        InterfaceIntrospect::export('SR\Reflection\Tests\Helper\Interface\That\Does\Not\Exist');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        InterfaceInspector::export('SR\Reflection\Tests\Helper\Interface\That\Does\Not\Exist');
     }
 
     public function testName()
     {
-        $inspect = new InterfaceIntrospect(self::TEST_INTERFACE);
+        $inspect = new InterfaceInspector(self::TEST_INTERFACE);
         $this->assertSame(self::TEST_INTERFACE, $inspect->nameQualified());
         $this->assertSame(self::TEST_INTERFACE, $inspect->name(true));
         $this->assertSame(preg_replace('{.*\\\}', '', self::TEST_INTERFACE), $inspect->nameUnQualified());
@@ -49,21 +49,21 @@ class InterfaceIntrospectionTest extends \PHPUnit_Framework_TestCase
 
     public function testConstants()
     {
-        $inspect = new InterfaceIntrospect(self::TEST_INTERFACE);
+        $inspect = new InterfaceInspector(self::TEST_INTERFACE);
         $constants = $inspect->constants();
         $this->assertCount(1, $constants);
     }
 
     public function testDocBlock()
     {
-        $inspect = new InterfaceIntrospect(self::TEST_INTERFACE);
+        $inspect = new InterfaceInspector(self::TEST_INTERFACE);
         $result = $inspect->docBlock();
         $this->assertRegExp('{Class FixtureInterface}', $result);
     }
 
     public function testModifiers()
     {
-        $_ = new InterfaceIntrospect(self::TEST_INTERFACE);
+        $_ = new InterfaceInspector(self::TEST_INTERFACE);
         $this->assertTrue(gettype($_->modifiers()) === 'integer');
         $this->assertTrue($_->isAbstract());
         $this->assertFalse($_->isTrait());

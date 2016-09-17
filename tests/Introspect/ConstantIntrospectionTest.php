@@ -11,7 +11,7 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Reflection\Introspect\ConstantIntrospect;
+use SR\Reflection\Inspector\ConstantInspector;
 
 /**
  * Class ConstantIntrospectionTest.
@@ -55,25 +55,25 @@ class ConstantIntrospectionTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConstructorArguments()
     {
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        new ConstantIntrospect(self::TEST_CLASS, 'CONSTANT_DOES_NOT_EXIST');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        new ConstantInspector(self::TEST_CLASS, 'CONSTANT_DOES_NOT_EXIST');
     }
 
     public function testExport()
     {
         foreach (self::TEST_NAMES as $constant) {
-            $export = ConstantIntrospect::export(self::TEST_CLASS, $constant);
+            $export = ConstantInspector::export(self::TEST_CLASS, $constant);
             $this->assertRegExp('{Constant \[ (string|NULL|integer|array) [A-Za-z0-9_:\\\\]+ \] \{'."\n".'  [^'."\n".']+'."\n".'\}}', $export);
         }
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        ConstantIntrospect::export(self::TEST_CLASS, 'CONSTANT_DOES_NOT_EXIST');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        ConstantInspector::export(self::TEST_CLASS, 'CONSTANT_DOES_NOT_EXIST');
     }
 
     public function testDeclaringClass()
     {
         foreach (self::TEST_NAMES as $constant) {
-            $inspect = new ConstantIntrospect(self::TEST_CLASS, $constant);
+            $inspect = new ConstantInspector(self::TEST_CLASS, $constant);
             $this->assertSame(self::TEST_CLASS, $inspect->declaringClass()->nameQualified());
             $this->assertInstanceOf('\ReflectionClass', $inspect->reflectionDeclaringClass());
         }

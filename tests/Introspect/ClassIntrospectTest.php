@@ -11,13 +11,13 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Exception\InvalidArgumentException;
-use SR\Reflection\Introspect\AbstractIntrospect;
-use SR\Reflection\Introspect\ClassIntrospect;
-use SR\Reflection\Introspect\ConstantIntrospect;
-use SR\Reflection\Introspect\InterfaceIntrospect;
-use SR\Reflection\Introspect\MethodIntrospect;
-use SR\Reflection\Introspect\PropertyIntrospect;
+use SR\Reflection\Exception\InvalidArgumentException;
+use SR\Reflection\Inspector\AbstractInspector;
+use SR\Reflection\Inspector\ClassInspector;
+use SR\Reflection\Inspector\ConstantInspector;
+use SR\Reflection\Inspector\InterfaceInspector;
+use SR\Reflection\Inspector\MethodInspector;
+use SR\Reflection\Inspector\PropertyInspector;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
@@ -28,22 +28,22 @@ class ClassIntrospectTest extends AbstractTestHelper
     /**
      * @var string
      */
-    const TEST_CLASS = ClassIntrospect::class;
+    const TEST_CLASS = ClassInspector::class;
 
     /**
-     * @var ClassIntrospect
+     * @var ClassInspector
      */
     protected static $instance = null;
 
     private function checkMethods(array $methods)
     {
-        array_walk($methods, function (MethodIntrospect $method) {
+        array_walk($methods, function (MethodInspector $method) {
             $expectedVisibilityMethod = 'is'.ucfirst($this->getMethodExpectedVisibility($method));
             $this->assertTrue($method->reflection()->{$expectedVisibilityMethod}());
         });
     }
 
-    public function getMethodsAndCheckCount(AbstractIntrospect $m, $filter = '', $countAssert = null, $levels = null)
+    public function getMethodsAndCheckCount(AbstractInspector $m, $filter = '', $countAssert = null, $levels = null)
     {
         $call = 'getMethods'.ucfirst($filter);
         $methods = $m->{$call}($levels);
@@ -55,7 +55,7 @@ class ClassIntrospectTest extends AbstractTestHelper
         return $methods;
     }
 
-    private function getMethodExpectedVisibility(MethodIntrospect $method)
+    private function getMethodExpectedVisibility(MethodInspector $method)
     {
         if (1 !== preg_match('{public|protected|private}', $method->name(), $match) || count($match) !== 1) {
             $this->fail('Could not determine expected visibility.');
@@ -174,7 +174,7 @@ class ClassIntrospectTest extends AbstractTestHelper
             $methods = $this->getMethodsAndCheckCount($_, '', 9 * ($i + 1));
             $this->checkMethods($methods);
 
-            $filtered = $_->filterMethods(function (MethodIntrospect $m) {
+            $filtered = $_->filterMethods(function (MethodInspector $m) {
                 return substr($m->name(), -1, 1) === '2';
             });
         }
@@ -196,7 +196,7 @@ class ClassIntrospectTest extends AbstractTestHelper
             foreach ($constStrings as $cs) {
                 $this->assertTrue($m->hasConstant($cs));
                 $c = $m->getConstant($cs);
-                $this->assertTrue($c instanceof ConstantIntrospect);
+                $this->assertTrue($c instanceof ConstantInspector);
 
                 $constantDefinitions[] = $c;
                 $constantStrings[] = $c->__toString();
@@ -220,11 +220,11 @@ class ClassIntrospectTest extends AbstractTestHelper
         foreach ($this->getFixtureInstances() as $i => $m) {
             $expectedConstants = $constants = $m->constants();
 
-            array_walk($expectedConstants, function (ConstantIntrospect &$c) {
+            array_walk($expectedConstants, function (ConstantInspector &$c) {
                 $c = $c->name().$c->value();
             });
 
-            $visitedConstants = $m->visitConstants(function (ConstantIntrospect $c) {
+            $visitedConstants = $m->visitConstants(function (ConstantInspector $c) {
                 return $c->name().$c->value();
             });
 
@@ -235,11 +235,11 @@ class ClassIntrospectTest extends AbstractTestHelper
     public function testConstantFilter()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $result = $m->filterOneConstant(function (ConstantIntrospect $c) {
+            $result = $m->filterOneConstant(function (ConstantInspector $c) {
                 return $c->name() === 'ONE_0';
             });
 
-            $this->assertTrue($result instanceof ConstantIntrospect);
+            $this->assertTrue($result instanceof ConstantInspector);
         }
     }
 
@@ -247,7 +247,7 @@ class ClassIntrospectTest extends AbstractTestHelper
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
             $result = $m->matchOneConstant('ONE_0');
-            $this->assertTrue($result instanceof ConstantIntrospect);
+            $this->assertTrue($result instanceof ConstantInspector);
         }
     }
 
@@ -268,7 +268,7 @@ class ClassIntrospectTest extends AbstractTestHelper
             $this->assertInternalType('array', $results);
             $this->assertGreaterThan(3, $results);
             array_walk($results, function ($r) {
-                $this->assertTrue($r instanceof ConstantIntrospect);
+                $this->assertTrue($r instanceof ConstantInspector);
             });
         }
     }
@@ -276,13 +276,13 @@ class ClassIntrospectTest extends AbstractTestHelper
     public function testConstantsFilter()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $results = $m->filterConstants(function (ConstantIntrospect $c) {
+            $results = $m->filterConstants(function (ConstantInspector $c) {
                 return false !== strpos($c->name(), 'ONE');
             });
             $this->assertInternalType('array', $results);
             $this->assertCount(3, $results);
             array_walk($results, function ($r) {
-                $this->assertTrue($r instanceof ConstantIntrospect);
+                $this->assertTrue($r instanceof ConstantInspector);
             });
         }
     }
@@ -290,7 +290,7 @@ class ClassIntrospectTest extends AbstractTestHelper
     public function testSortConstants()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $results = $m->sortConstants(function (ConstantIntrospect $a, ConstantIntrospect $b) {
+            $results = $m->sortConstants(function (ConstantInspector $a, ConstantInspector $b) {
                 return substr($a->name(), -1, 1) > substr($b->name(), -1, 1);
             });
 
@@ -341,32 +341,32 @@ class ClassIntrospectTest extends AbstractTestHelper
     public function testMethodAccessors()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $result = $m->filterMethods(function (MethodIntrospect $m) {
+            $result = $m->filterMethods(function (MethodInspector $m) {
                 return false !== strpos($m->name(), 'publicOne');
             });
             $this->assertCount(3, $result);
-            $result = $m->filterMethods(function (MethodIntrospect $m) {
+            $result = $m->filterMethods(function (MethodInspector $m) {
                 return $m->name() === 'abcdef';
             });
             $this->assertCount(0, $result);
 
-            $result = $m->filterOneMethod(function (MethodIntrospect $m) {
+            $result = $m->filterOneMethod(function (MethodInspector $m) {
                 return $m->name() === 'publicOne0';
             });
-            $this->assertTrue($result instanceof MethodIntrospect);
-            $result = $m->filterOneMethod(function (MethodIntrospect $m) {
+            $this->assertTrue($result instanceof MethodInspector);
+            $result = $m->filterOneMethod(function (MethodInspector $m) {
                 return $m->name() === 'abcdef';
             });
             $this->assertNull($result);
 
             $result = $m->matchMethods('publicOne0');
             $this->assertCount(1, $result);
-            $this->assertTrue($result[0] instanceof MethodIntrospect);
+            $this->assertTrue($result[0] instanceof MethodInspector);
             $result = $m->matchMethods('abcdef');
             $this->assertCount(0, $result);
 
             $result = $m->matchOneMethod('publicOne0');
-            $this->assertTrue($result instanceof MethodIntrospect);
+            $this->assertTrue($result instanceof MethodInspector);
             $result = $m->matchOneMethod('abcdef');
             $this->assertNull($result);
 
@@ -374,19 +374,19 @@ class ClassIntrospectTest extends AbstractTestHelper
             $this->assertFalse($m->hasMethod('abcdef'));
 
             $result = $m->getMethod('publicOne0');
-            $this->assertTrue($result instanceof MethodIntrospect);
+            $this->assertTrue($result instanceof MethodInspector);
 
             $this->assertGreaterThan(2, $m->getMethodsPublic());
             $this->assertGreaterThan(2, $m->getMethodsProtected());
             $this->assertGreaterThan(2, $m->getMethodsPrivate());
 
-            $result = $m->sortMethods(function (MethodIntrospect $a, MethodIntrospect $b) {
+            $result = $m->sortMethods(function (MethodInspector $a, MethodInspector $b) {
                 return substr($a->name(), -1, 1) > substr($b->name(), -1, 1);
             });
 
             $this->assertGreaterThan(3, $result);
 
-            $result = $m->visitMethods(function (MethodIntrospect $p) {
+            $result = $m->visitMethods(function (MethodInspector $p) {
                 return $p->name().'VISITOR';
             });
 
@@ -402,32 +402,32 @@ class ClassIntrospectTest extends AbstractTestHelper
     public function testPropertyAccessors()
     {
         foreach ($this->getFixtureInstances() as $i => $m) {
-            $result = $m->filterProperties(function (PropertyIntrospect $m) {
+            $result = $m->filterProperties(function (PropertyInspector $m) {
                 return false !== strpos($m->name(), 'propPublicOne');
             });
             $this->assertCount(3, $result);
-            $result = $m->filterProperties(function (PropertyIntrospect $m) {
+            $result = $m->filterProperties(function (PropertyInspector $m) {
                 return $m->name() === 'abcdef';
             });
             $this->assertCount(0, $result);
 
-            $result = $m->filterOneProperty(function (PropertyIntrospect $m) {
+            $result = $m->filterOneProperty(function (PropertyInspector $m) {
                 return $m->name() === 'propPublicOne0';
             });
-            $this->assertTrue($result instanceof PropertyIntrospect);
-            $result = $m->filterOneProperty(function (PropertyIntrospect $m) {
+            $this->assertTrue($result instanceof PropertyInspector);
+            $result = $m->filterOneProperty(function (PropertyInspector $m) {
                 return $m->name() === 'abcdef';
             });
             $this->assertNull($result);
 
             $result = $m->matchProperties('propPublicOne0');
             $this->assertCount(1, $result);
-            $this->assertTrue($result[0] instanceof PropertyIntrospect);
+            $this->assertTrue($result[0] instanceof PropertyInspector);
             $result = $m->matchProperties('abcdef');
             $this->assertCount(0, $result);
 
             $result = $m->matchOneProperty('propPublicOne0');
-            $this->assertTrue($result instanceof PropertyIntrospect);
+            $this->assertTrue($result instanceof PropertyInspector);
             $result = $m->matchOneProperty('abcdef');
             $this->assertNull($result);
 
@@ -435,7 +435,7 @@ class ClassIntrospectTest extends AbstractTestHelper
             $this->assertFalse($m->hasProperty('abcdef'));
 
             $result = $m->getProperty('propPublicOne0');
-            $this->assertTrue($result instanceof PropertyIntrospect);
+            $this->assertTrue($result instanceof PropertyInspector);
 
             $publicMethods = $m->publicProperties();
             $this->assertGreaterThan(2, $publicMethods);
@@ -467,13 +467,13 @@ class ClassIntrospectTest extends AbstractTestHelper
                 $this->assertFalse($method->accessible());
             }
 
-            $result = $m->sortProperties(function (PropertyIntrospect $a, PropertyIntrospect $b) {
+            $result = $m->sortProperties(function (PropertyInspector $a, PropertyInspector $b) {
                 return substr($a->name(), -1, 1) > substr($b->name(), -1, 1);
             });
 
             $this->assertGreaterThan(3, $result);
 
-            $result = $m->visitProperties(function (PropertyIntrospect $p) {
+            $result = $m->visitProperties(function (PropertyInspector $p) {
                 return $p->name().'VISITOR';
             });
 
@@ -488,29 +488,29 @@ class ClassIntrospectTest extends AbstractTestHelper
 
     public function testInterfaceAccessors()
     {
-        $m = new ClassIntrospect('SR\Reflection\Tests\Helper\FixtureClassThree');
+        $m = new ClassInspector('SR\Reflection\Tests\Helper\FixtureClassThree');
 
         $result = $m->filterInterfaces(
-            function (InterfaceIntrospect $m) {
+            function (InterfaceInspector $m) {
                 return false !== strpos($m->name(), 'Two');
             }
         );
         $this->assertCount(1, $result);
         $result = $m->filterInterfaces(
-            function (InterfaceIntrospect $m) {
+            function (InterfaceInspector $m) {
                 return $m->name() === 'abcdef';
             }
         );
         $this->assertCount(0, $result);
 
         $result = $m->filterOneInterface(
-            function (InterfaceIntrospect $m) {
+            function (InterfaceInspector $m) {
                 return $m->name() === 'FixtureInterfaceThree';
             }
         );
-        $this->assertTrue($result instanceof InterfaceIntrospect);
+        $this->assertTrue($result instanceof InterfaceInspector);
         $result = $m->filterOneInterface(
-            function (InterfaceIntrospect $m) {
+            function (InterfaceInspector $m) {
                 return $m->name() === 'abcdef';
             }
         );
@@ -518,12 +518,12 @@ class ClassIntrospectTest extends AbstractTestHelper
 
         $result = $m->matchInterfaces('FixtureInterfaceThree');
         $this->assertCount(1, $result);
-        $this->assertTrue($result[0] instanceof InterfaceIntrospect);
+        $this->assertTrue($result[0] instanceof InterfaceInspector);
         $result = $m->matchInterfaces('abcdef');
         $this->assertCount(0, $result);
 
         $result = $m->matchOneInterface('FixtureInterfaceTwo');
-        $this->assertTrue($result instanceof InterfaceIntrospect);
+        $this->assertTrue($result instanceof InterfaceInspector);
         $result = $m->matchOneInterface('abcdef');
         $this->assertNull($result);
 
@@ -534,16 +534,16 @@ class ClassIntrospectTest extends AbstractTestHelper
         $this->assertFalse($m->implementsInterface('abcdef'));
 
         $result = $m->getInterface('FixtureInterfaceTwo');
-        $this->assertTrue($result instanceof InterfaceIntrospect);
+        $this->assertTrue($result instanceof InterfaceInspector);
         $result = $m->getInterface('FixtureInterfaceThree');
-        $this->assertTrue($result instanceof InterfaceIntrospect);
+        $this->assertTrue($result instanceof InterfaceInspector);
         $result = $m->getInterface('SR\Reflection\Tests\Helper\FixtureInterfaceTwo');
-        $this->assertTrue($result instanceof InterfaceIntrospect);
+        $this->assertTrue($result instanceof InterfaceInspector);
         $result = $m->getInterface('SR\Reflection\Tests\Helper\FixtureInterfaceThree');
-        $this->assertTrue($result instanceof InterfaceIntrospect);
+        $this->assertTrue($result instanceof InterfaceInspector);
 
         $result = $m->sortInterfaces(
-            function (InterfaceIntrospect $a, InterfaceIntrospect $b) {
+            function (InterfaceInspector $a, InterfaceInspector $b) {
                 return substr($a->name(), -3, 1) > substr($b->name(), -3, 1);
             }
         );
@@ -551,7 +551,7 @@ class ClassIntrospectTest extends AbstractTestHelper
         $this->assertGreaterThan(1, $result);
 
         $result = $m->visitInterfaces(
-            function (InterfaceIntrospect $p) {
+            function (InterfaceInspector $p) {
                 return $p->name().'VISITOR';
             }
         );

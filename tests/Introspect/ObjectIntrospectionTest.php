@@ -11,7 +11,7 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Reflection\Introspect\ObjectIntrospect;
+use SR\Reflection\Inspector\ObjectInspector;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
@@ -22,15 +22,15 @@ class ObjectIntrospectionTest extends AbstractTestHelper
     /**
      * @var string
      */
-    const TEST_CLASS = ObjectIntrospect::class;
+    const TEST_CLASS = ObjectInspector::class;
 
     /**
-     * @var ObjectIntrospect
+     * @var ObjectInspector
      */
     protected static $instance = null;
 
     /**
-     * @return ObjectIntrospect[]
+     * @return ObjectInspector[]
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {
@@ -50,7 +50,7 @@ class ObjectIntrospectionTest extends AbstractTestHelper
 
     public function testInvalidConstructorArguments()
     {
-        $this->expectException('SR\Exception\InvalidArgumentException');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
         $this->getFixtureInstances('/AN/INVALID/NAME/SPACE/I/REALLY/HOPE');
     }
 

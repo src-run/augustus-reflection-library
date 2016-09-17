@@ -1,17 +1,17 @@
 
 # [src-run] augustus-reflection-library
 
-|       Travis-CI        |      Codacy Rating      |      Code Coverage      |        Style-CI         |
-|:----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|
-| [![Travis](https://src.run/augustus-reflection-library/travis.svg)](https://src.run/augustus-reflection-library/travis) | [![Codacy](https://src.run/augustus-reflection-library/codacy.svg)](https://src.run/augustus-reflection-library/codacy) | [![Coveralls](https://src.run/augustus-reflection-library/coveralls.svg)](https://src.run/augustus-reflection-library/coveralls) | [![Coveralls](https://src.run/augustus-reflection-library/styleci.svg)](https://src.run/augustus-reflection-library/styleci) |
+|       Travis-CI        |      Codacy Rating      |      Code Coverage      |        Style-CI         |         Release         |    API Documentation    |
+|:----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|
+| [![Travis](https://src.run/augustus-reflection-library/travis.svg)](https://src.run/augustus-reflection-library/travis) | [![Codacy](https://src.run/augustus-reflection-library/codacy.svg)](https://src.run/augustus-reflection-library/codacy) | [![Coveralls](https://src.run/augustus-reflection-library/coveralls.svg)](https://src.run/augustus-reflection-library/coveralls) | [![Coveralls](https://src.run/augustus-reflection-library/styleci.svg)](https://src.run/augustus-reflection-library/styleci) | [![Packagist](https://src.run/augustus-reflection-library/packagist.svg)](https://src.run/augustus-reflection-library/packagist) | [![API Docs](https://src.run/augustus-reflection-library/api.svg)](https://src.run/augustus-reflection-library/api) | 
 
 
 ## Overview
 
 [Welcome](https://src.run/go/readme_welcome)!
-The `src-run/augustus-reflection-library` package provides the following
+The `src-run/augustus-reflection-library` package provides:
 
-> collection of reflection wrapper objects and helprs to simplify common tasks
+> A simple library providing a partial reflection high-level api.
 
 ### Grouping
 
@@ -116,5 +116,3 @@ information.
 | __Stable Release__ | [![Packagist](https://src.run/augustus-reflection-library/packagist.svg)](https://src.run/augustus-reflection-library/packagist)     |
 | __Dev Release__    | [![Packagist](https://src.run/augustus-reflection-library/packagist_pre.svg)](https://src.run/augustus-reflection-library/packagist) |
 | __License__        | [![License](https://src.run/augustus-reflection-library/license.svg)](https://src.run/augustus-reflection-library/license)           |
-| __Reference__      | [![License](https://src.run/augustus-reflection-library/api.svg)](https://src.run/augustus-reflection-library/api)                   |
-

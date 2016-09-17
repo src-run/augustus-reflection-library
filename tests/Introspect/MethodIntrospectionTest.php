@@ -11,7 +11,7 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
-use SR\Reflection\Introspect\MethodIntrospect;
+use SR\Reflection\Inspector\MethodInspector;
 
 /**
  * Class MethodIntrospectionTest.
@@ -49,24 +49,24 @@ class MethodIntrospectionTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConstructorArguments()
     {
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        new MethodIntrospect(self::TEST_CLASS, 'thisMethodDoesNotExist');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        new MethodInspector(self::TEST_CLASS, 'thisMethodDoesNotExist');
     }
 
     public function testExport()
     {
         foreach (self::TEST_NAMES as $method) {
-            $export = MethodIntrospect::export(self::TEST_CLASS, $method);
+            $export = MethodInspector::export(self::TEST_CLASS, $method);
             $this->assertRegExp('{Method \[ <user> (public|protected|private) method [a-zA-Z0-9]+ \]}', $export);
         }
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        MethodIntrospect::export(self::TEST_CLASS, 'thisMethodDoesNotExist');
+        $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
+        MethodInspector::export(self::TEST_CLASS, 'thisMethodDoesNotExist');
     }
 
     public function testDeclaringClass()
     {
-        $inspect = new MethodIntrospect(self::TEST_CLASS, self::TEST_NAME);
+        $inspect = new MethodInspector(self::TEST_CLASS, self::TEST_NAME);
         $this->assertSame(self::TEST_CLASS, $inspect->declaringClass()->nameQualified());
         $this->assertInstanceOf('\ReflectionClass', $inspect->reflectionDeclaringClass());
     }
@@ -74,7 +74,7 @@ class MethodIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testName()
     {
         foreach (self::TEST_NAMES as $method) {
-            $inspect = new MethodIntrospect(self::TEST_CLASS, $method);
+            $inspect = new MethodInspector(self::TEST_CLASS, $method);
             $this->assertSame(self::TEST_CLASS.'::'.$method, $inspect->nameQualified());
             $this->assertSame(self::TEST_CLASS.'::'.$method, $inspect->name(true));
             $this->assertSame($method, $inspect->nameUnQualified());
@@ -87,7 +87,7 @@ class MethodIntrospectionTest extends \PHPUnit_Framework_TestCase
         foreach (self::TEST_NAMES as $method) {
             $class = self::TEST_CLASS;
             $class = new $class();
-            $inspect = new MethodIntrospect(self::TEST_CLASS, $method);
+            $inspect = new MethodInspector(self::TEST_CLASS, $method);
             $result = $inspect->invoke($class, 'Invoked');
             $this->assertRegExp('{prop(Public|Protected|Private)(One|Two|Three)[0-2]Invoked}', $result);
         }
@@ -96,7 +96,7 @@ class MethodIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testDocBlock()
     {
         foreach (self::TEST_NAMES as $method) {
-            $inspect = new MethodIntrospect(self::TEST_CLASS, $method);
+            $inspect = new MethodInspector(self::TEST_CLASS, $method);
             $result = $inspect->docBlock();
             $this->assertRegExp('{@param string \$param}', $result);
             $this->assertRegExp('{@return string}', $result);
@@ -106,7 +106,7 @@ class MethodIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testModifiers()
     {
         foreach (self::TEST_NAMES as $method) {
-            $_ = new MethodIntrospect(self::TEST_CLASS, $method);
+            $_ = new MethodInspector(self::TEST_CLASS, $method);
             $this->assertTrue(gettype($_->modifiers()) === 'integer');
             $this->assertFalse($_->isAbstract());
             $this->assertFalse($_->isFinal());

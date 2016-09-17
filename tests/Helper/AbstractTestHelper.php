@@ -11,8 +11,8 @@
 
 namespace SR\Reflection\Tests\Helper;
 
-use SR\Reflection\Introspect\ClassIntrospect;
-use SR\Reflection\Introspect\ObjectIntrospect;
+use SR\Reflection\Inspector\ClassInspector;
+use SR\Reflection\Inspector\ObjectInspector;
 
 /**
  * Class AbstractTestHelper.
@@ -78,7 +78,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ClassIntrospect[]|ObjectIntrospect[]
+     * @return ClassInspector[]|ObjectInspector[]
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {
