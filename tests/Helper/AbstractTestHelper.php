@@ -4,7 +4,6 @@
  * This file is part of the `src-run/augustus-reflection-library` project.
  *
  * (c) Rob Frawley 2nd <rmf@src.run>
- * (c) Scribe Inc      <scr@src.run>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -12,8 +11,8 @@
 
 namespace SR\Reflection\Tests\Helper;
 
-use SR\Reflection\Introspection\ClassIntrospection;
-use SR\Reflection\Introspection\ObjectIntrospection;
+use SR\Reflection\Introspect\ClassIntrospect;
+use SR\Reflection\Introspect\ObjectIntrospect;
 
 /**
  * Class AbstractTestHelper.
@@ -40,13 +39,21 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    protected function getClassnameQualified($className = null)
+    protected function getClassNameQualified($className = null)
     {
         if (static::TEST_CLASS === null) {
             $this->fail(sprintf('%s::TEST_CLASS must be set to the testing class name.', static::TEST_NAMESPACE));
         }
 
-        return static::TEST_NAMESPACE.($className !== null ? $className : static::TEST_CLASS);
+        if ($className === null) {
+            $className = static::TEST_CLASS;
+        }
+
+        if (strpos($className, self::TEST_NAMESPACE) !== false) {
+            return $className;
+        }
+
+        return static::TEST_NAMESPACE.$className;
     }
 
     /**
@@ -56,28 +63,26 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
      */
     protected function setUpInstance(array $parameters = [])
     {
-        $_fqcn = $this->getClassnameQualified();
+        $_fqcn = $this->getClassNameQualified();
 
-        self::$instance = $_fqcn(...$parameters);
-
-        return self::$instance;
+        return self::$instance = $_fqcn(...$parameters);
     }
 
     protected function getFixtureClassNamesAbsolute()
     {
         return [
-            $this->getClassnameQualified('\Tests\Helper\FixtureClassOne'),
-            $this->getClassnameQualified('\Tests\Helper\FixtureClassTwo'),
-            $this->getClassnameQualified('\Tests\Helper\FixtureClassThree'),
+            FixtureClassOne::class,
+            FixtureClassTwo::class,
+            FixtureClassThree::class,
         ];
     }
 
     /**
-     * @return ClassIntrospection[]|ObjectIntrospection[]
+     * @return ClassIntrospect[]|ObjectIntrospect[]
      */
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {
-        $_ = $this->getClassnameQualified();
+        $_ = $this->getClassNameQualified();
         list($_1, $_2, $_3) = $this->getFixtureClassNamesAbsolute();
 
         return [

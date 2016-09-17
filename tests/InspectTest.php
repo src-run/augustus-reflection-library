@@ -4,21 +4,26 @@
  * This file is part of the `src-run/augustus-reflection-library` project.
  *
  * (c) Rob Frawley 2nd <rmf@src.run>
- * (c) Scribe Inc      <scr@src.run>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
-namespace SR\Reflection\Tests\Introspection;
+namespace SR\Reflection\Tests\Introspect;
 
-use SR\Reflection\Inspect;
-use SR\Reflection\Introspection\ConstantIntrospection;
-use SR\Reflection\Introspection\InterfaceIntrospection;
-use SR\Reflection\Introspection\ObjectIntrospection;
-use SR\Reflection\Introspection\ClassIntrospection;
-use SR\Reflection\Introspection\TraitIntrospection;
+use SR\Exception\InvalidArgumentException;
+use SR\Reflection\Inspector;
+use SR\Reflection\InspectorInterface;
+use SR\Reflection\Introspect\ClassIntrospect;
+use SR\Reflection\Introspect\ConstantIntrospect;
+use SR\Reflection\Introspect\InterfaceIntrospect;
+use SR\Reflection\Introspect\ObjectIntrospect;
+use SR\Reflection\Introspect\Resolver\ResultResolver;
+use SR\Reflection\Introspect\TraitIntrospect;
 use SR\Reflection\Tests\Helper\AbstractTestHelper;
+use SR\Reflection\Tests\Helper\FixtureClassOne;
+use SR\Reflection\Tests\Helper\FixtureTrait;
+use SR\Reflection\Tests\Helper\FixtureTraitTwo;
 use SR\Utility\StringInspect;
 
 /**
@@ -26,36 +31,21 @@ use SR\Utility\StringInspect;
  */
 class InspectTest extends AbstractTestHelper
 {
-    /**
-     * @var string
-     */
-    const TEST_CLASS = '\Inspect';
+    const TEST_CLASS = Inspector::class;
+    const TEST_FIXTURE_CLASS = ResultResolver::class;
+    const TEST_FIXTURE_TRAIT = FixtureTrait::class;
+    const TEST_FIXTURE_INTERFACE = InspectorInterface::class;
 
     /**
-     * @var string
-     */
-    const TEST_FIXTURE_CLASS = 'SR\Reflection\Introspection\Resolver\ResultResolver';
-
-    /**
-     * @var string
-     */
-    const TEST_FIXTURE_TRAIT = 'SR\Reflection\Tests\Helper\FixtureTrait';
-
-    /**
-     * @var string
-     */
-    const TEST_FIXTURE_INTERFACE = 'SR\Reflection\InspectInterface';
-
-    /**
-     * @var Inspect
+     * @var Inspector
      */
     protected static $instance = null;
 
     public function testReflectionOnInvalidInput()
     {
-        $this->expectException('\RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
-        $r = Inspect::this(__NAMESPACE__.'abcdef0123\ThisShouldNot\Ever\Exist');
+        $r = Inspector::from(__NAMESPACE__.'abcdef0123\ThisShouldNot\Ever\Exist');
     }
 
     public function testReflectionOnClassName()
@@ -66,9 +56,9 @@ class InspectTest extends AbstractTestHelper
         $namespace = substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
 
-        $r = Inspect::thisClass($qualified);
+        $r = Inspector::fromClass($qualified);
 
-        $this->assertTrue($r instanceof ClassIntrospection);
+        $this->assertTrue($r instanceof ClassIntrospect);
         $this->assertSame($qualified, $r->nameQualified());
         $this->assertSame($name, $r->nameUnQualified());
         $this->assertSame($name, $r->name());
@@ -77,9 +67,9 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
-        $r = Inspect::this($qualified);
+        $r = Inspector::from($qualified);
 
-        $this->assertTrue($r instanceof ClassIntrospection);
+        $this->assertTrue($r instanceof ClassIntrospect);
         $this->assertSame($qualified, $r->nameQualified());
         $this->assertSame($name, $r->nameUnQualified());
         $this->assertSame($name, $r->name());
@@ -97,9 +87,9 @@ class InspectTest extends AbstractTestHelper
         $namespace = substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
 
-        $r = Inspect::thisInterface($qualified);
+        $r = Inspector::fromInterface($qualified);
 
-        $this->assertTrue($r instanceof InterfaceIntrospection);
+        $this->assertTrue($r instanceof InterfaceIntrospect);
         $this->assertSame($qualified, $r->nameQualified());
         $this->assertSame($name, $r->nameUnQualified());
         $this->assertSame($name, $r->name());
@@ -108,9 +98,9 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
-        $r = Inspect::this($qualified);
+        $r = Inspector::from($qualified);
 
-        $this->assertTrue($r instanceof InterfaceIntrospection);
+        $this->assertTrue($r instanceof InterfaceIntrospect);
         $this->assertSame($qualified, $r->nameQualified());
         $this->assertSame($name, $r->nameUnQualified());
         $this->assertSame($name, $r->name());
@@ -119,22 +109,22 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        Inspect::thisTrait($qualified.'\InvalidTraitName');
+        $this->expectException(InvalidArgumentException::class);
+        Inspector::fromTrait($qualified.'\InvalidTraitName');
     }
 
     public function testReflectionOnClassInstance()
     {
         $c = self::TEST_FIXTURE_CLASS;
         $f = new $c();
-        $r = Inspect::thisInstance($f);
+        $r = Inspector::fromInstance($f);
 
-        $this->assertTrue($r instanceof ObjectIntrospection);
+        $this->assertTrue($r instanceof ObjectIntrospect);
         $this->assertSame(self::TEST_FIXTURE_CLASS, $r->nameQualified());
 
-        $r = Inspect::this($f);
+        $r = Inspector::from($f);
 
-        $this->assertTrue($r instanceof ObjectIntrospection);
+        $this->assertTrue($r instanceof ObjectIntrospect);
         $this->assertSame(self::TEST_FIXTURE_CLASS, $r->nameQualified());
     }
 
@@ -146,9 +136,9 @@ class InspectTest extends AbstractTestHelper
         $namespace = substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
 
-        $r = Inspect::thisTrait($qualified);
+        $r = Inspector::fromTrait($qualified);
 
-        $this->assertTrue($r instanceof TraitIntrospection);
+        $this->assertTrue($r instanceof TraitIntrospect);
         $this->assertSame($qualified, $r->nameQualified());
         $this->assertSame($name, $r->nameUnQualified());
         $this->assertSame($name, $r->name());
@@ -157,9 +147,9 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
-        $r = Inspect::this($qualified);
+        $r = Inspector::from($qualified);
 
-        $this->assertTrue($r instanceof TraitIntrospection);
+        $this->assertTrue($r instanceof TraitIntrospect);
         $this->assertSame($qualified, $r->nameQualified());
         $this->assertSame($name, $r->nameUnQualified());
         $this->assertSame($name, $r->name());
@@ -168,29 +158,28 @@ class InspectTest extends AbstractTestHelper
         $this->assertSame($namespace, $r->namespaceName());
         $this->assertSame($namespaceSections, $r->namespaceSections());
 
-        $trait = 'SR\Reflection\Tests\Helper\FixtureTraitTwo';
-        $r = Inspect::thisTrait($trait);
+        $trait = FixtureTraitTwo::class;
+        $r = Inspector::fromTrait($trait);
 
-        $this->assertTrue($r instanceof TraitIntrospection);
+        $this->assertTrue($r instanceof TraitIntrospect);
         $this->assertSame($trait, $r->nameQualified());
 
-        $this->expectException('SR\Exception\InvalidArgumentException');
-        $r = Inspect::thisTrait($trait.'\InvalidTraitName');
+        $this->expectException(InvalidArgumentException::class);
+        $r = Inspector::fromTrait($trait.'\InvalidTraitName');
     }
 
     public function testBindTo()
     {
-        $class = '\SR\Reflection\Tests\Helper\FixtureClassOne';
-        $s = new \SR\Reflection\Tests\Helper\FixtureClassOne();
-        $m = Inspect::thisClass($class, $s);
+        $object = FixtureClassOne::class;
+        $method = Inspector::fromClass($object, $fixture = new FixtureClassOne());
 
-        $results = $m->visitConstants(function (ConstantIntrospection $const) use ($class) {
+        $result = $method->visitConstants(function (ConstantIntrospect $const) use ($object) {
             return $this->protectedOne0($const->value()).'---'.$const->name();
         });
 
-        $this->assertGreaterThan(3, $results);
+        $this->assertGreaterThan(3, $result);
 
-        foreach ($results as $r) {
+        foreach ($result as $r) {
             $this->assertNotFalse(strpos($r, 'propProtectedOne0') !== false);
             $this->assertNotFalse(strpos($r, 'ONE_') !== false || strpos($r, 'NULL_') !== false);
         }

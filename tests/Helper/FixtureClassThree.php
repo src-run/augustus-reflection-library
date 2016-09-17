@@ -4,7 +4,6 @@
  * This file is part of the `src-run/augustus-reflection-library` project.
  *
  * (c) Rob Frawley 2nd <rmf@src.run>
- * (c) Scribe Inc      <scr@src.run>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -37,10 +36,12 @@ class FixtureClassThree extends FixtureClassTwo implements FixtureInterfaceThree
     {
         return 'prop'.ucfirst(__FUNCTION__);
     }
+
     public function publicThree1()
     {
         return 'prop'.ucfirst(__FUNCTION__);
     }
+
     public function publicThree2()
     {
         return 'prop'.ucfirst(__FUNCTION__);
@@ -50,10 +51,12 @@ class FixtureClassThree extends FixtureClassTwo implements FixtureInterfaceThree
     {
         return 'prop'.ucfirst(__FUNCTION__);
     }
+
     protected function protectedThree1()
     {
         return 'prop'.ucfirst(__FUNCTION__);
     }
+
     protected function protectedThree2()
     {
         return 'prop'.ucfirst(__FUNCTION__);
@@ -63,10 +66,12 @@ class FixtureClassThree extends FixtureClassTwo implements FixtureInterfaceThree
     {
         return 'prop'.ucfirst(__FUNCTION__);
     }
+
     private function privateThree1()
     {
         return 'prop'.ucfirst(__FUNCTION__);
     }
+
     private function privateThree2()
     {
         return 'prop'.ucfirst(__FUNCTION__);

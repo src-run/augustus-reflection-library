@@ -4,7 +4,6 @@
  * This file is part of the `src-run/augustus-reflection-library` project.
  *
  * (c) Rob Frawley 2nd <rmf@src.run>
- * (c) Scribe Inc      <scr@src.run>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -52,10 +51,12 @@ class FixtureClassOne
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
+
     public function publicOne1($param = '')
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
+
     public function publicOne2($param = '')
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
@@ -70,10 +71,12 @@ class FixtureClassOne
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
+
     protected function protectedOne1($param = '')
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
+
     protected function protectedOne2($param = '')
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
@@ -88,10 +91,12 @@ class FixtureClassOne
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
+
     private function privateOne1($param = '')
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
     }
+
     private function privateOne2($param = '')
     {
         return 'prop'.ucfirst(__FUNCTION__).$param;
