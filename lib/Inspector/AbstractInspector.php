@@ -12,10 +12,10 @@
 namespace SR\Reflection\Inspector;
 
 use SR\Reflection\Exception\InvalidArgumentException;
-use SR\Reflection\Resolver\ResolverInterface;
-use SR\Reflection\Resolver\Resolver;
 use SR\Reflection\Inspector\Aware\ScopeCore\DocBlockAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\DocBlockAwareTrait;
+use SR\Reflection\Resolver\Resolver;
+use SR\Reflection\Resolver\ResolverInterface;
 
 /**
  * Abstract introspector class.
@@ -35,9 +35,9 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
     protected $resolver;
 
     /**
-     * @param \Reflector     $reflection
-     * @param null|object    $bind
-     * @param Resolver $resolver
+     * @param \Reflector  $reflection
+     * @param null|object $bind
+     * @param Resolver    $resolver
      */
     public function __construct(\Reflector $reflection, $bind = null, Resolver $resolver = null)
     {

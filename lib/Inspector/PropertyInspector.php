@@ -11,7 +11,6 @@
 
 namespace SR\Reflection\Inspector;
 
-use SR\Reflection\Resolver\ResolverInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeProperty\IdentityAwareInterface;
@@ -20,6 +19,7 @@ use SR\Reflection\Inspector\Aware\ScopeProperty\ModifiersAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeProperty\ModifiersAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareTrait;
+use SR\Reflection\Resolver\ResolverInterface;
 
 /**
  * Property introspection class.

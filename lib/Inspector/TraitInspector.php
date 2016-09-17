@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector;
 
-use SR\Reflection\Resolver\ResolverInterface;
-use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
-use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeClass\MethodAwareInterface;
@@ -22,6 +19,9 @@ use SR\Reflection\Inspector\Aware\ScopeClass\ModifiersAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeClass\ModifiersAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait;
+use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
+use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
+use SR\Reflection\Resolver\ResolverInterface;
 use SR\Utility\ClassInspect;
 
 /**

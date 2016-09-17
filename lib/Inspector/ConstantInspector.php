@@ -12,9 +12,9 @@
 namespace SR\Reflection\Inspector;
 
 use SR\Reflection\Definition\ReflectionConstant;
-use SR\Reflection\Resolver\ResolverInterface;
 use SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareTrait;
+use SR\Reflection\Resolver\ResolverInterface;
 use SR\Utility\ClassInspect;
 
 /**

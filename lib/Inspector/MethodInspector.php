@@ -11,7 +11,6 @@
 
 namespace SR\Reflection\Inspector;
 
-use SR\Reflection\Resolver\ResolverInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareInterface;
@@ -22,6 +21,7 @@ use SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait;
+use SR\Reflection\Resolver\ResolverInterface;
 use SR\Utility\ClassInspect;
 
 /**
@@ -53,8 +53,7 @@ class MethodInspector extends AbstractInspector implements CallableAwareInterfac
             if (!ClassInspect::isTrait($class) && ClassInspect::isClass($class)) {
                 $this->declaringClass = new ClassInspector($class);
             }
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class], ['method name string', $method]);
         }
     }
