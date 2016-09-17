@@ -44,10 +44,5 @@
   "prefer-stable"     : true,
   "config": {
     "bin-dir" : "bin"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master" : "0.6-dev"
-    }
   }
 }
