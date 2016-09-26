@@ -18,4 +18,3 @@ use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareInterface;
 interface IdentityAwareInterface extends IdentityNameAwareInterface, IdentityNamespaceAwareInterface, IdentityDeclaringClassAwareInterface
 {
 }
-

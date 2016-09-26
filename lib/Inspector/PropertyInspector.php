@@ -63,4 +63,3 @@ class PropertyInspector extends AbstractInspector implements IdentityAwareInterf
         return ['\ReflectionProperty'];
     }
 }
-

@@ -14,4 +14,3 @@ namespace SR\Reflection\Exception;
 class InvalidArgumentException extends Exception
 {
 }
-

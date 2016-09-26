@@ -14,4 +14,3 @@ namespace SR\Reflection\Exception;
 class RuntimeException extends Exception
 {
 }
-

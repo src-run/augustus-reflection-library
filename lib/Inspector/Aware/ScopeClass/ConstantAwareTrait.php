@@ -145,4 +145,3 @@ trait ConstantAwareTrait // implements ConstantAwareInterface
         return new ConstantInspector($class, $constant);
     }
 }
-
