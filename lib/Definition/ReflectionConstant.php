@@ -38,9 +38,7 @@ class ReflectionConstant implements \Reflector
         $constant = $declaringContext.'::'.$constantName;
 
         if (!defined($constant)) {
-            throw InvalidArgumentException::create()
-                ->setMessage('Constant "%s" does not exist')
-                ->with($constant);
+            throw InvalidArgumentException::create('Constant "%s" does not exist', $constant);
         }
 
         $this->name = $constantName;
@@ -89,7 +87,7 @@ class ReflectionConstant implements \Reflector
         $constant = $class.'::'.$name;
 
         if (!defined($constant)) {
-            throw InvalidArgumentException::create()->setMessage('Constant "%s" does not exist')->with($constant);
+            throw InvalidArgumentException::create('Constant "%s" does not exist', $constant);
         }
 
         $reflect = new \ReflectionClass($class);

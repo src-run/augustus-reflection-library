@@ -22,7 +22,7 @@ use SR\Reflection\Inspector\Aware\ScopeClass\ModifiersAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Utility\ClassInspect;
+use SR\Util\Info\ClassInfo;
 
 /**
  * Base introspection interface.
@@ -43,7 +43,7 @@ class InterfaceInspector extends AbstractInspector implements ConstantAwareInter
     public function __construct($interface, $bind = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassInspect::assertInterface($interface);
+            ClassInfo::assertInterface($interface);
             parent::__construct(new \ReflectionClass($interface), $bind, $resolver);
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['interface name string', $interface]);

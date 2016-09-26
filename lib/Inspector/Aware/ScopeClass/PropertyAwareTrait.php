@@ -50,7 +50,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     public function getProperty($name)
     {
         if (!$this->hasProperty($name)) {
-            throw InvalidArgumentException::create('Property %s not found.')->with($name);
+            throw InvalidArgumentException::create('Property %s not found.', $name);
         }
 
         return $this->createPropertyDefinition($this->reflection()->getName(), $name);

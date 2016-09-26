@@ -26,7 +26,7 @@ use SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Utility\ClassInspect;
+use SR\Util\Info\ClassInfo;
 
 /**
  * Class/object introspection class.
@@ -49,7 +49,7 @@ class ClassInspector extends AbstractInspector implements ConstantAwareInterface
     public function __construct($class, $bind = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassInspect::assertClass($class);
+            ClassInfo::assertClass($class);
             parent::__construct(new \ReflectionClass($class), $bind, $resolver);
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class]);

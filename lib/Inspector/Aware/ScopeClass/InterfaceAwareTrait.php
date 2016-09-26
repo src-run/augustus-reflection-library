@@ -40,7 +40,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
     public function getInterface($name)
     {
         if (!$this->implementsInterface($name)) {
-            throw InvalidArgumentException::create('Interface %s not found.')->with($name);
+            throw InvalidArgumentException::create('Interface %s not found.', $name);
         }
 
         try {

@@ -50,7 +50,7 @@ trait ConstantAwareTrait // implements ConstantAwareInterface
     public function getConstant($name)
     {
         if (!$this->hasConstant($name)) {
-            throw InvalidArgumentException::create('Constant %s not found.')->with($name);
+            throw InvalidArgumentException::create('Constant %s not found.', $name);
         }
 
         return $this->createConstantDefinition($this->reflection()->getName(), $name);

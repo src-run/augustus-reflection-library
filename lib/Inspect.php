@@ -16,7 +16,7 @@ use SR\Reflection\Inspector\ClassInspector;
 use SR\Reflection\Inspector\InterfaceInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 use SR\Reflection\Inspector\TraitInspector;
-use SR\Utility\ClassInspect;
+use SR\Util\Info\ClassInfo;
 
 /**
  * Inspector factory creates appropriate [*]Introspection class.
@@ -35,23 +35,23 @@ class Inspect implements InspectInterface
      */
     public static function using($what, $bind = null)
     {
-        if (ClassInspect::isInstance($what)) {
+        if (ClassInfo::isInstance($what)) {
             return self::useInstance($what, $bind);
         }
 
-        if (ClassInspect::isClass($what)) {
+        if (ClassInfo::isClass($what)) {
             return self::useClass($what, $bind);
         }
 
-        if (ClassInspect::isInterface($what)) {
+        if (ClassInfo::isInterface($what)) {
             return self::useInterface($what, $bind);
         }
 
-        if (ClassInspect::isTrait($what)) {
+        if (ClassInfo::isTrait($what)) {
             return self::useTrait($what);
         }
 
-        throw RuntimeException::create('Invalid inspector argument provided (got %s)')->with(var_export($what, true));
+        throw RuntimeException::create('Invalid inspector argument provided (got %s)', var_export($what, true));
     }
 
     /**

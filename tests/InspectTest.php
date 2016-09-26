@@ -25,7 +25,7 @@ use SR\Reflection\Tests\Helper\AbstractTestHelper;
 use SR\Reflection\Tests\Helper\FixtureClassOne;
 use SR\Reflection\Tests\Helper\FixtureTrait;
 use SR\Reflection\Tests\Helper\FixtureTraitTwo;
-use SR\Utility\StringInspect;
+use SR\Util\Info\StringInfo;
 
 /**
  * Class InspectTest.
@@ -52,7 +52,7 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnClassName()
     {
         $qualified = self::TEST_FIXTURE_CLASS;
-        $lastSlashPosition = StringInspect::searchPositionFromRight($qualified, '\\');
+        $lastSlashPosition = StringInfo::searchPositionFromRight($qualified, '\\');
         $name = substr($qualified, $lastSlashPosition + 1);
         $namespace = substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
@@ -83,7 +83,7 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnInterfaceName()
     {
         $qualified = self::TEST_FIXTURE_INTERFACE;
-        $lastSlashPosition = StringInspect::searchPositionFromRight($qualified, '\\');
+        $lastSlashPosition = StringInfo::searchPositionFromRight($qualified, '\\');
         $name = substr($qualified, $lastSlashPosition + 1);
         $namespace = substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
@@ -132,7 +132,7 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnTraitName()
     {
         $qualified = self::TEST_FIXTURE_TRAIT;
-        $lastSlashPosition = StringInspect::searchPositionFromRight($qualified, '\\');
+        $lastSlashPosition = StringInfo::searchPositionFromRight($qualified, '\\');
         $name = substr($qualified, $lastSlashPosition + 1);
         $namespace = substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);

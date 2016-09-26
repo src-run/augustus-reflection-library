@@ -22,7 +22,7 @@ use SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Utility\ClassInspect;
+use SR\Util\Info\ClassInfo;
 
 /**
  * Trait introspection class.
@@ -43,7 +43,7 @@ class TraitInspector extends AbstractInspector implements IdentityAwareInterface
     public function __construct($name, $bind = null, ResolverInterface $resolver = null)
     {
         try {
-            ClassInspect::assertTrait($name);
+            ClassInfo::assertTrait($name);
             parent::__construct(new \ReflectionClass($name), $bind, $resolver);
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['trait name string', $name]);

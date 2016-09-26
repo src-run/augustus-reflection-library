@@ -22,7 +22,7 @@ use SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Utility\ClassInspect;
+use SR\Util\Info\ClassInfo;
 
 /**
  * Method introspection class.
@@ -46,11 +46,11 @@ class MethodInspector extends AbstractInspector implements CallableAwareInterfac
         try {
             parent::__construct(new \ReflectionMethod($class, $method), $bindTo, $resolver);
 
-            if (ClassInspect::isTrait($class)) {
+            if (ClassInfo::isTrait($class)) {
                 $this->declaringClass = new TraitInspector($class);
             }
 
-            if (!ClassInspect::isTrait($class) && ClassInspect::isClass($class)) {
+            if (!ClassInfo::isTrait($class) && ClassInfo::isClass($class)) {
                 $this->declaringClass = new ClassInspector($class);
             }
         } catch (\Exception $exception) {
