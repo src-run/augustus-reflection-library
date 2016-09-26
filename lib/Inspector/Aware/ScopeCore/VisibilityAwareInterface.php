@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class VisibilityAwareInterface.
- */
 interface VisibilityAwareInterface
 {
     /**
@@ -41,5 +38,3 @@ interface VisibilityAwareInterface
      */
     public function visibilityPublic();
 }
-
-/* EOF */

@@ -11,11 +11,7 @@
 
 namespace SR\Reflection\Exception;
 
-/**
- * Invalid argument exception for reflection library.
- */
 class InvalidArgumentException extends Exception
 {
 }
 
-/* EOF */

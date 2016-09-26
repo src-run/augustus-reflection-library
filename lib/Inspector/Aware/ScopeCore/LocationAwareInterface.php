@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class DocBlockAwareInterface.
- */
 interface LocationAwareInterface
 {
     /**
@@ -31,5 +28,3 @@ interface LocationAwareInterface
      */
     public function lineEnd();
 }
-
-/* EOF */

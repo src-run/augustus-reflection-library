@@ -24,9 +24,6 @@ use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
 use SR\Util\Info\ClassInfo;
 
-/**
- * Method introspection class.
- */
 class MethodInspector extends AbstractInspector implements CallableAwareInterface, IdentityAwareInterface, LocationAwareInterface, ModifiersAwareInterface, VisibilityAwareInterface
 {
     use CallableAwareTrait;
@@ -77,5 +74,3 @@ class MethodInspector extends AbstractInspector implements CallableAwareInterfac
         return ['\ReflectionMethod'];
     }
 }
-
-/* EOF */

@@ -21,9 +21,6 @@ use SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Property introspection class.
- */
 class PropertyInspector extends AbstractInspector implements IdentityAwareInterface, ModifiersAwareInterface, ValueAwareInterface, VisibilityAwareInterface
 {
     use IdentityAwareTrait;
@@ -67,4 +64,3 @@ class PropertyInspector extends AbstractInspector implements IdentityAwareInterf
     }
 }
 
-/* EOF */

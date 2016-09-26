@@ -28,9 +28,6 @@ use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
 use SR\Util\Info\ClassInfo;
 
-/**
- * Class/object introspection class.
- */
 class ClassInspector extends AbstractInspector implements ConstantAwareInterface, IdentityAwareInterface, InterfaceAwareInterface, LocationAwareInterface, MethodAwareInterface, ModifiersAwareInterface, PropertyAwareInterface
 {
     use ConstantAwareTrait;
@@ -74,5 +71,3 @@ class ClassInspector extends AbstractInspector implements ConstantAwareInterface
         return ['\ReflectionClass'];
     }
 }
-
-/* EOF */

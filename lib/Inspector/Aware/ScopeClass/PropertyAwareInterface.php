@@ -14,9 +14,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeClass;
 use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class PropertyAwareInterface.
- */
 interface PropertyAwareInterface
 {
     /**

@@ -13,9 +13,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeProperty;
 
 use SR\Reflection\Inspector\Aware\ScopeCore\ModifiersAwareTrait as BaseModifiersAwareTrait;
 
-/**
- * Class ModifiersAwareTrait.
- */
 trait ModifiersAwareTrait // implements ModifiersAwareInterface
 {
     use BaseModifiersAwareTrait;
@@ -36,5 +33,3 @@ trait ModifiersAwareTrait // implements ModifiersAwareInterface
         return $this->reflection()->isDefault();
     }
 }
-
-/* EOF */

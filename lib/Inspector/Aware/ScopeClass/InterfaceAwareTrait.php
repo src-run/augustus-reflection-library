@@ -15,9 +15,6 @@ use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\InterfaceInspector;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class InterfaceAwareTrait.
- */
 trait InterfaceAwareTrait // implements InterfaceAwareInterface
 {
     /**
@@ -141,5 +138,3 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
         return new InterfaceInspector($interface);
     }
 }
-
-/* EOF */

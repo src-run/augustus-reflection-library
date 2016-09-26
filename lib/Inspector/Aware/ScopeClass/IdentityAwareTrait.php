@@ -15,9 +15,6 @@ use SR\Reflection\Inspector\Aware\ScopeCore\IdentityInheritanceAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNameAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareTrait;
 
-/**
- * Class IdentityAwareTrait.
- */
 trait IdentityAwareTrait // implements IdentityAwareInterface
 {
     use IdentityNameAwareTrait;
@@ -40,5 +37,3 @@ trait IdentityAwareTrait // implements IdentityAwareInterface
         return $this->reflection()->getShortName();
     }
 }
-
-/* EOF */

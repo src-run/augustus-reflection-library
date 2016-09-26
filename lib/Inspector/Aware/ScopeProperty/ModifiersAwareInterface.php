@@ -13,9 +13,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeProperty;
 
 use SR\Reflection\Inspector\Aware\ScopeCore\ModifiersAwareInterface as BaseModifiersAwareInterface;
 
-/**
- * Class ModifiersAwareInterface.
- */
 interface ModifiersAwareInterface extends BaseModifiersAwareInterface
 {
     /**
@@ -28,5 +25,3 @@ interface ModifiersAwareInterface extends BaseModifiersAwareInterface
      */
     public function isDefault();
 }
-
-/* EOF */

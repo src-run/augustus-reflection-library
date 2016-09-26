@@ -15,9 +15,6 @@ use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\PropertyInspector;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class PropertyAwareTrait.
- */
 trait PropertyAwareTrait // implements PropertyAwareInterface
 {
     /**
@@ -188,5 +185,3 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
         return new PropertyInspector($class, $property);
     }
 }
-
-/* EOF */

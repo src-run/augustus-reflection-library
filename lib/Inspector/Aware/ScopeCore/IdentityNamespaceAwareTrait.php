@@ -13,9 +13,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
 use SR\Reflection\Definition\ReflectionConstant;
 
-/**
- * Class IdentityNamespaceAwareTrait.
- */
 trait IdentityNamespaceAwareTrait // implements IdentityNamespaceAwareInterface
 {
     /**
@@ -39,5 +36,3 @@ trait IdentityNamespaceAwareTrait // implements IdentityNamespaceAwareInterface
         return (array) explode('\\', $this->namespaceName());
     }
 }
-
-/* EOF */

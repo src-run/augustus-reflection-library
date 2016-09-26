@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class DocBlockAwareInterface.
- */
 interface DocBlockAwareInterface
 {
     /**
@@ -21,5 +18,3 @@ interface DocBlockAwareInterface
      */
     public function docBlock();
 }
-
-/* EOF */

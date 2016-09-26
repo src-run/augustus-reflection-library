@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class DocBlockAwareTrait.
- */
 trait DocBlockAwareTrait // implements DocBlockAwareInterface
 {
     /**
@@ -29,5 +26,3 @@ trait DocBlockAwareTrait // implements DocBlockAwareInterface
         return $this->reflection()->getDocComment();
     }
 }
-
-/* EOF */

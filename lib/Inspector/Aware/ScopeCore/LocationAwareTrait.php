@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class LocationAwareTrait.
- */
 trait LocationAwareTrait // implements LocationAwareInterface
 {
     /**
@@ -45,5 +42,3 @@ trait LocationAwareTrait // implements LocationAwareInterface
         return $this->reflection()->getEndLine();
     }
 }
-
-/* EOF */

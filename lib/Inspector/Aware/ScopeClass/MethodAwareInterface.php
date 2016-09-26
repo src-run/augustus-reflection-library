@@ -15,9 +15,6 @@ use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\MethodInspector;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class MethodAwareInterface.
- */
 interface MethodAwareInterface
 {
     /**
@@ -146,5 +143,3 @@ interface MethodAwareInterface
      */
     public function matchOneMethod($match, $method = '__toString', $mask = null);
 }
-
-/* EOF */

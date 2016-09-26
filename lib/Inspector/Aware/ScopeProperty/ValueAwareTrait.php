@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeProperty;
 
-/**
- * Class ValueAwareTrait.
- */
 trait ValueAwareTrait // implements ValueAwareInterface
 {
     /**
@@ -53,5 +50,3 @@ trait ValueAwareTrait // implements ValueAwareInterface
         $this->reflection()->setValue($instance, $value);
     }
 }
-
-/* EOF */

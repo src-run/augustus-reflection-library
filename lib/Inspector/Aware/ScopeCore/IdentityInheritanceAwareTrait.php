@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class IdentityInheritanceAwareTrait.
- */
 trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterface
 {
     /**
@@ -86,5 +83,3 @@ trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterf
         return $namespace;
     }
 }
-
-/* EOF */

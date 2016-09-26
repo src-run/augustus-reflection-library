@@ -16,9 +16,6 @@ use SR\Reflection\Inspector\InterfaceInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 use SR\Reflection\Inspector\TraitInspector;
 
-/**
- * Base inspector factory interface.
- */
 interface InspectInterface
 {
     /**
@@ -71,5 +68,3 @@ interface InspectInterface
      */
     public static function useTrait($what, $bind = null);
 }
-
-/* EOF */

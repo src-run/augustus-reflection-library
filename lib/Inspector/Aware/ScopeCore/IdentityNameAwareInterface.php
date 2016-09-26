@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class IdentityNameAwareTrait.
- */
 interface IdentityNameAwareInterface
 {
     /**
@@ -33,5 +30,3 @@ interface IdentityNameAwareInterface
      */
     public function name($qualified = false);
 }
-
-/* EOF */

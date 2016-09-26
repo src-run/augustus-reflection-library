@@ -15,14 +15,7 @@ use SR\Reflection\Inspector\Aware\ScopeCore\IdentityDeclaringClassAwareInterface
 use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNameAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareInterface;
 
-/**
- * Class IdentityAwareInterface.
- */
-interface IdentityAwareInterface extends
-IdentityNameAwareInterface,
-IdentityNamespaceAwareInterface,
-                                                  IdentityDeclaringClassAwareInterface
+interface IdentityAwareInterface extends IdentityNameAwareInterface, IdentityNamespaceAwareInterface, IdentityDeclaringClassAwareInterface
 {
 }
 
-/* EOF */

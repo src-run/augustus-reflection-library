@@ -15,9 +15,6 @@ use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\ConstantInspector;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class ConstantAwareInterface.
- */
 interface ConstantAwareInterface
 {
     /**
@@ -99,5 +96,3 @@ interface ConstantAwareInterface
      */
     public function matchOneConstant($match, $func = '__toString');
 }
-
-/* EOF */

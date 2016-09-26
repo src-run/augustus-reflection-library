@@ -15,9 +15,6 @@ use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\ConstantInspector;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class ConstantAwareTrait.
- */
 trait ConstantAwareTrait // implements ConstantAwareInterface
 {
     /**
@@ -149,4 +146,3 @@ trait ConstantAwareTrait // implements ConstantAwareInterface
     }
 }
 
-/* EOF */

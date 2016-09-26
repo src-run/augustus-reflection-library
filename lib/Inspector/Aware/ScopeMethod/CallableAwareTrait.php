@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeMethod;
 
-/**
- * Class CallableAwareTrait.
- */
 trait CallableAwareTrait // implements CallableAwareInterface
 {
     /**
@@ -52,5 +49,3 @@ trait CallableAwareTrait // implements CallableAwareInterface
         return $this->reflection()->invokeArgs($instance, $parameters);
     }
 }
-
-/* EOF */

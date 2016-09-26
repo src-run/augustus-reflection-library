@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Resolver;
 
-/**
- * Class Resolver.
- */
 class Resolver implements ResolverInterface
 {
     /**
@@ -193,5 +190,3 @@ class Resolver implements ResolverInterface
         return null;
     }
 }
-
-/* EOF */

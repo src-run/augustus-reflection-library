@@ -18,9 +18,6 @@ use SR\Reflection\Inspector\ObjectInspector;
 use SR\Reflection\Inspector\TraitInspector;
 use SR\Util\Info\ClassInfo;
 
-/**
- * Inspector factory creates appropriate [*]Introspection class.
- */
 class Inspect implements InspectInterface
 {
     /**
@@ -106,5 +103,3 @@ class Inspect implements InspectInterface
         return new TraitInspector($what, $bind);
     }
 }
-
-/* EOF */

@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeProperty;
 
-/**
- * Class ValueAwareInterface.
- */
 interface ValueAwareInterface
 {
     /**
@@ -29,5 +26,3 @@ interface ValueAwareInterface
      */
     public function setValue($instance, $value);
 }
-
-/* EOF */

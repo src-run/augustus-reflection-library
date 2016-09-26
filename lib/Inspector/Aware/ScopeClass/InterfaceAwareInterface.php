@@ -13,9 +13,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeClass;
 
 use SR\Reflection\Inspector\InterfaceInspector;
 
-/**
- * Class InterfaceAwareInterface.
- */
 interface InterfaceAwareInterface
 {
     /**
@@ -80,5 +77,3 @@ interface InterfaceAwareInterface
      */
     public function matchOneInterface($match, $func = '__toString');
 }
-
-/* EOF */

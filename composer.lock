@@ -99,12 +99,17 @@
         },
         {
             "name": "src-run/augustus-exception-library",
-            "version": "dev-master",
+            "version": "0.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/src-run/augustus-exception-library.git",
+                "reference": "f5516eda5201e62e2191fb125d0535fce66b5756"
+            },
             "dist": {
-                "type": "path",
-                "url": "/home/rmf/repos/composer/augustus-exception-library",
-                "reference": "854e984d3f2573d874fff7da2f6f9c53a714c04c",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/src-run/augustus-exception-library/zipball/f5516eda5201e62e2191fb125d0535fce66b5756",
+                "reference": "f5516eda5201e62e2191fb125d0535fce66b5756",
+                "shasum": ""
             },
             "require": {
                 "php": "~7.0",
@@ -128,11 +133,7 @@
                     "SR\\Exception\\": "lib/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "SR\\Exception\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -154,27 +155,25 @@
                 "rmf",
                 "src-run"
             ],
-            "support": {
-                "email": "rmf@src.run",
-                "issues": "https://src.run/augustus-exception-library/issues",
-                "source": "https://src.run/augustus-exception-library/git"
-            },
-            "transport-options": {
-                "symlink": false
-            }
+            "time": "2016-09-26 18:54:00"
         },
         {
             "name": "src-run/augustus-polyfill-library",
-            "version": "dev-master",
+            "version": "0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/src-run/augustus-polyfill-library.git",
+                "reference": "f538f136250d98190a7c181f775fc3e2dbf1d801"
+            },
             "dist": {
-                "type": "path",
-                "url": "/home/rmf/repos/composer/augustus-polyfill-library",
-                "reference": "a583e94e8a4a3eb022ac0996f6cbe9fc99730b79",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/src-run/augustus-polyfill-library/zipball/f538f136250d98190a7c181f775fc3e2dbf1d801",
+                "reference": "f538f136250d98190a7c181f775fc3e2dbf1d801",
+                "shasum": ""
             },
             "require": {
                 "paragonie/random_compat": "~2.0",
-                "php": "~5.6 || ~7.0",
+                "php": "~7.0",
                 "symfony/polyfill": "~1.2"
             },
             "require-dev": {
@@ -198,11 +197,7 @@
                     "bootstrap.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "SR\\Polyfill\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -224,26 +219,24 @@
                 "rmf",
                 "src-run"
             ],
-            "support": {
-                "email": "rmf@src.run",
-                "issues": "https://src.run/augustus-polyfill-library/issues",
-                "source": "https://src.run/augustus-polyfill-library/git"
-            },
-            "transport-options": {
-                "symlink": false
-            }
+            "time": "2016-09-26 17:44:14"
         },
         {
             "name": "src-run/augustus-silencer-library",
-            "version": "dev-master",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/src-run/augustus-silencer-library.git",
+                "reference": "5fe8dca1ef10b80faeab3b4cf2a3875e2e64db22"
+            },
             "dist": {
-                "type": "path",
-                "url": "/home/rmf/repos/composer/augustus-silencer-library",
-                "reference": "370c164f28c4f91860603aaa080ec6383d1767b1",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/src-run/augustus-silencer-library/zipball/5fe8dca1ef10b80faeab3b4cf2a3875e2e64db22",
+                "reference": "5fe8dca1ef10b80faeab3b4cf2a3875e2e64db22",
+                "shasum": ""
             },
             "require": {
-                "php": "~5.6 || ~7.0",
+                "php": "~7.0",
                 "src-run/augustus-polyfill-library": "~0.7"
             },
             "require-dev": {
@@ -264,11 +257,7 @@
                     "SR\\Silencer\\": "lib"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "SR\\Silencer\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -290,26 +279,24 @@
                 "rmf",
                 "src-run"
             ],
-            "support": {
-                "email": "rmf@src.run",
-                "source": "https://src.run/augustus-silencer-library/git",
-                "issues": "https://src.run/augustus-silencer-library/issues"
-            },
-            "transport-options": {
-                "symlink": false
-            }
+            "time": "2016-09-26 18:22:32"
         },
         {
             "name": "src-run/augustus-utility-library",
-            "version": "dev-master",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/src-run/augustus-utility-library.git",
+                "reference": "e0bceabcace200031c719ef89e1f85aea57b7472"
+            },
             "dist": {
-                "type": "path",
-                "url": "/home/rmf/repos/composer/augustus-utility-library",
-                "reference": "4133620aeeb95e00abe87a59426ccf994b01f291",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/src-run/augustus-utility-library/zipball/e0bceabcace200031c719ef89e1f85aea57b7472",
+                "reference": "e0bceabcace200031c719ef89e1f85aea57b7472",
+                "shasum": ""
             },
             "require": {
-                "php": "~5.6 || ~7.0",
+                "php": "~7.0",
                 "src-run/augustus-polyfill-library": "~0.7",
                 "src-run/augustus-silencer-library": "~0.7"
             },
@@ -331,11 +318,7 @@
                     "SR\\Util\\": "lib/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "SR\\Util\\Test\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -357,14 +340,7 @@
                 "src-run",
                 "utility"
             ],
-            "support": {
-                "email": "rmf@src.run",
-                "source": "https://src.run/augustus-utility-library/git",
-                "issues": "https://src.run/augustus-utility-library/issues"
-            },
-            "transport-options": {
-                "symlink": false
-            }
+            "time": "2016-09-26 18:30:49"
         },
         {
             "name": "symfony/intl",

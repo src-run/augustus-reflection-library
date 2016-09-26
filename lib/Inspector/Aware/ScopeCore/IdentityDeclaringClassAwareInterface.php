@@ -14,9 +14,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeCore;
 use SR\Reflection\Inspector\ClassInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 
-/**
- * Class IdentityDeclaringClassAwareInterface.
- */
 interface IdentityDeclaringClassAwareInterface
 {
     /**
@@ -29,5 +26,3 @@ interface IdentityDeclaringClassAwareInterface
      */
     public function declaringClass();
 }
-
-/* EOF */

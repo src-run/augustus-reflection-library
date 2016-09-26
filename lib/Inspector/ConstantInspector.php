@@ -17,9 +17,6 @@ use SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
 use SR\Util\Info\ClassInfo;
 
-/**
- * Constant introspection class.
- */
 class ConstantInspector extends AbstractInspector implements IdentityAwareInterface
 {
     use IdentityAwareTrait;
@@ -82,5 +79,3 @@ class ConstantInspector extends AbstractInspector implements IdentityAwareInterf
         return [];
     }
 }
-
-/* EOF */

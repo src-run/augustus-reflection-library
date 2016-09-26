@@ -11,11 +11,7 @@
 
 namespace SR\Reflection\Exception;
 
-/**
- * Runtime exception for reflection library.
- */
 class RuntimeException extends Exception
 {
 }
 
-/* EOF */

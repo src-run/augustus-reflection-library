@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class IdentityNameAwareTrait.
- */
 trait IdentityNameAwareTrait // implements IdentityNameAwareInterface
 {
     /**
@@ -41,5 +38,3 @@ trait IdentityNameAwareTrait // implements IdentityNameAwareInterface
         return $qualified ? $this->nameQualified() : $this->nameUnQualified();
     }
 }
-
-/* EOF */

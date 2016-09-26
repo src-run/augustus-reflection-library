@@ -14,9 +14,6 @@ namespace SR\Reflection\Inspector\Aware\ScopeCore;
 use SR\Reflection\Inspector\ClassInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 
-/**
- * Class IdentityDeclaringClassAwareTrait.
- */
 trait IdentityDeclaringClassAwareTrait // implements IdentityDeclaringClassAwareInterface
 {
     /**
@@ -40,5 +37,3 @@ trait IdentityDeclaringClassAwareTrait // implements IdentityDeclaringClassAware
         return $this->declaringClass;
     }
 }
-
-/* EOF */

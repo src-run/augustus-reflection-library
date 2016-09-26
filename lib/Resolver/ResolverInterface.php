@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Resolver;
 
-/**
- * Class ResolverInterface.
- */
 interface ResolverInterface
 {
     /**
@@ -77,5 +74,3 @@ interface ResolverInterface
      */
     public function bind($scope = null);
 }
-
-/* EOF */

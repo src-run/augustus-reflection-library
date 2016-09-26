@@ -14,9 +14,6 @@ namespace SR\Reflection\Definition;
 use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Exception\RuntimeException;
 
-/**
- * Class ReflectionConstant.
- */
 class ReflectionConstant implements \Reflector
 {
     /**
@@ -107,5 +104,3 @@ class ReflectionConstant implements \Reflector
         printf("Constant [ %s %s::%s ] {\n  %s\n}", gettype($valOriginal), $reflect->getName(), $name, $valFormatted);
     }
 }
-
-/* EOF */

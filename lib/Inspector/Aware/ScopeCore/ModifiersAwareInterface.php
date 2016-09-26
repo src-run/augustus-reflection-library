@@ -11,11 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class ModifiersAwareInterface.
- */
 interface ModifiersAwareInterface
 {
 }
-
-/* EOF */

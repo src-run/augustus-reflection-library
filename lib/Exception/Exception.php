@@ -13,11 +13,6 @@ namespace SR\Reflection\Exception;
 
 use SR\Exception\Exception as BaseException;
 
-/**
- * Base exception for reflection library.
- */
 class Exception extends BaseException
 {
 }
-
-/* EOF */

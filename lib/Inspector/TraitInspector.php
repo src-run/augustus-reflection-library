@@ -24,9 +24,6 @@ use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
 use SR\Util\Info\ClassInfo;
 
-/**
- * Trait introspection class.
- */
 class TraitInspector extends AbstractInspector implements IdentityAwareInterface, LocationAwareInterface, MethodAwareInterface, ModifiersAwareInterface, PropertyAwareInterface
 {
     use IdentityAwareTrait;
@@ -68,5 +65,3 @@ class TraitInspector extends AbstractInspector implements IdentityAwareInterface
         return ['\ReflectionClass'];
     }
 }
-
-/* EOF */

@@ -15,9 +15,6 @@ use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\MethodInspector;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Class aware contextual, method aware accessors trait.
- */
 trait MethodAwareTrait // implements MethodAwareInterface
 {
     /**
@@ -212,5 +209,3 @@ trait MethodAwareTrait // implements MethodAwareInterface
         return new MethodInspector($className, $methodName);
     }
 }
-
-/* EOF */

@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class VisibilityAwareTrait.
- */
 trait VisibilityAwareTrait // implements VisibilityAwareInterface
 {
     /**
@@ -67,5 +64,3 @@ trait VisibilityAwareTrait // implements VisibilityAwareInterface
         return $this->reflection()->isPublic();
     }
 }
-
-/* EOF */

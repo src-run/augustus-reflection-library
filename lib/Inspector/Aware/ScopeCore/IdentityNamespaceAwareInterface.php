@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class IdentityNamespaceAwareTrait.
- */
 interface IdentityNamespaceAwareInterface
 {
     /**
@@ -26,5 +23,3 @@ interface IdentityNamespaceAwareInterface
      */
     public function namespaceSections();
 }
-
-/* EOF */

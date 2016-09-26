@@ -17,9 +17,6 @@ use SR\Reflection\Inspector\Aware\ScopeCore\DocBlockAwareTrait;
 use SR\Reflection\Resolver\Resolver;
 use SR\Reflection\Resolver\ResolverInterface;
 
-/**
- * Abstract introspector class.
- */
 abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
 {
     use DocBlockAwareTrait;
@@ -161,5 +158,3 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
         return InvalidArgumentException::create('Invalid constructor parameters provided: %s', implode('; ', $message));
     }
 }
-
-/* EOF */

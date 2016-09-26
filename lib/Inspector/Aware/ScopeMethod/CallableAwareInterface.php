@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeMethod;
 
-/**
- * Class CallableAwareInterface.
- */
 interface CallableAwareInterface
 {
     /**
@@ -32,5 +29,3 @@ interface CallableAwareInterface
      */
     public function invokeArgs($instance, array $parameters = []);
 }
-
-/* EOF */

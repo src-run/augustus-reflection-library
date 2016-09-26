@@ -11,9 +11,6 @@
 
 namespace SR\Reflection\Inspector\Aware\ScopeCore;
 
-/**
- * Class ModifiersAwareTrait.
- */
 trait ModifiersAwareTrait // implements ModifiersAwareInterface
 {
     /**
@@ -29,5 +26,3 @@ trait ModifiersAwareTrait // implements ModifiersAwareInterface
         return $this->reflection()->getModifiers();
     }
 }
-
-/* EOF */
