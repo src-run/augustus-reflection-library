@@ -11,37 +11,40 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
+use PHPUnit\Framework\TestCase;
 use SR\Reflection\Definition\ReflectionConstant;
 
 /**
  * Class ReflectionConstantTest.
+ *
+ * @covers \SR\Reflection\Definition\ReflectionConstant
  */
-class ReflectionConstantTest extends \PHPUnit_Framework_TestCase
+class ReflectionConstantTest extends TestCase
 {
     /**
      * @var string
      */
-    const TEST_CLASS = 'SR\Reflection\Tests\Helper\FixtureClassOne';
+    const TEST_CLASS = 'SR\Reflection\Tests\Helper\FixtureClassConstants';
 
     /**
      * @var string
      */
-    const TEST_NAME_1 = 'ONE_0';
+    const TEST_NAME_1 = 'CONSTANT_STRING';
 
     /**
      * @var string
      */
-    const TEST_NAME_2 = 'ONE_1';
+    const TEST_NAME_2 = 'CONSTANT_INT';
 
     /**
      * @var string
      */
-    const TEST_NAME_3 = 'ONE_2';
+    const TEST_NAME_3 = 'CONSTANT_NULL';
 
     /**
      * @var string
      */
-    const TEST_NAME_4 = 'NULL_CONST';
+    const TEST_NAME_4 = 'CONSTANT_ARRAY';
 
     /**
      * @var string[]

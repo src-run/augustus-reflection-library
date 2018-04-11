@@ -96,8 +96,8 @@ class ReflectionConstant implements \Reflector
             foreach ($valOriginal as $key => $value) {
                 $valFormatted .= '['.$key.'] => '.($value ?: 'NULL').', ';
             }
-            $valFormatted = substr($valFormatted, 0, strlen($valFormatted) - 2);
-        } elseif (is_null($valOriginal)) {
+            $valFormatted = mb_substr($valFormatted, 0, mb_strlen($valFormatted) - 2);
+        } elseif (null === $valOriginal) {
             $valFormatted = 'NULL';
         }
 

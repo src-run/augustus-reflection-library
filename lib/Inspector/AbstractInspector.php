@@ -43,6 +43,14 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
     }
 
     /**
+     * @return string
+     */
+    final public function __toString()
+    {
+        return $this->nameQualified();
+    }
+
+    /**
      * @return \ReflectionMethod|\ReflectionProperty|\ReflectionClass|\ReflectionObject|\Reflector
      */
     final public function reflection()
@@ -62,14 +70,6 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
      * @return string
      */
     abstract public function nameQualified();
-
-    /**
-     * @return string
-     */
-    final public function __toString()
-    {
-        return $this->nameQualified();
-    }
 
     /**
      * @param null|ResolverInterface $resolver
@@ -127,7 +127,7 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
             return !$reflection instanceof $type;
         });
 
-        if (count($failedChecks) !== 0) {
+        if (0 !== count($failedChecks)) {
             throw InvalidArgumentException::create('Failed required instanceof checks against: %s', implode(', ', $failedChecks));
         }
 

@@ -16,6 +16,32 @@ use SR\Reflection\Tests\Helper\AbstractTestHelper;
 
 /**
  * Class ObjectIntrospectionTest.
+ *
+ * @covers \SR\Reflection\Inspector\AbstractInspector
+ * @covers \SR\Reflection\Inspector\ObjectInspector
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\InterfaceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\MethodAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\DocBlockAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityDeclaringClassAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityInheritanceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityNameAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\CallableAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareTrait
+ * @covers \SR\Reflection\Resolver\Resolver
  */
 class ObjectIntrospectionTest extends AbstractTestHelper
 {
@@ -28,25 +54,6 @@ class ObjectIntrospectionTest extends AbstractTestHelper
      * @var ObjectInspector
      */
     protected static $instance = null;
-
-    /**
-     * @return ObjectInspector[]
-     */
-    protected function getFixtureInstances($one = null, $two = null, $three = null)
-    {
-        $testClass = $this->getClassNameQualified();
-        $_ = $this->getFixtureClassNamesAbsolute();
-
-        array_walk($_, function (&$className) {
-            $className = new $className();
-        });
-
-        return [
-            new $testClass($one ?: $_[0]),
-            new $testClass($two ?: $_[1]),
-            new $testClass($three ?: $_[2]),
-        ];
-    }
 
     public function testInvalidConstructorArguments()
     {
@@ -84,8 +91,8 @@ class ObjectIntrospectionTest extends AbstractTestHelper
             $this->assertSame($files[$i], $result->getFilename());
             $this->assertRegExp('{[0-9]+}', (string) $_->lineStart());
             $this->assertRegExp('{[0-9]+}', (string) $_->lineEnd());
-            $this->assertTrue(gettype($_->lineStart()) === 'integer');
-            $this->assertTrue(gettype($_->lineEnd()) === 'integer');
+            $this->assertTrue('integer' === gettype($_->lineStart()));
+            $this->assertTrue('integer' === gettype($_->lineEnd()));
         }
     }
 
@@ -93,7 +100,7 @@ class ObjectIntrospectionTest extends AbstractTestHelper
     {
         foreach ($this->getFixtureInstances() as $i => $_) {
             $result = $_->modifiers();
-            $this->assertTrue(gettype($result) === 'integer');
+            $this->assertTrue('integer' === gettype($result));
             $this->assertFalse($_->isAbstract());
             $this->assertFalse($_->isTrait());
             $this->assertFalse($_->isIterateable());
@@ -108,6 +115,25 @@ class ObjectIntrospectionTest extends AbstractTestHelper
             $this->assertTrue($_->isInstance($class));
             $this->assertFalse($_->isInterface());
         }
+    }
+
+    /**
+     * @return ObjectInspector[]
+     */
+    protected function getFixtureInstances($one = null, $two = null, $three = null)
+    {
+        $testClass = $this->getClassNameQualified();
+        $_ = $this->getFixtureClassNamesAbsolute();
+
+        array_walk($_, function (&$className) {
+            $className = new $className();
+        });
+
+        return [
+            new $testClass($one ?: $_[0]),
+            new $testClass($two ?: $_[1]),
+            new $testClass($three ?: $_[2]),
+        ];
     }
 }
 

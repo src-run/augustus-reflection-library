@@ -11,6 +11,7 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
+use PHPUnit\Framework\TestCase;
 use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\MethodInspector;
 use SR\Reflection\Inspector\TraitInspector;
@@ -19,8 +20,35 @@ use SR\Reflection\Tests\Helper\FixtureTraitThree;
 
 /**
  * Class TraitIntrospectionTest.
+ *
+ * @covers \SR\Reflection\Inspector\AbstractInspector
+ * @covers \SR\Reflection\Inspector\TraitInspector
+ * @covers \SR\Reflection\Inspector\MethodInspector
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\InterfaceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\MethodAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\DocBlockAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityDeclaringClassAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityInheritanceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityNameAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\CallableAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareTrait
+ * @covers \SR\Reflection\Resolver\Resolver
  */
-class TraitIntrospectionTest extends \PHPUnit_Framework_TestCase
+class TraitIntrospectionTest extends TestCase
 {
     /**
      * @var string
@@ -49,7 +77,7 @@ class TraitIntrospectionTest extends \PHPUnit_Framework_TestCase
     public function testModifiers()
     {
         $_ = new TraitInspector(self::TEST_TRAIT);
-        $this->assertTrue(gettype($_->modifiers()) === 'integer');
+        $this->assertTrue('integer' === gettype($_->modifiers()));
         if (PHP_VERSION_ID < 70000) {
             $this->assertTrue($_->isAbstract());
         } else {

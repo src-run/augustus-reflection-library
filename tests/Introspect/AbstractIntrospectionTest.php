@@ -11,14 +11,17 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
+use PHPUnit\Framework\TestCase;
 use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\AbstractInspector;
 use SR\Reflection\Tests\Helper\ReflectionFixture;
 
 /**
  * Class AbstractIntrospectionTest.
+ *
+ * @covers \SR\Reflection\Inspector\AbstractInspector
  */
-class AbstractIntrospectionTest extends \PHPUnit_Framework_TestCase
+class AbstractIntrospectionTest extends TestCase
 {
     public function testInvalidReflectorInConstruct()
     {

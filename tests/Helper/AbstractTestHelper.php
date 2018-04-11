@@ -11,13 +11,14 @@
 
 namespace SR\Reflection\Tests\Helper;
 
+use PHPUnit\Framework\TestCase;
 use SR\Reflection\Inspector\ClassInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 
 /**
  * Class AbstractTestHelper.
  */
-abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestHelper extends TestCase
 {
     /**
      * @var string|null
@@ -41,15 +42,15 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
      */
     protected function getClassNameQualified($className = null)
     {
-        if (static::TEST_CLASS === null) {
+        if (null === static::TEST_CLASS) {
             $this->fail(sprintf('%s::TEST_CLASS must be set to the testing class name.', static::TEST_NAMESPACE));
         }
 
-        if ($className === null) {
+        if (null === $className) {
             $className = static::TEST_CLASS;
         }
 
-        if (strpos($className, self::TEST_NAMESPACE) !== false) {
+        if (false !== mb_strpos($className, self::TEST_NAMESPACE)) {
             return $className;
         }
 
@@ -83,7 +84,7 @@ abstract class AbstractTestHelper extends \PHPUnit_Framework_TestCase
     protected function getFixtureInstances($one = null, $two = null, $three = null)
     {
         $_ = $this->getClassNameQualified();
-        list($_1, $_2, $_3) = $this->getFixtureClassNamesAbsolute();
+        [$_1, $_2, $_3] = $this->getFixtureClassNamesAbsolute();
 
         return [
             new $_($one ?: $_1),

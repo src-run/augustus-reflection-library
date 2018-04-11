@@ -63,8 +63,8 @@ trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterf
      */
     public function usesTrait($trait)
     {
-        return in_array(static::normalizeNamespace($this->namespaceName().'\\'.$trait), $this->reflection()->getTraitNames()) ||
-            in_array(static::normalizeNamespace($trait), $this->reflection()->getTraitNames());
+        return in_array(static::normalizeNamespace($this->namespaceName().'\\'.$trait), $this->reflection()->getTraitNames(), true) ||
+            in_array(static::normalizeNamespace($trait), $this->reflection()->getTraitNames(), true);
     }
 
     /**
@@ -76,8 +76,8 @@ trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterf
     {
         $namespace = str_replace('\\\\', '\\', $namespace);
 
-        if (substr($namespace, 0, 1) === '\\') {
-            return substr($namespace, 1);
+        if ('\\' === mb_substr($namespace, 0, 1)) {
+            return mb_substr($namespace, 1);
         }
 
         return $namespace;

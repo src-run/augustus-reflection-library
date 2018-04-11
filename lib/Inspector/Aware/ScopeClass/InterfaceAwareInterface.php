@@ -31,7 +31,7 @@ interface InterfaceAwareInterface
 
     /**
      * @param \Closure $sort
-     * @param mixed ...$extra
+     * @param mixed    ...$extra
      *
      * @return InterfaceInspector[]
      */
@@ -39,7 +39,7 @@ interface InterfaceAwareInterface
 
     /**
      * @param \Closure $visit
-     * @param mixed ...$extra
+     * @param mixed    ...$extra
      *
      * @return InterfaceInspector[]|mixed
      */
@@ -47,7 +47,7 @@ interface InterfaceAwareInterface
 
     /**
      * @param \Closure $predicate
-     * @param mixed ...$extra
+     * @param mixed    ...$extra
      *
      * @return InterfaceInspector[]
      */
@@ -55,7 +55,7 @@ interface InterfaceAwareInterface
 
     /**
      * @param \Closure $predicate
-     * @param mixed ...$extra
+     * @param mixed    ...$extra
      *
      * @return InterfaceInspector|null
      */

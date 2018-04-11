@@ -74,7 +74,7 @@ interface ConstantAwareInterface
 
     /**
      * @param \Closure $predicate
-     * @param mixed      ...$extra
+     * @param mixed    ...$extra
      *
      * @return null|ConstantInspector
      */

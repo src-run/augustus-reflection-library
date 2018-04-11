@@ -97,7 +97,7 @@ class Resolver implements ResolverInterface
     {
         $_ = function (\Reflector $r) use ($match, $method) {
             return is_callable([$r, $method]) ?
-                false !== strpos(call_user_func([$r, $method]), $match) : false;
+                false !== mb_strpos(call_user_func([$r, $method]), $match) : false;
         };
 
         $items = $this->filter($items, $_);
@@ -166,7 +166,7 @@ class Resolver implements ResolverInterface
      */
     protected function normalizeResultSet($items, $normalize = true)
     {
-        if ($normalize === true) {
+        if (true === $normalize) {
             $items = array_filter($items, function ($item) {
                 return $item instanceof \Reflector;
             });
@@ -183,7 +183,7 @@ class Resolver implements ResolverInterface
      */
     protected function normalizeResultSingle($items, $normalize = true)
     {
-        if (count($items = $this->normalizeResultSet($items, $normalize)) === 1) {
+        if (1 === count($items = $this->normalizeResultSet($items, $normalize))) {
             return array_shift($items);
         }
 

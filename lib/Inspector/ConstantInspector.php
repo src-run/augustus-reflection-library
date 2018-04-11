@@ -15,7 +15,7 @@ use SR\Reflection\Definition\ReflectionConstant;
 use SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Util\Info\ClassInfo;
+use SR\Utilities\ClassQuery;
 
 class ConstantInspector extends AbstractInspector implements IdentityAwareInterface
 {
@@ -32,9 +32,9 @@ class ConstantInspector extends AbstractInspector implements IdentityAwareInterf
         try {
             parent::__construct(new ReflectionConstant($class, $constant), $bindTo, $resolver);
 
-            if (ClassInfo::isInterface($class)) {
+            if (ClassQuery::isInterface($class)) {
                 $this->declaringClass = new InterfaceInspector($class);
-            } elseif (ClassInfo::isClass($class)) {
+            } elseif (ClassQuery::isClass($class)) {
                 $this->declaringClass = new ClassInspector($class);
             }
         } catch (\Exception $exception) {

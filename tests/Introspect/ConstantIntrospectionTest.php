@@ -11,12 +11,40 @@
 
 namespace SR\Reflection\Tests\Introspect;
 
+use PHPUnit\Framework\TestCase;
 use SR\Reflection\Inspector\ConstantInspector;
+use SR\Reflection\Tests\Helper\FixtureInterface;
 
 /**
  * Class ConstantIntrospectionTest.
+ *
+ * @covers \SR\Reflection\Inspector\AbstractInspector
+ * @covers \SR\Reflection\Inspector\ConstantInspector
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\InterfaceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\MethodAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeConstant\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\DocBlockAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityDeclaringClassAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityInheritanceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityNameAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\CallableAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\IdentityAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\ModifiersAwareTrait
+ * @covers \SR\Reflection\Inspector\Aware\ScopeProperty\ValueAwareTrait
+ * @covers \SR\Reflection\Resolver\Resolver
  */
-class ConstantIntrospectionTest extends \PHPUnit_Framework_TestCase
+class ConstantIntrospectionTest extends TestCase
 {
     /**
      * @var string
@@ -77,6 +105,26 @@ class ConstantIntrospectionTest extends \PHPUnit_Framework_TestCase
             $this->assertSame(self::TEST_CLASS, $inspect->declaringClass()->nameQualified());
             $this->assertInstanceOf('\ReflectionClass', $inspect->reflectionDeclaringClass());
         }
+    }
+
+    public function testValue()
+    {
+        foreach (self::TEST_NAMES as $constant) {
+            $inspect = new ConstantInspector(self::TEST_CLASS, $constant);
+            $this->assertSame(constant(self::TEST_CLASS.'::'.$constant), $inspect->value());
+
+            if (false !== strpos($constant, 'NULL')) {
+                $this->assertTrue($inspect->isNull());
+            } else {
+                $this->assertFalse($inspect->isNull());
+            }
+        }
+    }
+
+    public function testInterfaceConstant()
+    {
+        $inspect = new ConstantInspector(FixtureInterface::class, 'CONSTANT');
+        $this->assertSame('interfaceConstant', $inspect->value());
     }
 }
 

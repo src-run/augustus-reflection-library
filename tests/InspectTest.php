@@ -25,10 +25,13 @@ use SR\Reflection\Tests\Helper\AbstractTestHelper;
 use SR\Reflection\Tests\Helper\FixtureClassOne;
 use SR\Reflection\Tests\Helper\FixtureTrait;
 use SR\Reflection\Tests\Helper\FixtureTraitTwo;
-use SR\Util\Info\StringInfo;
+use SR\Utilities\StringQuery;
 
 /**
  * Class InspectTest.
+ *
+ * @covers \SR\Reflection\Inspect
+ * @covers \SR\Reflection\Resolver\Resolver
  */
 class InspectTest extends AbstractTestHelper
 {
@@ -52,9 +55,9 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnClassName()
     {
         $qualified = self::TEST_FIXTURE_CLASS;
-        $lastSlashPosition = StringInfo::searchPositionFromRight($qualified, '\\');
-        $name = substr($qualified, $lastSlashPosition + 1);
-        $namespace = substr($qualified, 0, $lastSlashPosition);
+        $lastSlashPosition = StringQuery::searchPositionFromRight($qualified, '\\');
+        $name = mb_substr($qualified, $lastSlashPosition + 1);
+        $namespace = mb_substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
 
         $r = Inspect::useClass($qualified);
@@ -83,9 +86,9 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnInterfaceName()
     {
         $qualified = self::TEST_FIXTURE_INTERFACE;
-        $lastSlashPosition = StringInfo::searchPositionFromRight($qualified, '\\');
-        $name = substr($qualified, $lastSlashPosition + 1);
-        $namespace = substr($qualified, 0, $lastSlashPosition);
+        $lastSlashPosition = StringQuery::searchPositionFromRight($qualified, '\\');
+        $name = mb_substr($qualified, $lastSlashPosition + 1);
+        $namespace = mb_substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
 
         $r = Inspect::useInterface($qualified);
@@ -132,9 +135,9 @@ class InspectTest extends AbstractTestHelper
     public function testReflectionOnTraitName()
     {
         $qualified = self::TEST_FIXTURE_TRAIT;
-        $lastSlashPosition = StringInfo::searchPositionFromRight($qualified, '\\');
-        $name = substr($qualified, $lastSlashPosition + 1);
-        $namespace = substr($qualified, 0, $lastSlashPosition);
+        $lastSlashPosition = StringQuery::searchPositionFromRight($qualified, '\\');
+        $name = mb_substr($qualified, $lastSlashPosition + 1);
+        $namespace = mb_substr($qualified, 0, $lastSlashPosition);
         $namespaceSections = explode('\\', $namespace);
 
         $r = Inspect::useTrait($qualified);
@@ -181,8 +184,8 @@ class InspectTest extends AbstractTestHelper
         $this->assertGreaterThan(3, $result);
 
         foreach ($result as $r) {
-            $this->assertNotFalse(strpos($r, 'propProtectedOne0') !== false);
-            $this->assertNotFalse(strpos($r, 'ONE_') !== false || strpos($r, 'NULL_') !== false);
+            $this->assertNotFalse(false !== mb_strpos($r, 'propProtectedOne0'));
+            $this->assertNotFalse(false !== mb_strpos($r, 'ONE_') || false !== mb_strpos($r, 'NULL_'));
         }
     }
 }

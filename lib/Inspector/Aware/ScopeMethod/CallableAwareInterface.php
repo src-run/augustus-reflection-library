@@ -15,7 +15,7 @@ interface CallableAwareInterface
 {
     /**
      * @param object $instance
-     * @param mixed ...$parameters
+     * @param mixed  ...$parameters
      *
      * @return mixed
      */

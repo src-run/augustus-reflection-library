@@ -16,7 +16,7 @@ use SR\Reflection\Inspector\ClassInspector;
 use SR\Reflection\Inspector\InterfaceInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 use SR\Reflection\Inspector\TraitInspector;
-use SR\Util\Info\ClassInfo;
+use SR\Utilities\ClassQuery;
 
 class Inspect implements InspectInterface
 {
@@ -32,19 +32,19 @@ class Inspect implements InspectInterface
      */
     public static function using($what, $bind = null)
     {
-        if (ClassInfo::isInstance($what)) {
+        if (ClassQuery::isInstance($what)) {
             return self::useInstance($what, $bind);
         }
 
-        if (ClassInfo::isClass($what)) {
+        if (ClassQuery::isClass($what)) {
             return self::useClass($what, $bind);
         }
 
-        if (ClassInfo::isInterface($what)) {
+        if (ClassQuery::isInterface($what)) {
             return self::useInterface($what, $bind);
         }
 
-        if (ClassInfo::isTrait($what)) {
+        if (ClassQuery::isTrait($what)) {
             return self::useTrait($what);
         }
 
