@@ -113,7 +113,7 @@ class ConstantIntrospectionTest extends TestCase
             $inspect = new ConstantInspector(self::TEST_CLASS, $constant);
             $this->assertSame(constant(self::TEST_CLASS.'::'.$constant), $inspect->value());
 
-            if (false !== strpos($constant, 'NULL')) {
+            if (false !== mb_strpos($constant, 'NULL')) {
                 $this->assertTrue($inspect->isNull());
             } else {
                 $this->assertFalse($inspect->isNull());

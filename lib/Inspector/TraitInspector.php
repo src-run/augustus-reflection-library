@@ -11,6 +11,8 @@
 
 namespace SR\Reflection\Inspector;
 
+use SR\Exception\ExceptionInterface;
+use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeClass\MethodAwareInterface;
@@ -22,7 +24,7 @@ use SR\Reflection\Inspector\Aware\ScopeClass\PropertyAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Utilities\ClassQuery;
+use SR\Utilities\Query\ClassQuery;
 
 class TraitInspector extends AbstractInspector implements IdentityAwareInterface, LocationAwareInterface, MethodAwareInterface, ModifiersAwareInterface, PropertyAwareInterface
 {
@@ -36,6 +38,8 @@ class TraitInspector extends AbstractInspector implements IdentityAwareInterface
      * @param string                 $name
      * @param null|object            $bind
      * @param null|ResolverInterface $resolver
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct($name, $bind = null, ResolverInterface $resolver = null)
     {
@@ -49,6 +53,8 @@ class TraitInspector extends AbstractInspector implements IdentityAwareInterface
 
     /**
      * @param string $trait
+     *
+     * @throws ExceptionInterface
      *
      * @return string
      */

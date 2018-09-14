@@ -11,12 +11,14 @@
 
 namespace SR\Reflection;
 
+use SR\Exception\ExceptionInterface;
+use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Exception\RuntimeException;
 use SR\Reflection\Inspector\ClassInspector;
 use SR\Reflection\Inspector\InterfaceInspector;
 use SR\Reflection\Inspector\ObjectInspector;
 use SR\Reflection\Inspector\TraitInspector;
-use SR\Utilities\ClassQuery;
+use SR\Utilities\Query\ClassQuery;
 
 class Inspect implements InspectInterface
 {
@@ -26,7 +28,7 @@ class Inspect implements InspectInterface
      * @param object|string $what A class name, object instance, interface name, or trait name
      * @param object|null   $bind Alternate $this binding for internal resolver instance
      *
-     * @throws RuntimeException If passed value is not an instance, class, interface or trait
+     * @throws ExceptionInterface If passed value is not an instance, class, interface or trait
      *
      * @return ClassInspector|ObjectInspector|InterfaceInspector|TraitInspector
      */
@@ -57,6 +59,8 @@ class Inspect implements InspectInterface
      * @param object|string $what A class name, object instance, interface name, or trait name
      * @param object|null   $bind Alternate $this binding for internal resolver instance
      *
+     * @throws InvalidArgumentException
+     *
      * @return ClassInspector
      */
     public static function useClass($what, $bind = null)
@@ -69,6 +73,8 @@ class Inspect implements InspectInterface
      *
      * @param object|string $what A class name, object instance, interface name, or trait name
      * @param object|null   $bind Alternate $this binding for internal resolver instance
+     *
+     * @throws InvalidArgumentException
      *
      * @return ObjectInspector
      */
@@ -83,6 +89,8 @@ class Inspect implements InspectInterface
      * @param object|string $what A class name, object instance, interface name, or trait name
      * @param object|null   $bind Alternate $this binding for internal resolver instance
      *
+     * @throws InvalidArgumentException
+     *
      * @return InterfaceInspector
      */
     public static function useInterface($what, $bind = null)
@@ -95,6 +103,8 @@ class Inspect implements InspectInterface
      *
      * @param object|string $what A class name, object instance, interface name, or trait name
      * @param object|null   $bind Alternate $this binding for internal resolver instance
+     *
+     * @throws InvalidArgumentException
      *
      * @return TraitInspector
      */

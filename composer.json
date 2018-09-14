@@ -20,8 +20,8 @@
   ],
   "require": {
     "php": "~7.1",
-    "src-run/augustus-exception-library": "~0.8",
-    "src-run/augustus-utility-library": "~0.8"
+    "src-run/augustus-exception-library": "^0.9.0",
+    "src-run/augustus-utility-library": "^0.9.0"
   },
   "require-dev": {
     "codacy/coverage": "~1.0",
@@ -47,7 +47,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.7-dev"
+      "dev-master": "0.9-dev"
     }
   }
 }

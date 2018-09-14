@@ -11,10 +11,7 @@
 
 namespace SR\Reflection\Tests\Helper;
 
-/**
- * Class FixtureClassConstants.
- */
-class FixtureClassConstants
+class FixtureClassArrayConstants
 {
     /**
      * @var string

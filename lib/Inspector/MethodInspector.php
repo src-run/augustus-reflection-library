@@ -11,6 +11,7 @@
 
 namespace SR\Reflection\Inspector;
 
+use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeCore\LocationAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeCore\VisibilityAwareInterface;
@@ -22,7 +23,7 @@ use SR\Reflection\Inspector\Aware\ScopeMethod\IdentityAwareTrait;
 use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeMethod\ModifiersAwareTrait;
 use SR\Reflection\Resolver\ResolverInterface;
-use SR\Utilities\ClassQuery;
+use SR\Utilities\Query\ClassQuery;
 
 class MethodInspector extends AbstractInspector implements CallableAwareInterface, IdentityAwareInterface, LocationAwareInterface, ModifiersAwareInterface, VisibilityAwareInterface
 {
@@ -37,6 +38,8 @@ class MethodInspector extends AbstractInspector implements CallableAwareInterfac
      * @param string                 $method
      * @param null|object            $bindTo
      * @param null|ResolverInterface $resolver
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct($class, $method, $bindTo = null, ResolverInterface $resolver = null)
     {

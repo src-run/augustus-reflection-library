@@ -25,7 +25,7 @@ use SR\Reflection\Tests\Helper\AbstractTestHelper;
 use SR\Reflection\Tests\Helper\FixtureClassOne;
 use SR\Reflection\Tests\Helper\FixtureTrait;
 use SR\Reflection\Tests\Helper\FixtureTraitTwo;
-use SR\Utilities\StringQuery;
+use SR\Utilities\Query\StringQuery;
 
 /**
  * Class InspectTest.
