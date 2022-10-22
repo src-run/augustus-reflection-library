@@ -30,9 +30,11 @@ class AbstractIntrospectionTest extends TestCase
         $mock = $this->getMockBuilder(AbstractInspector::class)
             ->disableOriginalConstructor()
             ->setMethods(['getReflectionRequirements'])
-            ->getMockForAbstractClass();
+            ->getMockForAbstractClass()
+        ;
         $mock->method('getReflectionRequirements')
-            ->willReturn(['\InvalidReflectorClassName']);
+            ->willReturn(['\InvalidReflectorClassName'])
+        ;
 
         $r = new \ReflectionClass(AbstractInspector::class);
         $m = $r->getMethod('setReflection');

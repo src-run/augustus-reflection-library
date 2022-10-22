@@ -24,32 +24,32 @@ class ReflectionConstantTest extends TestCase
     /**
      * @var string
      */
-    const TEST_CLASS = 'SR\Reflection\Tests\Helper\FixtureClassConstants';
+    public const TEST_CLASS = 'SR\Reflection\Tests\Helper\FixtureClassConstants';
 
     /**
      * @var string
      */
-    const TEST_NAME_1 = 'CONSTANT_STRING';
+    public const TEST_NAME_1 = 'CONSTANT_STRING';
 
     /**
      * @var string
      */
-    const TEST_NAME_2 = 'CONSTANT_INT';
+    public const TEST_NAME_2 = 'CONSTANT_INT';
 
     /**
      * @var string
      */
-    const TEST_NAME_3 = 'CONSTANT_NULL';
+    public const TEST_NAME_3 = 'CONSTANT_NULL';
 
     /**
      * @var string
      */
-    const TEST_NAME_4 = 'CONSTANT_ARRAY';
+    public const TEST_NAME_4 = 'CONSTANT_ARRAY';
 
     /**
      * @var string[]
      */
-    const TEST_NAMES = [
+    public const TEST_NAMES = [
         self::TEST_NAME_1,
         self::TEST_NAME_2,
         self::TEST_NAME_3,
@@ -69,7 +69,7 @@ class ReflectionConstantTest extends TestCase
             ReflectionConstant::export(self::TEST_CLASS, $constant);
             $export = ob_get_contents();
             ob_end_clean();
-            $this->assertRegExp('{Constant \[ (string|NULL|integer|array) [A-Za-z0-9_:\\\\]+ \] \{'."\n".'  [^'."\n".']+'."\n".'\}}', $export);
+            $this->assertMatchesRegularExpression('{Constant \[ (string|NULL|integer|array) [A-Za-z0-9_:\\\\]+ \] \{' . "\n" . '  [^' . "\n" . ']+' . "\n" . '\}}', $export);
         }
 
         $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
@@ -96,7 +96,7 @@ class ReflectionConstantTest extends TestCase
     {
         foreach (self::TEST_NAMES as $constant) {
             $reflectionConstant = new ReflectionConstant(self::TEST_CLASS, $constant);
-            $this->assertSame(constant(self::TEST_CLASS.'::'.$constant), $reflectionConstant->getValue());
+            $this->assertSame(constant(self::TEST_CLASS . '::' . $constant), $reflectionConstant->getValue());
         }
     }
 }

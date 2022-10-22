@@ -32,7 +32,7 @@ class ReflectionConstant implements \Reflector
      */
     public function __construct($declaringContext, $constantName)
     {
-        $constant = $declaringContext.'::'.$constantName;
+        $constant = $declaringContext . '::' . $constantName;
 
         if (!defined($constant)) {
             throw InvalidArgumentException::create('Constant "%s" does not exist', $constant);
@@ -63,7 +63,7 @@ class ReflectionConstant implements \Reflector
      */
     public function getValue()
     {
-        return constant($this->declaringContext.'::'.$this->name);
+        return constant($this->declaringContext . '::' . $this->name);
     }
 
     /**
@@ -81,7 +81,7 @@ class ReflectionConstant implements \Reflector
      */
     public static function export($class, $name)
     {
-        $constant = $class.'::'.$name;
+        $constant = $class . '::' . $name;
 
         if (!defined($constant)) {
             throw InvalidArgumentException::create('Constant "%s" does not exist', $constant);
@@ -94,7 +94,7 @@ class ReflectionConstant implements \Reflector
         if (is_array($valOriginal)) {
             $valFormatted = '';
             foreach ($valOriginal as $key => $value) {
-                $valFormatted .= '['.$key.'] => '.($value ?: 'NULL').', ';
+                $valFormatted .= '[' . $key . '] => ' . ($value ?: 'NULL') . ', ';
             }
             $valFormatted = mb_substr($valFormatted, 0, mb_strlen($valFormatted) - 2);
         } elseif (null === $valOriginal) {

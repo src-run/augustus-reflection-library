@@ -30,32 +30,28 @@ interface InterfaceAwareInterface
     public function interfaces();
 
     /**
-     * @param \Closure $sort
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector[]
      */
     public function sortInterfaces(\Closure $sort, &...$extra);
 
     /**
-     * @param \Closure $visit
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector[]|mixed
      */
     public function visitInterfaces(\Closure $visit, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector[]
      */
     public function filterInterfaces(\Closure $predicate, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector|null
      */
@@ -73,7 +69,7 @@ interface InterfaceAwareInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return null|InterfaceInspector
+     * @return InterfaceInspector|null
      */
     public function matchOneInterface($match, $func = '__toString');
 }

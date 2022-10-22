@@ -49,34 +49,30 @@ interface ConstantAwareInterface
     public function constants();
 
     /**
-     * @param \Closure $sort
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return ConstantInspector[]
      */
     public function sortConstants(\Closure $sort, &...$extra);
 
     /**
-     * @param \Closure $visit
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return ConstantInspector[]|mixed[]
      */
     public function visitConstants(\Closure $visit, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return ConstantInspector[]
      */
     public function filterConstants(\Closure $predicate, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
-     * @return null|ConstantInspector
+     * @return ConstantInspector|null
      */
     public function filterOneConstant(\Closure $predicate, &...$extra);
 
@@ -92,7 +88,7 @@ interface ConstantAwareInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return null|ConstantInspector
+     * @return ConstantInspector|null
      */
     public function matchOneConstant($match, $func = '__toString');
 }

@@ -21,19 +21,12 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
 {
     use DocBlockAwareTrait;
 
-    /**
-     * @var null|\ReflectionClass|\ReflectionObject|\Reflector
-     */
-    protected $reflection;
+    protected null|\ReflectionClass|\ReflectionObject|\Reflector $reflection;
+
+    protected ResolverInterface $resolver;
 
     /**
-     * @var ResolverInterface
-     */
-    protected $resolver;
-
-    /**
-     * @param \Reflector  $reflection
-     * @param null|object $bind
+     * @param object|null $bind
      * @param Resolver    $resolver
      */
     public function __construct(\Reflector $reflection, $bind = null, Resolver $resolver = null)
@@ -72,8 +65,7 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
     abstract public function nameQualified();
 
     /**
-     * @param null|ResolverInterface $resolver
-     * @param null|object            $bind
+     * @param object|null $bind
      *
      * @return $this
      */
@@ -91,34 +83,6 @@ abstract class AbstractInspector implements \Reflector, DocBlockAwareInterface
     abstract protected function getReflectionRequirements();
 
     /**
-     * @param string $class
-     * @param mixed  ...$parameters
-     *
-     * @return string
-     */
-    final protected static function exportFor($class, ...$parameters)
-    {
-        ob_start();
-
-        try {
-            $class::export(...$parameters);
-        } catch (\ReflectionException $e) {
-            $parameters = array_map(function ($p) {
-                return var_export($p, true);
-            }, $parameters);
-
-            throw InvalidArgumentException::create('Could not export %s: ', implode('::', $parameters), $e->getMessage());
-        } finally {
-            $export = ob_get_contents();
-            ob_end_clean();
-        }
-
-        return trim($export);
-    }
-
-    /**
-     * @param \Reflector $reflection
-     *
      * @return $this
      */
     final protected function setReflection(\Reflector $reflection)

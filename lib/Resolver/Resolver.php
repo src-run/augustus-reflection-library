@@ -14,13 +14,12 @@ namespace SR\Reflection\Resolver;
 class Resolver implements ResolverInterface
 {
     /**
-     * @var null|object
+     * @var object|null
      */
     protected $scope = null;
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $sort
      * @param mixed        ...$extra
      *
      * @return \Reflector[]
@@ -38,7 +37,6 @@ class Resolver implements ResolverInterface
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $visit
      * @param mixed        ...$extra
      *
      * @return mixed[]
@@ -56,7 +54,6 @@ class Resolver implements ResolverInterface
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $predicate
      * @param mixed        ...$extra
      *
      * @return \Reflector[]
@@ -74,7 +71,6 @@ class Resolver implements ResolverInterface
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $predicate
      * @param mixed        ...$extra
      *
      * @return \Reflector
@@ -130,7 +126,7 @@ class Resolver implements ResolverInterface
     }
 
     /**
-     * @param null|object $scope
+     * @param object|null $scope
      *
      * @return $this
      */
@@ -144,8 +140,7 @@ class Resolver implements ResolverInterface
     }
 
     /**
-     * @param \Closure $invokable
-     * @param mixed    $parameters
+     * @param mixed $parameters
      *
      * @return mixed
      */

@@ -34,10 +34,9 @@ class MethodInspector extends AbstractInspector implements CallableAwareInterfac
     use VisibilityAwareTrait;
 
     /**
-     * @param string                 $class
-     * @param string                 $method
-     * @param null|object            $bindTo
-     * @param null|ResolverInterface $resolver
+     * @param string      $class
+     * @param string      $method
+     * @param object|null $bindTo
      *
      * @throws InvalidArgumentException
      */
@@ -56,17 +55,6 @@ class MethodInspector extends AbstractInspector implements CallableAwareInterfac
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class], ['method name string', $method]);
         }
-    }
-
-    /**
-     * @param string $class
-     * @param string $method
-     *
-     * @return string
-     */
-    public static function export($class, $method)
-    {
-        return self::exportFor('\ReflectionMethod', $class, $method);
     }
 
     /**

@@ -48,27 +48,27 @@ class MethodIntrospectionTest extends TestCase
     /**
      * @var string
      */
-    const TEST_CLASS = 'SR\Reflection\Tests\Helper\FixtureClassOne';
+    public const TEST_CLASS = 'SR\Reflection\Tests\Helper\FixtureClassOne';
 
     /**
      * @var string
      */
-    const TEST_NAME = 'publicOne0';
+    public const TEST_NAME = 'publicOne0';
 
     /**
      * @var string
      */
-    const TEST_NAME_PROTECTED = 'protectedOne0';
+    public const TEST_NAME_PROTECTED = 'protectedOne0';
 
     /**
      * @var string
      */
-    const TEST_NAME_PRIVATE = 'privateOne0';
+    public const TEST_NAME_PRIVATE = 'privateOne0';
 
     /**
      * @var string[]
      */
-    const TEST_NAMES = [
+    public const TEST_NAMES = [
         self::TEST_NAME,
         self::TEST_NAME_PROTECTED,
         self::TEST_NAME_PRIVATE,
@@ -80,16 +80,18 @@ class MethodIntrospectionTest extends TestCase
         new MethodInspector(self::TEST_CLASS, 'thisMethodDoesNotExist');
     }
 
+    /*
     public function testExport()
     {
         foreach (self::TEST_NAMES as $method) {
             $export = MethodInspector::export(self::TEST_CLASS, $method);
-            $this->assertRegExp('{Method \[ <user> (public|protected|private) method [a-zA-Z0-9]+ \]}', $export);
+            $this->assertMatchesRegularExpression('{Method \[ <user> (public|protected|private) method [a-zA-Z0-9]+ \]}', $export);
         }
 
         $this->expectException('SR\Reflection\Exception\InvalidArgumentException');
         MethodInspector::export(self::TEST_CLASS, 'thisMethodDoesNotExist');
     }
+    */
 
     public function testDeclaringClass()
     {
@@ -102,8 +104,8 @@ class MethodIntrospectionTest extends TestCase
     {
         foreach (self::TEST_NAMES as $method) {
             $inspect = new MethodInspector(self::TEST_CLASS, $method);
-            $this->assertSame(self::TEST_CLASS.'::'.$method, $inspect->nameQualified());
-            $this->assertSame(self::TEST_CLASS.'::'.$method, $inspect->name(true));
+            $this->assertSame(self::TEST_CLASS . '::' . $method, $inspect->nameQualified());
+            $this->assertSame(self::TEST_CLASS . '::' . $method, $inspect->name(true));
             $this->assertSame($method, $inspect->nameUnQualified());
             $this->assertSame($method, $inspect->name());
         }
@@ -116,7 +118,7 @@ class MethodIntrospectionTest extends TestCase
             $class = new $class();
             $inspect = new MethodInspector(self::TEST_CLASS, $method);
             $result = $inspect->invoke($class, 'Invoked');
-            $this->assertRegExp('{prop(Public|Protected|Private)(One|Two|Three)[0-2]Invoked}', $result);
+            $this->assertMatchesRegularExpression('{prop(Public|Protected|Private)(One|Two|Three)[0-2]Invoked}', $result);
         }
     }
 
@@ -125,8 +127,8 @@ class MethodIntrospectionTest extends TestCase
         foreach (self::TEST_NAMES as $method) {
             $inspect = new MethodInspector(self::TEST_CLASS, $method);
             $result = $inspect->docBlock();
-            $this->assertRegExp('{@param string \$param}', $result);
-            $this->assertRegExp('{@return string}', $result);
+            $this->assertMatchesRegularExpression('{@param string \$param}', $result);
+            $this->assertMatchesRegularExpression('{@return string}', $result);
         }
     }
 

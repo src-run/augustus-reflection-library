@@ -17,16 +17,16 @@ use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareTrait;
 
 trait IdentityAwareTrait // implements IdentityAwareInterface
 {
+    use IdentityDeclaringClassAwareTrait;
     use IdentityNameAwareTrait;
     use IdentityNamespaceAwareTrait;
-    use IdentityDeclaringClassAwareTrait;
 
     /**
      * @return string
      */
     public function nameQualified()
     {
-        return $this->declaringClass()->nameQualified().'::$'.$this->nameUnQualified();
+        return $this->declaringClass()->nameQualified() . '::$' . $this->nameUnQualified();
     }
 
     /**

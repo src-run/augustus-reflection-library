@@ -43,7 +43,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
         try {
             return $this->createInterfaceDefinition($name);
         } catch (InvalidArgumentException $e) {
-            return $this->createInterfaceDefinition($this->namespaceName().'\\'.$name);
+            return $this->createInterfaceDefinition($this->namespaceName() . '\\' . $name);
         }
     }
 
@@ -63,8 +63,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
     }
 
     /**
-     * @param \Closure $sort
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector[]
      */
@@ -74,8 +73,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
     }
 
     /**
-     * @param \Closure $visit
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector[]|mixed
      */
@@ -85,8 +83,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
     }
 
     /**
-     * @param \Closure $predicate
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector[]
      */
@@ -96,8 +93,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
     }
 
     /**
-     * @param \Closure $predicate
-     * @param mixed    ...$extra
+     * @param mixed ...$extra
      *
      * @return InterfaceInspector|null
      */
@@ -121,7 +117,7 @@ trait InterfaceAwareTrait // implements InterfaceAwareInterface
      * @param mixed  $match
      * @param string $func
      *
-     * @return null|InterfaceInspector
+     * @return InterfaceInspector|null
      */
     public function matchOneInterface($match, $func = '__toString')
     {

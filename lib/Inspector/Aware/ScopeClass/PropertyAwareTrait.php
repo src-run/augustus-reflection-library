@@ -54,7 +54,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     }
 
     /**
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return PropertyInspector[]
      */
@@ -95,8 +95,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     }
 
     /**
-     * @param \Closure $sort
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return PropertyInspector[]
@@ -107,8 +106,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     }
 
     /**
-     * @param \Closure $visit
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return PropertyInspector[]|mixed[]
@@ -119,8 +117,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     }
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return PropertyInspector[]
@@ -131,8 +128,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     }
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return PropertyInspector|null
@@ -145,7 +141,7 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     /**
      * @param mixed    $match
      * @param string   $func
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return PropertyInspector[]
      */
@@ -157,9 +153,9 @@ trait PropertyAwareTrait // implements PropertyAwareInterface
     /**
      * @param mixed    $match
      * @param string   $func
-     * @param null|int $mask
+     * @param int|null $mask
      *
-     * @return null|PropertyInspector
+     * @return PropertyInspector|null
      */
     public function matchOneProperty($match, $func = '__toString', $mask = null)
     {

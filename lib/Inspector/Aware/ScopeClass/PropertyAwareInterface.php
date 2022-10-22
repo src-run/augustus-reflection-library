@@ -43,7 +43,7 @@ interface PropertyAwareInterface
     public function getProperty($name);
 
     /**
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return \ReflectionProperty[]
      */
@@ -65,8 +65,7 @@ interface PropertyAwareInterface
     public function privateProperties();
 
     /**
-     * @param \Closure $sort
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]
@@ -74,8 +73,7 @@ interface PropertyAwareInterface
     public function sortProperties(\Closure $sort, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $visit
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]|mixed[]
@@ -83,8 +81,7 @@ interface PropertyAwareInterface
     public function visitProperties(\Closure $visit, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return \ReflectionProperty[]
@@ -92,8 +89,7 @@ interface PropertyAwareInterface
     public function filterProperties(\Closure $predicate, $mask = null, &...$extra);
 
     /**
-     * @param \Closure $predicate
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$extra
      *
      * @return \ReflectionProperty|null
@@ -103,7 +99,7 @@ interface PropertyAwareInterface
     /**
      * @param mixed    $match
      * @param string   $func
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return \ReflectionProperty[]
      */
@@ -112,9 +108,9 @@ interface PropertyAwareInterface
     /**
      * @param mixed    $match
      * @param string   $func
-     * @param null|int $mask
+     * @param int|null $mask
      *
-     * @return null|\ReflectionProperty
+     * @return \ReflectionProperty|null
      */
     public function matchOneProperty($match, $func = '__toString', $mask = null);
 }

@@ -23,12 +23,12 @@ abstract class AbstractTestHelper extends TestCase
     /**
      * @var string|null
      */
-    const TEST_CLASS = null;
+    public const TEST_CLASS = null;
 
     /**
      * @var string
      */
-    const TEST_NAMESPACE = 'SR\Reflection';
+    public const TEST_NAMESPACE = 'SR\Reflection';
 
     /**
      * @var null
@@ -36,7 +36,7 @@ abstract class AbstractTestHelper extends TestCase
     protected static $instance = null;
 
     /**
-     * @param null|string $className
+     * @param string|null $className
      *
      * @return string
      */
@@ -54,12 +54,10 @@ abstract class AbstractTestHelper extends TestCase
             return $className;
         }
 
-        return static::TEST_NAMESPACE.$className;
+        return static::TEST_NAMESPACE . $className;
     }
 
     /**
-     * @param array $parameters
-     *
      * @return object
      */
     protected function setUpInstance(array $parameters = [])

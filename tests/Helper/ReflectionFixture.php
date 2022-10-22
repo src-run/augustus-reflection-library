@@ -23,7 +23,7 @@ class ReflectionFixture implements \Reflector
 
     public static function export()
     {
-        return 'export:'.__CLASS__;
+        return 'export:' . __CLASS__;
     }
 }
 

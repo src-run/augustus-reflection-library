@@ -19,22 +19,22 @@ class FixtureClassConstants
     /**
      * @var string
      */
-    const CONSTANT_STRING = 'string';
+    public const CONSTANT_STRING = 'string';
 
     /**
      * @var int
      */
-    const CONSTANT_INT = 1;
+    public const CONSTANT_INT = 1;
 
     /**
      * @var null
      */
-    const CONSTANT_NULL = null;
+    public const CONSTANT_NULL = null;
 
     /**
      * @var array
      */
-    const CONSTANT_ARRAY = [
+    public const CONSTANT_ARRAY = [
         self::CONSTANT_STRING,
         self::CONSTANT_INT,
         self::CONSTANT_NULL,

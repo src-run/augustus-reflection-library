@@ -17,9 +17,9 @@ use SR\Reflection\Inspector\Aware\ScopeCore\IdentityNamespaceAwareTrait;
 
 trait IdentityAwareTrait // implements IdentityAwareInterface
 {
+    use IdentityInheritanceAwareTrait;
     use IdentityNameAwareTrait;
     use IdentityNamespaceAwareTrait;
-    use IdentityInheritanceAwareTrait;
 
     /**
      * @return string

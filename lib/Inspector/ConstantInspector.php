@@ -24,10 +24,9 @@ class ConstantInspector extends AbstractInspector implements IdentityAwareInterf
     use IdentityAwareTrait;
 
     /**
-     * @param string                 $class
-     * @param string                 $constant
-     * @param null|object            $bindTo
-     * @param null|ResolverInterface $resolver
+     * @param string      $class
+     * @param string      $constant
+     * @param object|null $bindTo
      *
      * @throws InvalidArgumentException|ExceptionInterface
      */
@@ -51,7 +50,7 @@ class ConstantInspector extends AbstractInspector implements IdentityAwareInterf
      */
     public function value()
     {
-        return constant($this->declaringClass()->nameQualified().'::'.$this->name());
+        return constant($this->declaringClass()->nameQualified() . '::' . $this->name());
     }
 
     /**
@@ -62,19 +61,6 @@ class ConstantInspector extends AbstractInspector implements IdentityAwareInterf
     public function isNull()
     {
         return null === $this->value();
-    }
-
-    /**
-     * @param string $class
-     * @param string $name
-     *
-     * @throws ExceptionInterface
-     *
-     * @return string
-     */
-    public static function export($class, $name)
-    {
-        return self::exportFor('\SR\Reflection\Definition\ReflectionConstant', $class, $name);
     }
 
     /**

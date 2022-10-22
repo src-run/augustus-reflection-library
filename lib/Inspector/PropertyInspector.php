@@ -29,10 +29,9 @@ class PropertyInspector extends AbstractInspector implements IdentityAwareInterf
     use VisibilityAwareTrait;
 
     /**
-     * @param string                 $class
-     * @param string                 $property
-     * @param null|object            $bindTo
-     * @param null|ResolverInterface $resolver
+     * @param string      $class
+     * @param string      $property
+     * @param object|null $bindTo
      */
     public function __construct($class, $property, $bindTo = null, ResolverInterface $resolver = null)
     {
@@ -42,17 +41,6 @@ class PropertyInspector extends AbstractInspector implements IdentityAwareInterf
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['class name string', $class], ['property name string', $property]);
         }
-    }
-
-    /**
-     * @param string $class
-     * @param string $property
-     *
-     * @return string
-     */
-    public static function export($class, $property)
-    {
-        return self::exportFor('\ReflectionProperty', $class, $property);
     }
 
     /**

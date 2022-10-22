@@ -11,7 +11,6 @@
 
 namespace SR\Reflection\Inspector;
 
-use SR\Exception\ExceptionInterface;
 use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeClass\ConstantAwareTrait;
@@ -35,9 +34,8 @@ class InterfaceInspector extends AbstractInspector implements ConstantAwareInter
     use ModifiersAwareTrait;
 
     /**
-     * @param string                 $interface
-     * @param null|object            $bind
-     * @param null|ResolverInterface $resolver
+     * @param string      $interface
+     * @param object|null $bind
      *
      * @throws InvalidArgumentException
      */
@@ -49,18 +47,6 @@ class InterfaceInspector extends AbstractInspector implements ConstantAwareInter
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['interface name string', $interface]);
         }
-    }
-
-    /**
-     * @param string $class
-     *
-     * @throws ExceptionInterface
-     *
-     * @return string
-     */
-    public static function export($class)
-    {
-        return self::exportFor('\ReflectionClass', $class);
     }
 
     /**

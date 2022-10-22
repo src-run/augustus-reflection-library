@@ -48,7 +48,7 @@ class ObjectIntrospectionTest extends AbstractTestHelper
     /**
      * @var string
      */
-    const TEST_CLASS = ObjectInspector::class;
+    public const TEST_CLASS = ObjectInspector::class;
 
     /**
      * @var ObjectInspector
@@ -61,20 +61,22 @@ class ObjectIntrospectionTest extends AbstractTestHelper
         $this->getFixtureInstances('/AN/INVALID/NAME/SPACE/I/REALLY/HOPE');
     }
 
+    /*
     public function testExport()
     {
         foreach ($this->getFixtureInstances() as $i => $_) {
             $export = $_::export($_);
-            $this->assertRegExp('{Object of class \[ }', $export);
-            $this->assertRegExp('{- Constants \[[0-9]+\] \{}', $export);
+            $this->assertMatchesRegularExpression('{Object of class \[ }', $export);
+            $this->assertMatchesRegularExpression('{- Constants \[[0-9]+\] \{}', $export);
         }
     }
+    */
 
     public function testDocBlock()
     {
         foreach ($this->getFixtureInstances() as $i => $_) {
             $result = $_->docBlock();
-            $this->assertRegExp('{Class FixtureClass(One|Two|Three).}', $result);
+            $this->assertMatchesRegularExpression('{Class FixtureClass(One|Two|Three).}', $result);
         }
     }
 
@@ -89,8 +91,8 @@ class ObjectIntrospectionTest extends AbstractTestHelper
         foreach ($this->getFixtureInstances() as $i => $_) {
             $result = $_->file();
             $this->assertSame($files[$i], $result->getFilename());
-            $this->assertRegExp('{[0-9]+}', (string) $_->lineStart());
-            $this->assertRegExp('{[0-9]+}', (string) $_->lineEnd());
+            $this->assertMatchesRegularExpression('{[0-9]+}', (string) $_->lineStart());
+            $this->assertMatchesRegularExpression('{[0-9]+}', (string) $_->lineEnd());
             $this->assertTrue('integer' === gettype($_->lineStart()));
             $this->assertTrue('integer' === gettype($_->lineEnd()));
         }

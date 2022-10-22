@@ -15,7 +15,6 @@ interface ResolverInterface
 {
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $sort
      * @param mixed        ...$extra
      *
      * @return \Reflector[]
@@ -24,7 +23,6 @@ interface ResolverInterface
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $visit
      * @param mixed        ....$extra
      *
      * @return mixed[]
@@ -33,7 +31,6 @@ interface ResolverInterface
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $predicate
      * @param mixed        ...$extra
      *
      * @return \Reflector[]
@@ -42,7 +39,6 @@ interface ResolverInterface
 
     /**
      * @param \Reflector[] $items
-     * @param \Closure     $predicate
      * @param mixed        ...$extra
      *
      * @return \Reflector
@@ -68,7 +64,7 @@ interface ResolverInterface
     public function matchOne(array $items, $match, $method = '__toString');
 
     /**
-     * @param null|object $scope
+     * @param object|null $scope
      *
      * @return $this
      */

@@ -50,7 +50,7 @@ interface MethodAwareInterface
     /**
      * Returns set of methods using mask.
      *
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return MethodInspector[]
      */
@@ -80,8 +80,7 @@ interface MethodAwareInterface
     /**
      * Sort methods using closure.
      *
-     * @param \Closure $sorter
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector[]|\Reflector[]
@@ -91,8 +90,7 @@ interface MethodAwareInterface
     /**
      * Visit methods using closure and return result.
      *
-     * @param \Closure $visitor
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector[]|\Reflector[]|mixed[]
@@ -102,8 +100,7 @@ interface MethodAwareInterface
     /**
      * Filter methods using closure.
      *
-     * @param \Closure $filter
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector[]|\Reflector[]
@@ -113,8 +110,7 @@ interface MethodAwareInterface
     /**
      * Filter methods using closure, expecting a single result.
      *
-     * @param \Closure $filter
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector|\Reflector|null
@@ -126,7 +122,7 @@ interface MethodAwareInterface
      *
      * @param mixed    $against
      * @param string   $method
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return MethodInspector[]|\Reflector[]
      */
@@ -137,7 +133,7 @@ interface MethodAwareInterface
      *
      * @param mixed    $match
      * @param string   $method
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return MethodInspector|\Reflector[]|null
      */

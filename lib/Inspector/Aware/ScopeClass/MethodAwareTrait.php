@@ -60,7 +60,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
     /**
      * Returns set of methods using mask.
      *
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return MethodInspector[]
      */
@@ -109,8 +109,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
     /**
      * Sort methods using closure.
      *
-     * @param \Closure $sorter
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector[]|\Reflector[]
@@ -123,8 +122,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
     /**
      * Visit methods using closure and return result.
      *
-     * @param \Closure $visitor
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector[]|\Reflector[]|mixed[]
@@ -137,8 +135,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
     /**
      * Filter methods using closure.
      *
-     * @param \Closure $filter
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector[]|\Reflector[]
@@ -151,8 +148,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
     /**
      * Filter methods using closure, expecting a single result.
      *
-     * @param \Closure $filter
-     * @param null|int $mask
+     * @param int|null $mask
      * @param mixed    ...$parameters
      *
      * @return MethodInspector|\Reflector|null
@@ -167,7 +163,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
      *
      * @param mixed    $against
      * @param string   $method
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return MethodInspector[]|\Reflector[]
      */
@@ -181,7 +177,7 @@ trait MethodAwareTrait // implements MethodAwareInterface
      *
      * @param mixed    $match
      * @param string   $method
-     * @param null|int $mask
+     * @param int|null $mask
      *
      * @return MethodInspector|\Reflector[]|null
      */

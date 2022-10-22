@@ -26,7 +26,7 @@ trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterf
     public function extendsClass($class)
     {
         try {
-            return $this->reflection()->isSubclassOf(static::normalizeNamespace($this->namespaceName().'\\'.$class));
+            return $this->reflection()->isSubclassOf(static::normalizeNamespace($this->namespaceName() . '\\' . $class));
         } catch (\ReflectionException $e) {
         }
 
@@ -45,7 +45,7 @@ trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterf
     public function implementsInterface($interface)
     {
         try {
-            return $this->reflection()->implementsInterface(static::normalizeNamespace($this->namespaceName().'\\'.$interface));
+            return $this->reflection()->implementsInterface(static::normalizeNamespace($this->namespaceName() . '\\' . $interface));
         } catch (\ReflectionException $e) {
         }
 
@@ -63,7 +63,7 @@ trait IdentityInheritanceAwareTrait // implements IdentityInheritanceAwareInterf
      */
     public function usesTrait($trait)
     {
-        return in_array(static::normalizeNamespace($this->namespaceName().'\\'.$trait), $this->reflection()->getTraitNames(), true) ||
+        return in_array(static::normalizeNamespace($this->namespaceName() . '\\' . $trait), $this->reflection()->getTraitNames(), true) ||
             in_array(static::normalizeNamespace($trait), $this->reflection()->getTraitNames(), true);
     }
 

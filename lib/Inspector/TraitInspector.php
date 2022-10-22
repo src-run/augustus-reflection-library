@@ -11,7 +11,6 @@
 
 namespace SR\Reflection\Inspector;
 
-use SR\Exception\ExceptionInterface;
 use SR\Reflection\Exception\InvalidArgumentException;
 use SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareInterface;
 use SR\Reflection\Inspector\Aware\ScopeClass\IdentityAwareTrait;
@@ -35,9 +34,8 @@ class TraitInspector extends AbstractInspector implements IdentityAwareInterface
     use PropertyAwareTrait;
 
     /**
-     * @param string                 $name
-     * @param null|object            $bind
-     * @param null|ResolverInterface $resolver
+     * @param string      $name
+     * @param object|null $bind
      *
      * @throws InvalidArgumentException
      */
@@ -49,18 +47,6 @@ class TraitInspector extends AbstractInspector implements IdentityAwareInterface
         } catch (\Exception $exception) {
             throw $this->getConstructorException(['trait name string', $name]);
         }
-    }
-
-    /**
-     * @param string $trait
-     *
-     * @throws ExceptionInterface
-     *
-     * @return string
-     */
-    public static function export($trait)
-    {
-        return self::exportFor('\ReflectionClass', $trait);
     }
 
     /**

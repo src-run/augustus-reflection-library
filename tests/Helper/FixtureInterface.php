@@ -16,7 +16,7 @@ namespace SR\Reflection\Tests\Helper;
  */
 interface FixtureInterface
 {
-    const CONSTANT = 'interfaceConstant';
+    public const CONSTANT = 'interfaceConstant';
 
     public function interfaceMethod();
 }
